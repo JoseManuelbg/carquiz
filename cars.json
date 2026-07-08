@@ -1,0 +1,125 @@
+[
+  {
+    "id": "ford-focus-mk2",
+    "brand": "Ford",
+    "model": "Focus",
+    "gen": "Mk2",
+    "year": 2005,
+    "engine": "1.6 TDCi",
+    "region": "EUR",
+    "bodyType": "Hatchback",
+    "images": [
+      { "id": "img_ff2_full", "file": "ford_focus_2005_1.6_90.jpg", "part": "full" }
+    ]
+  },
+  {
+    "id": "vw-golf-mk5",
+    "brand": "Volkswagen",
+    "model": "Golf",
+    "gen": "Mk5",
+    "year": 2004,
+    "engine": "1.9 TDI",
+    "region": "EUR",
+    "bodyType": "Hatchback",
+    "images": []
+  },
+  {
+    "id": "seat-leon-mk2",
+    "brand": "Seat",
+    "model": "León",
+    "gen": "Mk2",
+    "year": 2006,
+    "engine": "2.0 TDI",
+    "region": "EUR",
+    "bodyType": "Hatchback",
+    "images": []
+  },
+  {
+    "id": "audi-a3-8p",
+    "brand": "Audi",
+    "model": "A3",
+    "gen": "8P",
+    "year": 2004,
+    "engine": "2.0 TDI",
+    "region": "EUR",
+    "bodyType": "Hatchback",
+    "images": []
+  },
+  {
+    "id": "renault-megane-2",
+    "brand": "Renault",
+    "model": "Mégane",
+    "gen": "II",
+    "year": 2003,
+    "engine": "1.9 dCi",
+    "region": "EUR",
+    "bodyType": "Hatchback",
+    "images": []
+  },
+  {
+    "id": "opel-astra-h",
+    "brand": "Opel",
+    "model": "Astra",
+    "gen": "H",
+    "year": 2004,
+    "engine": "1.7 CDTI",
+    "region": "EUR",
+    "bodyType": "Hatchback",
+    "images": []
+  },
+  {
+    "id": "peugeot-307",
+    "brand": "Peugeot",
+    "model": "307",
+    "gen": "T5",
+    "year": 2001,
+    "engine": "2.0 HDi",
+    "region": "EUR",
+    "bodyType": "Hatchback",
+    "images": []
+  },
+  {
+    "id": "bmw-3-e90",
+    "brand": "BMW",
+    "model": "Serie 3",
+    "gen": "E90",
+    "year": 2005,
+    "engine": "320d",
+    "region": "EUR",
+    "bodyType": "Sedan",
+    "images": []
+  },
+  {
+    "id": "toyota-corolla-e120",
+    "brand": "Toyota",
+    "model": "Corolla",
+    "gen": "E120",
+    "year": 2002,
+    "engine": "1.4 VVT-i",
+    "region": "JDM",
+    "bodyType": "Hatchback",
+    "images": []
+  },
+  {
+    "id": "honda-civic-ep",
+    "brand": "Honda",
+    "model": "Civic",
+    "gen": "EP",
+    "year": 2004,
+    "engine": "1.6 i-VTEC",
+    "region": "JDM",
+    "bodyType": "Hatchback",
+    "images": []
+  },
+  {
+    "id": "ford-fiesta-mk6",
+    "brand": "Ford",
+    "model": "Fiesta",
+    "gen": "Mk6",
+    "year": 2005,
+    "engine": "1.4 TDCi",
+    "region": "EUR",
+    "bodyType": "Hatchback",
+    "images": []
+  }
+]
