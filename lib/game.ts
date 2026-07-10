@@ -1,109 +1,137 @@
-// Core game logic: build the autocomplete option list and evaluate a guess.
-// Pure functions, no I/O — easy to reason about and unit-test later.
+// Core game logic: build guess feedback as a row of colored "cells".
+// Pure functions, no I/O.
+//
+// Cell colors:
+//   green  = exact match
+//   yellow = warm (year within tolerance)
+//   gray   = miss
 
 import type { Car } from "./types";
-import type { Mode, Target } from "./modes";
+import type { Target } from "./modes";
 import { normalize } from "./normalize";
+import type { RefCar } from "./reference";
 
-export type YearCmp = "equal" | "higher" | "lower";
-export type SameCmp = "same" | "different";
+export type CellState = "green" | "yellow" | "gray";
+
+export interface Cell {
+  key: string;
+  label: string;
+  value: string;
+  state: CellState;
+  arrow?: "up" | "down";
+}
 
 export interface Feedback {
-  /** Canonical label of what we matched, or the raw text if unrecognized. */
   guess: string;
-  /** Whether the typed text matched a known value in the dataset. */
   resolved: boolean;
   correct: boolean;
-  /** Attribute comparison (target "car" / "model" / "brand"). */
-  attrs?: {
-    brand: SameCmp;
-    bodyType: SameCmp;
-    region: SameCmp;
-    /** Relative to the answer: "higher" => the answer's year is higher (go up). */
-    year: YearCmp;
+  cells: Cell[];
+}
+
+/** Attributes we know about a guessed car. body/region/year are optional because
+ *  a guess picked from the big catalog only carries brand + model. */
+export interface GuessCar {
+  brand: string;
+  model: string;
+  bodyType?: string;
+  region?: string;
+  year?: number;
+}
+
+const YEAR_TOL = 3;
+
+function eq(a: string, b: string): boolean {
+  return normalize(a) === normalize(b);
+}
+
+function brandCell(g: string, a: string): Cell {
+  return { key: "brand", label: "Marca", value: g, state: eq(g, a) ? "green" : "gray" };
+}
+
+// Model is green (exact) or gray. No "warm" state — body segment has its own cell.
+function modelCell(g: string, a: string): Cell {
+  return { key: "model", label: "Modelo", value: g, state: eq(g, a) ? "green" : "gray" };
+}
+
+function yearCell(g: number, a: number): Cell {
+  const d = a - g;
+  const state: CellState = d === 0 ? "green" : Math.abs(d) <= YEAR_TOL ? "yellow" : "gray";
+  return {
+    key: "year",
+    label: "Año",
+    value: String(g),
+    state,
+    arrow: d === 0 ? undefined : d > 0 ? "up" : "down",
   };
-  /** Numeric hint (target "year"). */
-  yearHint?: YearCmp;
 }
 
-function unique(xs: string[]): string[] {
-  return [...new Set(xs)];
+function sameCell(key: string, label: string, g: string, a: string): Cell {
+  return { key, label, value: g, state: eq(g, a) ? "green" : "gray" };
 }
 
-/** Labels shown in the autocomplete datalist, derived from the dataset. */
+/** Daily: guess = a catalog car (brand+model) plus a typed year. */
+export function evaluateDaily(
+  answer: Car,
+  ref: RefCar | undefined,
+  year: number | undefined
+): Feedback {
+  if (!ref || year === undefined || !Number.isFinite(year)) {
+    return { guess: ref ? `${ref.brand} ${ref.model}` : "", resolved: false, correct: false, cells: [] };
+  }
+  const cells: Cell[] = [
+    brandCell(ref.brand, answer.brand),
+    modelCell(ref.model, answer.model),
+    yearCell(year, answer.year),
+  ];
+  const correct =
+    eq(ref.brand, answer.brand) && eq(ref.model, answer.model) && year === answer.year;
+  return { guess: `${ref.brand} ${ref.model} · ${year}`, resolved: true, correct, cells };
+}
+
+/** Infinite "year" target (e.g. morro → año). */
+export function evaluateYear(answer: Car, text: string): Feedback {
+  const gy = parseInt(text, 10);
+  if (!Number.isFinite(gy)) return { guess: text, resolved: false, correct: false, cells: [] };
+  return {
+    guess: String(gy),
+    resolved: true,
+    correct: gy === answer.year,
+    cells: [yearCell(gy, answer.year)],
+  };
+}
+
+/** Infinite car/model/brand targets. Extra cells appear only when the guessed
+ *  car is one we have full data on; catalog-only guesses show brand + model. */
+export function evaluateCar(answer: Car, g: GuessCar, target: Target): Feedback {
+  const cells: Cell[] = [brandCell(g.brand, answer.brand), modelCell(g.model, answer.model)];
+  if (g.bodyType) cells.push(sameCell("body", "Carrocería", g.bodyType, answer.bodyType));
+  if (g.region) cells.push(sameCell("region", "Región", g.region, answer.region));
+  if (g.year !== undefined) cells.push(yearCell(g.year, answer.year));
+
+  const correct =
+    target === "brand"
+      ? eq(g.brand, answer.brand)
+      : target === "model"
+        ? eq(g.model, answer.model)
+        : eq(g.brand, answer.brand) && eq(g.model, answer.model);
+
+  return { guess: `${g.brand} ${g.model}`, resolved: true, correct, cells };
+}
+
+/** Options for the small static datalist (only used by non-typeahead modes now). */
 export function optionsFor(cars: Car[], target: Target): string[] {
+  const uniq = (xs: string[]) => [...new Set(xs)];
   switch (target) {
     case "car":
     case "model":
-      return unique(cars.map((c) => `${c.brand} ${c.model}`)).sort((a, b) =>
-        a.localeCompare(b)
-      );
+      return uniq(cars.map((c) => `${c.brand} ${c.model}`)).sort((a, b) => a.localeCompare(b));
     case "brand":
-      return unique(cars.map((c) => c.brand)).sort((a, b) => a.localeCompare(b));
+      return uniq(cars.map((c) => c.brand)).sort((a, b) => a.localeCompare(b));
     case "year":
-      return unique(cars.map((c) => String(c.year))).sort();
+      return uniq(cars.map((c) => String(c.year))).sort();
   }
 }
 
-function findCarByText(cars: Car[], text: string): Car | undefined {
-  const n = normalize(text);
-  return (
-    cars.find((c) => normalize(`${c.brand} ${c.model}`) === n) ??
-    cars.find((c) => normalize(c.model) === n)
-  );
-}
-
-/** Evaluate a raw guess string against the answer for the given mode. */
-export function evaluate(
-  answer: Car,
-  cars: Car[],
-  mode: Mode,
-  text: string
-): Feedback {
-  if (mode.target === "year") {
-    const gy = parseInt(text, 10);
-    if (!Number.isFinite(gy)) return { guess: text, resolved: false, correct: false };
-    return {
-      guess: String(gy),
-      resolved: true,
-      correct: gy === answer.year,
-      yearHint: gy === answer.year ? "equal" : answer.year > gy ? "higher" : "lower",
-    };
-  }
-
-  if (mode.target === "brand") {
-    const n = normalize(text);
-    const g = cars.find((c) => normalize(c.brand) === n);
-    return {
-      guess: g?.brand ?? text,
-      resolved: Boolean(g),
-      correct: Boolean(g) && g!.brand === answer.brand,
-    };
-  }
-
-  // target "car" or "model"
-  const g = findCarByText(cars, text);
-  if (!g) return { guess: text, resolved: false, correct: false };
-  const correct =
-    mode.target === "model"
-      ? normalize(g.model) === normalize(answer.model)
-      : g.brand === answer.brand && g.model === answer.model;
-
-  return {
-    guess: `${g.brand} ${g.model}`,
-    resolved: true,
-    correct,
-    attrs: {
-      brand: g.brand === answer.brand ? "same" : "different",
-      bodyType: g.bodyType === answer.bodyType ? "same" : "different",
-      region: g.region === answer.region ? "same" : "different",
-      year:
-        g.year === answer.year ? "equal" : answer.year > g.year ? "higher" : "lower",
-    },
-  };
-}
-
-/** Minimal, safe representation of the answer revealed at game end. */
 export function revealAnswer(car: Car) {
   return {
     brand: car.brand,

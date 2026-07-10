@@ -12,12 +12,34 @@ export type Part =
   | "wheel"
   | "badge";
 
+/** Normalized bounding box (0..1) used to crop a part out of the full photo. */
+export interface Region {
+  x: number;
+  y: number;
+  w: number;
+  h: number;
+}
+
+/** How the photo is revealed to the player. See app/ui/RevealImage.tsx. */
+export type RevealStrategy = "none" | "blur" | "tiles" | "region";
+
+/** Photo attribution (required for Creative Commons / Wikimedia images). */
+export interface Credit {
+  artist?: string;
+  license?: string;
+  source?: string;
+}
+
 export interface CarImage {
   /** Opaque id exposed to the client (used in /api/img/[id]). Never reveals the answer. */
   id: string;
   /** Real filename on disk under /cars. Server-only, never sent to the client. */
   file: string;
   part: Part;
+  /** Optional crop rectangle, e.g. the headlight, used by the "region" reveal. */
+  region?: Region;
+  /** Where the photo came from (for attribution). */
+  credit?: Credit;
 }
 
 export interface Car {

@@ -9,7 +9,11 @@
     "region": "EUR",
     "bodyType": "Hatchback",
     "images": [
-      { "id": "img_ff2_full", "file": "ford_focus_2005_1.6_90.jpg", "part": "full" }
+      {
+        "id": "img_ff2_full",
+        "file": "ford_focus_2005_1.6_90.jpg",
+        "part": "full"
+      }
     ]
   },
   {
@@ -21,7 +25,18 @@
     "engine": "1.9 TDI",
     "region": "EUR",
     "bodyType": "Hatchback",
-    "images": []
+    "images": [
+      {
+        "id": "img_00617e2c6e",
+        "file": "vw-golf-mk5.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Dinkun Chen",
+          "license": "CC BY-SA 4.0",
+          "source": "https://commons.wikimedia.org/wiki/File:VOLKSWAGEN_GOLF_5_DOOR_Mk4_China_(2).jpg"
+        }
+      }
+    ]
   },
   {
     "id": "seat-leon-mk2",
@@ -32,7 +47,18 @@
     "engine": "2.0 TDI",
     "region": "EUR",
     "bodyType": "Hatchback",
-    "images": []
+    "images": [
+      {
+        "id": "img_a199c4d88c",
+        "file": "seat-leon-mk2.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Morio",
+          "license": "CC BY-SA 3.0",
+          "source": "https://commons.wikimedia.org/wiki/File:SEAT_Leon_Tom_Coronel_WTCC_2007_Curitiba_test.jpg"
+        }
+      }
+    ]
   },
   {
     "id": "audi-a3-8p",
@@ -43,7 +69,18 @@
     "engine": "2.0 TDI",
     "region": "EUR",
     "bodyType": "Hatchback",
-    "images": []
+    "images": [
+      {
+        "id": "img_2ec18a1c46",
+        "file": "audi-a3-8p.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Spurzem - Lothar Spurzem",
+          "license": "CC BY-SA 2.0 de",
+          "source": "https://commons.wikimedia.org/wiki/File:Audi_A3_Cabriolet,_Heck,_Bj._2008_(2008-12-13).jpg"
+        }
+      }
+    ]
   },
   {
     "id": "renault-megane-2",
@@ -54,7 +91,18 @@
     "engine": "1.9 dCi",
     "region": "EUR",
     "bodyType": "Hatchback",
-    "images": []
+    "images": [
+      {
+        "id": "img_1b954ef5a0",
+        "file": "renault-megane-2.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "SunflowerYuri",
+          "license": "CC BY-SA 4.0",
+          "source": "https://commons.wikimedia.org/wiki/File:Renault_Megane_at_the_2019_Mouzon-Frezelle_rally.jpg"
+        }
+      }
+    ]
   },
   {
     "id": "opel-astra-h",
@@ -65,7 +113,18 @@
     "engine": "1.7 CDTI",
     "region": "EUR",
     "bodyType": "Hatchback",
-    "images": []
+    "images": [
+      {
+        "id": "img_05502889d0",
+        "file": "opel-astra-h.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "SunflowerYuri",
+          "license": "CC BY-SA 4.0",
+          "source": "https://commons.wikimedia.org/wiki/File:Opel_Astra_at_a_french_hillclimb_in_2004.jpg"
+        }
+      }
+    ]
   },
   {
     "id": "peugeot-307",
@@ -76,7 +135,18 @@
     "engine": "2.0 HDi",
     "region": "EUR",
     "bodyType": "Hatchback",
-    "images": []
+    "images": [
+      {
+        "id": "img_43387f1e9a",
+        "file": "peugeot-307.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Vauxford",
+          "license": "CC BY-SA 4.0",
+          "source": "https://commons.wikimedia.org/wiki/File:2002_Peugeot_307_Rapier_16V_1.6_Front.jpg"
+        }
+      }
+    ]
   },
   {
     "id": "bmw-3-e90",
@@ -87,7 +157,18 @@
     "engine": "320d",
     "region": "EUR",
     "bodyType": "Sedan",
-    "images": []
+    "images": [
+      {
+        "id": "img_40b699bb64",
+        "file": "bmw-3-e90.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Dinkun Chen",
+          "license": "CC BY-SA 4.0",
+          "source": "https://commons.wikimedia.org/wiki/File:BMW_3_SERIES_E90_China.jpg"
+        }
+      }
+    ]
   },
   {
     "id": "toyota-corolla-e120",
@@ -98,7 +179,18 @@
     "engine": "1.4 VVT-i",
     "region": "JDM",
     "bodyType": "Hatchback",
-    "images": []
+    "images": [
+      {
+        "id": "img_69a22e1b66",
+        "file": "toyota-corolla-e120.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Ethan Llamas",
+          "license": "CC BY-SA 4.0",
+          "source": "https://commons.wikimedia.org/wiki/File:Toyota_Corolla_AE110_1.6_GLi_Red_Mica_Metallic_02.jpg"
+        }
+      }
+    ]
   },
   {
     "id": "honda-civic-ep",
@@ -109,7 +201,18 @@
     "engine": "1.6 i-VTEC",
     "region": "JDM",
     "bodyType": "Hatchback",
-    "images": []
+    "images": [
+      {
+        "id": "img_c96ee77e66",
+        "file": "honda-civic-ep.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "crash71100",
+          "license": "CC0",
+          "source": "https://commons.wikimedia.org/wiki/File:Honda_Civic_Type_R_%26_Honda_Prelude.jpg"
+        }
+      }
+    ]
   },
   {
     "id": "ford-fiesta-mk6",
@@ -120,6 +223,985 @@
     "engine": "1.4 TDCi",
     "region": "EUR",
     "bodyType": "Hatchback",
-    "images": []
+    "images": [
+      {
+        "id": "img_87bcac407d",
+        "file": "ford-fiesta-mk6.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Sicnag",
+          "license": "CC BY 2.0",
+          "source": "https://commons.wikimedia.org/wiki/File:2007_Ford_Fiesta_(WQ)_XR4_3-door_hatchback_(24614673200).jpg"
+        }
+      }
+    ]
+  },
+  {
+    "id": "vw-passat-b6",
+    "brand": "Volkswagen",
+    "model": "Passat",
+    "gen": "B6",
+    "year": 2006,
+    "engine": "2.0 TDI",
+    "region": "EUR",
+    "bodyType": "Sedan",
+    "images": [
+      {
+        "id": "img_b7d4d947c2",
+        "file": "vw-passat-b6.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Dmitrijs Purgalvis",
+          "license": "CC BY 3.0",
+          "source": "https://commons.wikimedia.org/wiki/File:My_Car_is_the_Red_one_-_panoramio.jpg"
+        }
+      }
+    ]
+  },
+  {
+    "id": "vw-beetle-classic",
+    "brand": "Volkswagen",
+    "model": "Beetle",
+    "gen": "Classic",
+    "year": 1970,
+    "engine": "1.6",
+    "region": "EUR",
+    "bodyType": "Coupe",
+    "images": [
+      {
+        "id": "img_4472380570",
+        "file": "vw-beetle-classic.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Biswarup Ganguly",
+          "license": "CC BY 3.0",
+          "source": "https://commons.wikimedia.org/wiki/File:Volkswagen_-_Beetle_1300_-_1970_-_1285_cc_-_4_Cyl_-_WB_20_5366_-_Kolkata_2014-01-19_6534.JPG"
+        }
+      }
+    ]
+  },
+  {
+    "id": "bmw-m3-e46",
+    "brand": "BMW",
+    "model": "M3",
+    "gen": "E46",
+    "year": 2002,
+    "engine": "3.2 S54",
+    "region": "EUR",
+    "bodyType": "Coupe",
+    "images": [
+      {
+        "id": "img_424d0afa0e",
+        "file": "bmw-m3-e46.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Pedro Ribeiro Simões from Lisboa, Portugal",
+          "license": "CC BY 2.0",
+          "source": "https://commons.wikimedia.org/wiki/File:ACP_(Touring_Club_of_Portugal)_tow_(Hanomag,_1959)_(6668036697).jpg"
+        }
+      }
+    ]
+  },
+  {
+    "id": "bmw-1-e87",
+    "brand": "BMW",
+    "model": "Serie 1",
+    "gen": "E87",
+    "year": 2005,
+    "engine": "120d",
+    "region": "EUR",
+    "bodyType": "Hatchback",
+    "images": [
+      {
+        "id": "img_0e37b39360",
+        "file": "bmw-1-e87.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Dinkun Chen",
+          "license": "CC BY-SA 4.0",
+          "source": "https://commons.wikimedia.org/wiki/File:BMW_1_SERIES_(E87)_China_(3).jpg"
+        }
+      }
+    ]
+  },
+  {
+    "id": "mercedes-c-w204",
+    "brand": "Mercedes-Benz",
+    "model": "Clase C",
+    "gen": "W204",
+    "year": 2008,
+    "engine": "C220 CDI",
+    "region": "EUR",
+    "bodyType": "Sedan",
+    "images": [
+      {
+        "id": "img_42abad6654",
+        "file": "mercedes-c-w204.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "user:AngMoKio",
+          "license": "CC BY-SA 2.5",
+          "source": "https://commons.wikimedia.org/wiki/File:DTM_Mercedes_w204_Schneider_amk.jpg"
+        }
+      }
+    ]
+  },
+  {
+    "id": "mercedes-190e-w201",
+    "brand": "Mercedes-Benz",
+    "model": "190E",
+    "gen": "W201",
+    "year": 1985,
+    "engine": "2.0",
+    "region": "EUR",
+    "bodyType": "Sedan",
+    "images": [
+      {
+        "id": "img_f670b76850",
+        "file": "mercedes-190e-w201.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Riley from Christchurch, New Zealand",
+          "license": "CC BY 2.0",
+          "source": "https://commons.wikimedia.org/wiki/File:1985_Mercedes-Benz_190E_(24179242148).jpg"
+        }
+      }
+    ]
+  },
+  {
+    "id": "audi-a4-b7",
+    "brand": "Audi",
+    "model": "A4",
+    "gen": "B7",
+    "year": 2005,
+    "engine": "2.0 TDI",
+    "region": "EUR",
+    "bodyType": "Sedan",
+    "images": [
+      {
+        "id": "img_719c75f939",
+        "file": "audi-a4-b7.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Vauxford",
+          "license": "CC BY-SA 4.0",
+          "source": "https://commons.wikimedia.org/wiki/File:2005_Audi_A4_T_S_Line_1.8_Rear.jpg"
+        }
+      }
+    ]
+  },
+  {
+    "id": "audi-tt-8n",
+    "brand": "Audi",
+    "model": "TT",
+    "gen": "8N",
+    "year": 2000,
+    "engine": "1.8T",
+    "region": "EUR",
+    "bodyType": "Coupe",
+    "images": [
+      {
+        "id": "img_5a83ecf31d",
+        "file": "audi-tt-8n.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Lothar Spurzem",
+          "license": "CC BY-SA 2.0 de",
+          "source": "https://commons.wikimedia.org/wiki/File:NSU_Brixner_Spyder,_um_1969-70,_im_museum_mobile_(2013-09-03_Sp).JPG"
+        }
+      }
+    ]
+  },
+  {
+    "id": "toyota-supra-a80",
+    "brand": "Toyota",
+    "model": "Supra",
+    "gen": "A80",
+    "year": 1997,
+    "engine": "2JZ-GTE",
+    "region": "JDM",
+    "bodyType": "Coupe",
+    "images": [
+      {
+        "id": "img_7db72fa666",
+        "file": "toyota-supra-a80.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Jacob Frey 4A",
+          "license": "CC BY 2.0",
+          "source": "https://commons.wikimedia.org/wiki/File:Toyota_E-JZA80_Supra_15th_Anniversary_Limited_Edition_(16042321064).jpg"
+        }
+      }
+    ]
+  },
+  {
+    "id": "nissan-gtr-r35",
+    "brand": "Nissan",
+    "model": "GT-R",
+    "gen": "R35",
+    "year": 2009,
+    "engine": "3.8 VR38",
+    "region": "JDM",
+    "bodyType": "Coupe",
+    "images": [
+      {
+        "id": "img_0d82c01720",
+        "file": "nissan-gtr-r35.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "The Car Spy",
+          "license": "CC BY 2.0",
+          "source": "https://commons.wikimedia.org/wiki/File:2009_Nissan_GT-R_Premium_-_Flickr_-_The_Car_Spy.jpg"
+        }
+      }
+    ]
+  },
+  {
+    "id": "nissan-350z-z33",
+    "brand": "Nissan",
+    "model": "350Z",
+    "gen": "Z33",
+    "year": 2004,
+    "engine": "3.5 VQ35",
+    "region": "JDM",
+    "bodyType": "Coupe",
+    "images": [
+      {
+        "id": "img_8fd8e0c30c",
+        "file": "nissan-350z-z33.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "crash71100",
+          "license": "CC0",
+          "source": "https://commons.wikimedia.org/wiki/File:Nissan_350Z_b.jpg"
+        }
+      }
+    ]
+  },
+  {
+    "id": "mazda-mx5-na",
+    "brand": "Mazda",
+    "model": "MX-5",
+    "gen": "NA",
+    "year": 1990,
+    "engine": "1.6",
+    "region": "JDM",
+    "bodyType": "Convertible",
+    "images": [
+      {
+        "id": "img_e2ee1c0d2d",
+        "file": "mazda-mx5-na.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Vauxford",
+          "license": "CC BY-SA 4.0",
+          "source": "https://commons.wikimedia.org/wiki/File:1990_Mazda_MX-5_1.6_(1).jpg"
+        }
+      }
+    ]
+  },
+  {
+    "id": "ford-mustang-s197",
+    "brand": "Ford",
+    "model": "Mustang",
+    "gen": "S197",
+    "year": 2006,
+    "engine": "4.6 V8",
+    "region": "USDM",
+    "bodyType": "Coupe",
+    "images": [
+      {
+        "id": "img_39bc8be232",
+        "file": "ford-mustang-s197.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Michel Curi",
+          "license": "CC BY 2.0",
+          "source": "https://commons.wikimedia.org/wiki/File:2006_Ford_Mustang_Foose_Design_(13941827653).jpg"
+        }
+      }
+    ]
+  },
+  {
+    "id": "fiat-500-2007",
+    "brand": "Fiat",
+    "model": "500",
+    "gen": "2007",
+    "year": 2008,
+    "engine": "1.2",
+    "region": "EUR",
+    "bodyType": "Hatchback",
+    "images": [
+      {
+        "id": "img_bf945e54c3",
+        "file": "fiat-500-2007.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Lothar Spurzem",
+          "license": "CC BY-SA 2.0 de",
+          "source": "https://commons.wikimedia.org/wiki/File:Fiat_500_R_(2008-07-12_Sp_r).JPG"
+        }
+      }
+    ]
+  },
+  {
+    "id": "mini-cooper-r56",
+    "brand": "Mini",
+    "model": "Cooper",
+    "gen": "R56",
+    "year": 2007,
+    "engine": "1.6",
+    "region": "EUR",
+    "bodyType": "Hatchback",
+    "images": [
+      {
+        "id": "img_a58844dd10",
+        "file": "mini-cooper-r56.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Robert Yorde from Ohio, USA",
+          "license": "CC BY 2.0",
+          "source": "https://commons.wikimedia.org/wiki/File:-20,_2007_Mini_Cooper_Penguin,_B-Spec,_Group_1_(54077656177).jpg"
+        }
+      }
+    ]
+  },
+  {
+    "id": "porsche-911-997",
+    "brand": "Porsche",
+    "model": "911",
+    "gen": "997",
+    "year": 2006,
+    "engine": "3.6",
+    "region": "EUR",
+    "bodyType": "Coupe",
+    "images": [
+      {
+        "id": "img_c6a70d7b4c",
+        "file": "porsche-911-997.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Calreyn88",
+          "license": "CC BY-SA 4.0",
+          "source": "https://commons.wikimedia.org/wiki/File:2006_Porsche_911_997_R-GT_Art_Car_Ice_Race_Car_(80065).jpg"
+        }
+      }
+    ]
+  },
+  {
+    "id": "subaru-impreza-gd",
+    "brand": "Subaru",
+    "model": "Impreza WRX",
+    "gen": "GD",
+    "year": 2004,
+    "engine": "2.0 EJ20",
+    "region": "JDM",
+    "bodyType": "Sedan",
+    "images": [
+      {
+        "id": "img_6fa306638e",
+        "file": "subaru-impreza-gd.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Calreyn88",
+          "license": "CC BY-SA 4.0",
+          "source": "https://commons.wikimedia.org/wiki/File:2004_Subaru_Impreza_STI.jpg"
+        }
+      }
+    ]
+  },
+  {
+    "id": "honda-nsx-na1",
+    "brand": "Honda",
+    "model": "NSX",
+    "gen": "NA1",
+    "year": 1991,
+    "engine": "3.0 V6",
+    "region": "JDM",
+    "bodyType": "Coupe",
+    "images": [
+      {
+        "id": "img_bd286b1222",
+        "file": "honda-nsx-na1.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "crash71100",
+          "license": "CC0",
+          "source": "https://commons.wikimedia.org/wiki/File:Honda_NSX_-_48178180302.jpg"
+        }
+      }
+    ]
+  },
+  {
+    "id": "jeep-wrangler-jk",
+    "brand": "Jeep",
+    "model": "Wrangler",
+    "gen": "JK",
+    "year": 2010,
+    "engine": "3.8 V6",
+    "region": "USDM",
+    "bodyType": "SUV",
+    "images": [
+      {
+        "id": "img_bc7c9c7f5d",
+        "file": "jeep-wrangler-jk.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Spanish Coches",
+          "license": "CC BY 2.0",
+          "source": "https://commons.wikimedia.org/wiki/File:Jeep_Wrangler_(5002073538).jpg"
+        }
+      }
+    ]
+  },
+  {
+    "id": "volvo-v70-p2",
+    "brand": "Volvo",
+    "model": "V70",
+    "gen": "P2",
+    "year": 2004,
+    "engine": "2.4 D5",
+    "region": "EUR",
+    "bodyType": "Estate",
+    "images": [
+      {
+        "id": "img_90493acf73",
+        "file": "volvo-v70-p2.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "kitmasterbloke",
+          "license": "CC BY 4.0",
+          "source": "https://commons.wikimedia.org/wiki/File:FL02XFN_Volvo_V70_T5_police_car.jpg"
+        }
+      }
+    ]
+  },
+  {
+    "id": "lancia-delta-integrale",
+    "brand": "Lancia",
+    "model": "Delta Integrale",
+    "gen": "Evo",
+    "year": 1992,
+    "engine": "2.0 Turbo",
+    "region": "EUR",
+    "bodyType": "Hatchback",
+    "images": [
+      {
+        "id": "img_951de0cabc",
+        "file": "lancia-delta-integrale.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Martin Pettitt",
+          "license": "CC BY 2.0",
+          "source": "https://commons.wikimedia.org/wiki/File:NEC_Birmingham_1992_Car_Show_Lancia_-_49998978623.jpg"
+        }
+      }
+    ]
+  },
+  {
+    "id": "peugeot-205-gti",
+    "brand": "Peugeot",
+    "model": "205 GTI",
+    "gen": "1.9",
+    "year": 1987,
+    "engine": "1.9",
+    "region": "EUR",
+    "bodyType": "Hatchback",
+    "images": [
+      {
+        "id": "img_42f38b9ac5",
+        "file": "peugeot-205-gti.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Grand Parc - Bordeaux, France from France",
+          "license": "CC BY 2.0",
+          "source": "https://commons.wikimedia.org/wiki/File:GTRS_Circuit_M%C3%A9rignac_Bordeaux_22-06-2014_-_Peugeot_205_GTI_1.9_-_Image_Picture_Photography_(14295514399).jpg"
+        }
+      }
+    ]
+  },
+  {
+    "id": "bmw-m3-e30",
+    "brand": "BMW",
+    "model": "M3",
+    "gen": "E30",
+    "year": 1988,
+    "engine": "2.3 S14",
+    "region": "EUR",
+    "bodyType": "Coupe",
+    "images": [
+      {
+        "id": "img_548c3b1d76",
+        "file": "bmw-m3-e30.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "MrWalkr",
+          "license": "CC BY-SA 4.0",
+          "source": "https://commons.wikimedia.org/wiki/File:1988_BMW_M3.jpg"
+        }
+      }
+    ]
+  },
+  {
+    "id": "audi-quattro-ur",
+    "brand": "Audi",
+    "model": "Quattro",
+    "gen": "Ur",
+    "year": 1983,
+    "engine": "2.1 Turbo",
+    "region": "EUR",
+    "bodyType": "Coupe",
+    "images": [
+      {
+        "id": "img_8e094c1cf3",
+        "file": "audi-quattro-ur.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Charles from Port Chester, New York",
+          "license": "CC BY 2.0",
+          "source": "https://commons.wikimedia.org/wiki/File:Audi_Sport_Quattro_(1984)_(52566233141).jpg"
+        }
+      }
+    ]
+  },
+  {
+    "id": "toyota-ae86",
+    "brand": "Toyota",
+    "model": "AE86",
+    "gen": "AE86",
+    "year": 1985,
+    "engine": "1.6 4A-GE",
+    "region": "JDM",
+    "bodyType": "Coupe",
+    "images": [
+      {
+        "id": "img_d98da803b8",
+        "file": "toyota-ae86.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Cars Down Under",
+          "license": "CC BY 2.0",
+          "source": "https://commons.wikimedia.org/wiki/File:1985_Toyota_Corolla_AE86_Sprinter.jpg"
+        }
+      }
+    ]
+  },
+  {
+    "id": "mazda-rx7-fd",
+    "brand": "Mazda",
+    "model": "RX-7",
+    "gen": "FD",
+    "year": 1995,
+    "engine": "1.3 Rotary",
+    "region": "JDM",
+    "bodyType": "Coupe",
+    "images": [
+      {
+        "id": "img_1ab146b0a7",
+        "file": "mazda-rx7-fd.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "先従隗始",
+          "license": "CC0",
+          "source": "https://commons.wikimedia.org/wiki/File:%C6%90%CC%83fini_E-FD3S_RX-7_(23101510084).jpg"
+        }
+      }
+    ]
+  },
+  {
+    "id": "nissan-skyline-r34",
+    "brand": "Nissan",
+    "model": "Skyline GT-R",
+    "gen": "R34",
+    "year": 1999,
+    "engine": "2.6 RB26",
+    "region": "JDM",
+    "bodyType": "Coupe",
+    "images": [
+      {
+        "id": "img_4be17d1801",
+        "file": "nissan-skyline-r34.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "crash71100",
+          "license": "CC0",
+          "source": "https://commons.wikimedia.org/wiki/File:Nissan_Skyline_GT-R_R34.jpg"
+        }
+      }
+    ]
+  },
+  {
+    "id": "honda-integra-dc2",
+    "brand": "Honda",
+    "model": "Integra Type R",
+    "gen": "DC2",
+    "year": 1998,
+    "engine": "1.8 B18C",
+    "region": "JDM",
+    "bodyType": "Coupe",
+    "images": [
+      {
+        "id": "img_75ba17619b",
+        "file": "honda-integra-dc2.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "crash71100",
+          "license": "CC0",
+          "source": "https://commons.wikimedia.org/wiki/File:Honda_Integra_Type_R_-_48297857876.jpg"
+        }
+      }
+    ]
+  },
+  {
+    "id": "mitsubishi-evo-vi",
+    "brand": "Mitsubishi",
+    "model": "Lancer Evo VI",
+    "gen": "VI",
+    "year": 1999,
+    "engine": "2.0 Turbo",
+    "region": "JDM",
+    "bodyType": "Sedan",
+    "images": [
+      {
+        "id": "img_b6758c1965",
+        "file": "mitsubishi-evo-vi.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Calreyn88",
+          "license": "CC BY-SA 4.0",
+          "source": "https://commons.wikimedia.org/wiki/File:1999_Mitsubishi_EVO_VI_Rally_Car_3.jpg"
+        }
+      }
+    ]
+  },
+  {
+    "id": "alpine-a110",
+    "brand": "Alpine",
+    "model": "A110",
+    "gen": "Berlinette",
+    "year": 1973,
+    "engine": "1.6",
+    "region": "EUR",
+    "bodyType": "Coupe",
+    "images": [
+      {
+        "id": "img_e1196233e0",
+        "file": "alpine-a110.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Andrew Bone from Weymouth, England",
+          "license": "CC BY 2.0",
+          "source": "https://commons.wikimedia.org/wiki/File:Alpine_Renault_A110_c.1973-4_(14375363165).jpg"
+        }
+      }
+    ]
+  },
+  {
+    "id": "lotus-elise-s1",
+    "brand": "Lotus",
+    "model": "Elise",
+    "gen": "S1",
+    "year": 1996,
+    "engine": "1.8",
+    "region": "EUR",
+    "bodyType": "Convertible",
+    "images": [
+      {
+        "id": "img_f1f07de2fb",
+        "file": "lotus-elise-s1.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Thierry & Didier Descouens",
+          "license": "CC BY-SA 4.0",
+          "source": "https://commons.wikimedia.org/wiki/File:(Series_2)_Lotus_Elise_(type_111)_version_SC_(SuperCharged)_2009.jpg"
+        }
+      }
+    ]
+  },
+  {
+    "id": "renault-5-turbo",
+    "brand": "Renault",
+    "model": "5 Turbo",
+    "gen": "Turbo",
+    "year": 1981,
+    "engine": "1.4 Turbo",
+    "region": "EUR",
+    "bodyType": "Hatchback",
+    "images": [
+      {
+        "id": "img_d7ee3726e0",
+        "file": "renault-5-turbo.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Grand Parc - Bordeaux, France from France",
+          "license": "CC BY 2.0",
+          "source": "https://commons.wikimedia.org/wiki/File:Formule_Renault_-_GTRO_RACING_-_Ecole_de_pilotage_-_Circuit_Los_Arcos_Navarra_Spain_Espagne_-_Image_Picture_Photography_(15498442020).jpg"
+        }
+      }
+    ]
+  },
+  {
+    "id": "ford-sierra-cosworth",
+    "brand": "Ford",
+    "model": "Sierra RS Cosworth",
+    "gen": "RS",
+    "year": 1988,
+    "engine": "2.0 Turbo",
+    "region": "EUR",
+    "bodyType": "Sedan",
+    "images": [
+      {
+        "id": "img_9fc132851f",
+        "file": "ford-sierra-cosworth.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Sicnag",
+          "license": "CC BY 2.0",
+          "source": "https://commons.wikimedia.org/wiki/File:1987_Ford_Sierra_RS500_Cosworth_(16259814758).jpg"
+        }
+      }
+    ]
+  },
+  {
+    "id": "volvo-850-t5r",
+    "brand": "Volvo",
+    "model": "850 T5-R",
+    "gen": "T5-R",
+    "year": 1995,
+    "engine": "2.3 Turbo",
+    "region": "EUR",
+    "bodyType": "Estate",
+    "images": [
+      {
+        "id": "img_5503781838",
+        "file": "volvo-850-t5r.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Dave Conner from Inverness, Scotland",
+          "license": "CC BY 2.0",
+          "source": "https://commons.wikimedia.org/wiki/File:M238_Volvo_850_T5_-_Northern_Constabulary_(code_3)_(3878964359).jpg"
+        }
+      }
+    ]
+  },
+  {
+    "id": "saab-900-turbo",
+    "brand": "Saab",
+    "model": "900 Turbo",
+    "gen": "Classic",
+    "year": 1985,
+    "engine": "2.0 Turbo",
+    "region": "EUR",
+    "bodyType": "Coupe",
+    "images": [
+      {
+        "id": "img_8ecae3f9f9",
+        "file": "saab-900-turbo.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Lav Ulv from Viby J, Denmark",
+          "license": "CC BY 2.0",
+          "source": "https://commons.wikimedia.org/wiki/File:Saab_90,_1985_-_LS41156_-_DSC_0080_Balancer_(38060830856).jpg"
+        }
+      }
+    ]
+  },
+  {
+    "id": "delorean-dmc12",
+    "brand": "DeLorean",
+    "model": "DMC-12",
+    "gen": "DMC-12",
+    "year": 1981,
+    "engine": "2.85 V6",
+    "region": "USDM",
+    "bodyType": "Coupe",
+    "images": [
+      {
+        "id": "img_cd8e12b908",
+        "file": "delorean-dmc12.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "This picture has been taken by Oleg Yunakov. Contact e-mail: yunakovgmail.com. Image can be used in accordance with the terms of the СС-BY-SA license. Other photos can be seen here.",
+          "license": "CC BY-SA 4.0",
+          "source": "https://commons.wikimedia.org/wiki/File:The_1981_DeLorean_DMC-12.jpg"
+        }
+      }
+    ]
+  },
+  {
+    "id": "alfa-156-gta",
+    "brand": "Alfa Romeo",
+    "model": "156 GTA",
+    "gen": "GTA",
+    "year": 2002,
+    "engine": "3.2 V6",
+    "region": "EUR",
+    "bodyType": "Sedan",
+    "images": [
+      {
+        "id": "img_7807de0a64",
+        "file": "alfa-156-gta.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Calreyn88",
+          "license": "CC BY-SA 4.0",
+          "source": "https://commons.wikimedia.org/wiki/File:1999_Alfa_Romeo_156_GTA.jpg"
+        }
+      }
+    ]
+  },
+  {
+    "id": "lancia-stratos",
+    "brand": "Lancia",
+    "model": "Stratos",
+    "gen": "HF",
+    "year": 1974,
+    "engine": "2.4 V6",
+    "region": "EUR",
+    "bodyType": "Coupe",
+    "images": [
+      {
+        "id": "img_83f135d849",
+        "file": "lancia-stratos.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Calreyn88",
+          "license": "CC BY-SA 4.0",
+          "source": "https://commons.wikimedia.org/wiki/File:1975_Lancia_Stratos_HF_Stradale_5.jpg"
+        }
+      }
+    ]
+  },
+  {
+    "id": "mercedes-190e-cosworth",
+    "brand": "Mercedes-Benz",
+    "model": "190E 2.3-16",
+    "gen": "W201",
+    "year": 1986,
+    "engine": "2.3-16 Cosworth",
+    "region": "EUR",
+    "bodyType": "Sedan",
+    "images": [
+      {
+        "id": "img_bcc48fd8f8",
+        "file": "mercedes-190e-cosworth.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Charlie from United Kingdom",
+          "license": "CC BY 2.0",
+          "source": "https://commons.wikimedia.org/wiki/File:1986_Mercedes_190E_2.3_16_Cosworth_(16009599658).jpg"
+        }
+      }
+    ]
+  },
+  {
+    "id": "porsche-944-turbo",
+    "brand": "Porsche",
+    "model": "944",
+    "gen": "Turbo",
+    "year": 1986,
+    "engine": "2.5 Turbo",
+    "region": "EUR",
+    "bodyType": "Coupe",
+    "images": [
+      {
+        "id": "img_3ea677f767",
+        "file": "porsche-944-turbo.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Pokemonprime",
+          "license": "CC BY 4.0",
+          "source": "https://commons.wikimedia.org/wiki/File:1986_Porsche_944,_Mecum_Auctions_Kissimmee_2024.jpg"
+        }
+      }
+    ]
+  },
+  {
+    "id": "vw-scirocco-mk3",
+    "brand": "Volkswagen",
+    "model": "Scirocco",
+    "gen": "Mk3",
+    "year": 2009,
+    "engine": "2.0 TSI",
+    "region": "EUR",
+    "bodyType": "Coupe",
+    "images": [
+      {
+        "id": "img_c4694eb01c",
+        "file": "vw-scirocco-mk3.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Jeremy from Sydney, Australia",
+          "license": "CC BY 2.0",
+          "source": "https://commons.wikimedia.org/wiki/File:Volkswagen_Scirocco_(15923712939).jpg"
+        }
+      }
+    ]
+  },
+  {
+    "id": "tesla-model-3",
+    "brand": "Tesla",
+    "model": "Model 3",
+    "gen": "2019",
+    "year": 2019,
+    "engine": "Eléctrico",
+    "region": "USDM",
+    "bodyType": "Sedan",
+    "images": [
+      {
+        "id": "img_13cc071e17",
+        "file": "tesla-model-3.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Tony Webster",
+          "license": "CC BY 2.0",
+          "source": "https://commons.wikimedia.org/wiki/File:Tesla_Motors_-_Model_S_Electric_Car.jpg"
+        }
+      }
+    ]
+  },
+  {
+    "id": "citroen-2cv",
+    "brand": "Citroën",
+    "model": "2CV",
+    "gen": "Classic",
+    "year": 1970,
+    "engine": "0.6 flat-2",
+    "region": "EUR",
+    "bodyType": "Sedan",
+    "images": [
+      {
+        "id": "img_af5270b23b",
+        "file": "citroen-2cv.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Rundvald",
+          "license": "CC BY-SA 4.0",
+          "source": "https://commons.wikimedia.org/wiki/File:Citroen-2CV-verte-ArD-dessus-byRundvald.jpg"
+        }
+      }
+    ]
+  },
+  {
+    "id": "subaru-brz-zc6",
+    "brand": "Subaru",
+    "model": "BRZ",
+    "gen": "ZC6",
+    "year": 2013,
+    "engine": "2.0 FA20",
+    "region": "JDM",
+    "bodyType": "Coupe",
+    "images": [
+      {
+        "id": "img_4b93183e8f",
+        "file": "subaru-brz-zc6.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Autoviva",
+          "license": "CC BY 2.0",
+          "source": "https://commons.wikimedia.org/wiki/File:Subaru_BRZ_Prologue_at_the_Frankfurt_Motor_Show_IAA_2011_(6144538172).jpg"
+        }
+      }
+    ]
   }
 ]

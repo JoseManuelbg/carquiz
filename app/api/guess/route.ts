@@ -3,13 +3,23 @@
 
 import { getCarById, getCars } from "@/lib/db";
 import { getMode } from "@/lib/modes";
-import { evaluate, revealAnswer } from "@/lib/game";
+import {
+  evaluateCar,
+  evaluateDaily,
+  evaluateYear,
+  revealAnswer,
+  type Feedback,
+  type GuessCar,
+} from "@/lib/game";
+import { resolveCar } from "@/lib/reference";
 import { getRound } from "@/lib/rounds";
+import { normalize } from "@/lib/normalize";
 
 export async function POST(req: Request) {
   const body = (await req.json().catch(() => null)) as {
     roundId?: string;
     guess?: string;
+    year?: number;
   } | null;
 
   if (!body?.roundId || typeof body.guess !== "string") {
@@ -21,15 +31,40 @@ export async function POST(req: Request) {
 
   const mode = getMode(round.modeId);
   const answer = await getCarById(round.carId);
-  if (!mode || !answer) {
-    return Response.json({ error: "gone" }, { status: 410 });
-  }
+  if (!mode || !answer) return Response.json({ error: "gone" }, { status: 410 });
 
   const alreadyOver = round.solved || round.attempts >= round.maxAttempts;
-  const feedback = evaluate(answer, await getCars(), mode, body.guess);
 
-  // Only count attempts that actually resolved to a known value, and only while
-  // the game is still live.
+  let feedback: Feedback;
+  if (mode.askYear) {
+    feedback = evaluateDaily(answer, await resolveCar(body.guess), body.year);
+  } else if (mode.target === "year") {
+    feedback = evaluateYear(answer, body.guess);
+  } else {
+    // Prefer our curated car (full attributes); fall back to the big catalog.
+    const n = normalize(body.guess);
+    const cars = await getCars();
+    const curated =
+      cars.find((c) => normalize(`${c.brand} ${c.model}`) === n) ??
+      cars.find((c) => normalize(c.model) === n);
+    let g: GuessCar | undefined;
+    if (curated) {
+      g = {
+        brand: curated.brand,
+        model: curated.model,
+        bodyType: curated.bodyType,
+        region: curated.region,
+        year: curated.year,
+      };
+    } else {
+      const ref = await resolveCar(body.guess);
+      if (ref) g = { brand: ref.brand, model: ref.model };
+    }
+    feedback = g
+      ? evaluateCar(answer, g, mode.target)
+      : { guess: body.guess, resolved: false, correct: false, cells: [] };
+  }
+
   if (!alreadyOver && feedback.resolved) {
     round.attempts += 1;
     if (feedback.correct) round.solved = true;

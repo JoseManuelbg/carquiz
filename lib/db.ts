@@ -35,10 +35,16 @@ export async function getImage(
   return undefined;
 }
 
-/** Cars that can be used as an answer for a mode: they must own a matching image. */
-export async function answerCandidates(part?: Part): Promise<Car[]> {
+/** Cars usable as an answer: they must own a matching image and (optionally)
+ *  belong to one of the given regions. Empty/undefined regions = any region. */
+export async function answerCandidates(
+  part?: Part,
+  regions?: string[]
+): Promise<Car[]> {
   const cars = await getCars();
-  return cars.filter((c) =>
-    part ? c.images.some((i) => i.part === part) : c.images.length > 0
-  );
+  const regionSet = regions && regions.length ? new Set(regions) : null;
+  return cars.filter((c) => {
+    const hasImage = part ? c.images.some((i) => i.part === part) : c.images.length > 0;
+    return hasImage && (!regionSet || regionSet.has(c.region));
+  });
 }

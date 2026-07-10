@@ -4,7 +4,7 @@
 // must identify, and how many attempts they get. Adding a new "challenge" (e.g.
 // "taillight -> brand") is just one more entry in INFINITE_MODES.
 
-import type { Part } from "./types";
+import type { Part, RevealStrategy } from "./types";
 
 /** What the player must identify. */
 export type Target = "car" | "model" | "brand" | "year";
@@ -17,6 +17,12 @@ export interface Mode {
   part?: Part;
   target: Target;
   maxAttempts: number;
+  /** Also ask for a year (adds the Año column). */
+  askYear?: boolean;
+  /** Autocomplete from the big reference catalog instead of the curated list. */
+  typeahead?: boolean;
+  /** How the photo is revealed. Defaults to "none" (full photo). */
+  reveal?: RevealStrategy;
 }
 
 // The daily (Wordle-style) mode. Same car for everyone on a given day.
@@ -29,6 +35,9 @@ export const DAILY_MODE: Mode = {
   part: "full",
   target: "car",
   maxAttempts: 6,
+  askYear: true,
+  typeahead: true,
+  reveal: "tiles",
 };
 
 // Endless modes. Each is a (part -> attribute) challenge.
@@ -40,6 +49,27 @@ export const INFINITE_MODES: Mode[] = [
     part: "full",
     target: "car",
     maxAttempts: 6,
+    typeahead: true,
+  },
+  {
+    id: "inf-blur",
+    title: "Desenfoque",
+    description: "Empieza borrosa y se aclara con cada fallo.",
+    part: "full",
+    target: "car",
+    maxAttempts: 6,
+    reveal: "blur",
+    typeahead: true,
+  },
+  {
+    id: "inf-tiles",
+    title: "Por zonas",
+    description: "Una rejilla tapa la foto y se destapa poco a poco.",
+    part: "full",
+    target: "car",
+    maxAttempts: 6,
+    reveal: "tiles",
+    typeahead: true,
   },
   {
     id: "inf-faro-model",
@@ -48,6 +78,7 @@ export const INFINITE_MODES: Mode[] = [
     part: "headlight",
     target: "model",
     maxAttempts: 5,
+    typeahead: true,
   },
   {
     id: "inf-morro-year",
