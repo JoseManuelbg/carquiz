@@ -60,13 +60,18 @@ export async function getCars(): Promise<Car[]> {
   return (data as unknown as CarRow[]).map(toCar);
 }
 
-/** Cuántos coches jugables hay (para mostrarlo en la home). */
+/** Cuántos coches jugables hay (para mostrarlo en la home).
+ *  No debe tumbar el build si la BBDD no está disponible: devuelve 0. */
 export async function countCars(): Promise<number> {
-  const { count, error } = await supabaseAdmin()
-    .from("cars")
-    .select("id", { count: "exact", head: true });
-  if (error) return 0;
-  return count ?? 0;
+  try {
+    const { count, error } = await supabaseAdmin()
+      .from("cars")
+      .select("id", { count: "exact", head: true });
+    if (error) return 0;
+    return count ?? 0;
+  } catch {
+    return 0;
+  }
 }
 
 export async function getCarById(id: string): Promise<Car | undefined> {

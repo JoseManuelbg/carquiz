@@ -1,6 +1,9 @@
 import Link from "next/link";
 import { countCars } from "@/lib/db";
 
+// El contador de coches crece: refrescar cada 5 min en vez de congelarlo en el build.
+export const revalidate = 300;
+
 export default async function Home() {
   const total = await countCars();
   return (
