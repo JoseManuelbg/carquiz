@@ -19,7 +19,7 @@ export default async function AdminLayout({
           No autorizado
         </h1>
         <p className="text-sm text-muted">
-          {user.email} no está en la lista de administradores.
+          Esta cuenta no está en la lista de administradores.
         </p>
       </div>
     );
@@ -37,12 +37,9 @@ export default async function AdminLayout({
             Panel
           </Link>
         </div>
-        <div className="flex items-center gap-3 text-xs">
-          <Link href="/admin/stats" className="text-muted hover:text-accent">
-            Datos
-          </Link>
-          <span className="text-muted">{user.email}</span>
-        </div>
+        <Link href="/admin/stats" className="text-xs text-muted hover:text-accent">
+          Datos
+        </Link>
       </div>
       {children}
     </div>

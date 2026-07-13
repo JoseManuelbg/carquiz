@@ -19,7 +19,6 @@ export default async function UserNav() {
 
   const profile = await getProfile(user.id);
   const admin = await isAdminEmail(user.email);
-  const name = profile?.username ?? user.email?.split("@")[0] ?? "yo";
 
   return (
     <div className="flex items-center gap-3 text-sm">
@@ -29,7 +28,10 @@ export default async function UserNav() {
         </Link>
       )}
       <Link href="/perfil" className="hover:text-accent transition-colors">
-        {name}
+        {/* Nunca el email: si aún no hay nombre, se le manda a ponérselo. */}
+        {profile?.username ?? (
+          <span className="text-accent2">Ponte un nombre</span>
+        )}
       </Link>
       <SignOutButton />
     </div>
