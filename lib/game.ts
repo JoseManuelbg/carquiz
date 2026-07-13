@@ -1,15 +1,14 @@
-// Core game logic: build guess feedback as a row of colored "cells".
-// Pure functions, no I/O.
+// Lógica del juego: convierte un intento en una fila de casillas de colores.
+// Funciones puras, sin I/O.
 //
-// Cell colors:
-//   green  = exact match
-//   yellow = warm (year within tolerance)
-//   gray   = miss
+//   verde    = exacto
+//   amarillo = tibio (año dentro de tolerancia)
+//   gris     = fallo
 
 import type { Car } from "./types";
 import type { Target } from "./modes";
+import type { Difficulty } from "./difficulty";
 import { normalize } from "./normalize";
-import type { RefCar } from "./reference";
 
 export type CellState = "green" | "yellow" | "gray";
 
@@ -28,14 +27,15 @@ export interface Feedback {
   cells: Cell[];
 }
 
-/** Attributes we know about a guessed car. body/region/year are optional because
- *  a guess picked from the big catalog only carries brand + model. */
+/** Lo que sabemos del coche escrito. body/region/year solo si es un coche nuestro
+ *  (los del catálogo grande solo traen marca + modelo). */
 export interface GuessCar {
   brand: string;
   model: string;
   bodyType?: string;
   region?: string;
   year?: number;
+  engine?: string;
 }
 
 const YEAR_TOL = 3;
@@ -48,16 +48,15 @@ function brandCell(g: string, a: string): Cell {
   return { key: "brand", label: "Marca", value: g, state: eq(g, a) ? "green" : "gray" };
 }
 
-// Model is green (exact) or gray. No "warm" state — body segment has its own cell.
 function modelCell(g: string, a: string): Cell {
   return { key: "model", label: "Modelo", value: g, state: eq(g, a) ? "green" : "gray" };
 }
 
-function yearCell(g: number, a: number): Cell {
+function yearCell(g: number, a: number, key = "year"): Cell {
   const d = a - g;
   const state: CellState = d === 0 ? "green" : Math.abs(d) <= YEAR_TOL ? "yellow" : "gray";
   return {
-    key: "year",
+    key,
     label: "Año",
     value: String(g),
     state,
@@ -69,26 +68,7 @@ function sameCell(key: string, label: string, g: string, a: string): Cell {
   return { key, label, value: g, state: eq(g, a) ? "green" : "gray" };
 }
 
-/** Daily: guess = a catalog car (brand+model) plus a typed year. */
-export function evaluateDaily(
-  answer: Car,
-  ref: RefCar | undefined,
-  year: number | undefined
-): Feedback {
-  if (!ref || year === undefined || !Number.isFinite(year)) {
-    return { guess: ref ? `${ref.brand} ${ref.model}` : "", resolved: false, correct: false, cells: [] };
-  }
-  const cells: Cell[] = [
-    brandCell(ref.brand, answer.brand),
-    modelCell(ref.model, answer.model),
-    yearCell(year, answer.year),
-  ];
-  const correct =
-    eq(ref.brand, answer.brand) && eq(ref.model, answer.model) && year === answer.year;
-  return { guess: `${ref.brand} ${ref.model} · ${year}`, resolved: true, correct, cells };
-}
-
-/** Infinite "year" target (e.g. morro → año). */
+/** Modo "morro → año": solo se pide el año. */
 export function evaluateYear(answer: Car, text: string): Feedback {
   const gy = parseInt(text, 10);
   if (!Number.isFinite(gy)) return { guess: text, resolved: false, correct: false, cells: [] };
@@ -100,25 +80,71 @@ export function evaluateYear(answer: Car, text: string): Feedback {
   };
 }
 
-/** Infinite car/model/brand targets. Extra cells appear only when the guessed
- *  car is one we have full data on; catalog-only guesses show brand + model. */
-export function evaluateCar(answer: Car, g: GuessCar, target: Target): Feedback {
+/**
+ * Evaluación unificada: vale para el diario y para los modos infinitos, en
+ * cualquier nivel de dificultad. El nivel decide qué campos hay que acertar;
+ * los datos del coche escrito (si lo tenemos en la BBDD) se muestran de propina
+ * como pistas.
+ */
+export function evaluateGuess(
+  answer: Car,
+  g: GuessCar | undefined,
+  year: number | undefined,
+  engine: string | undefined,
+  diff: Difficulty,
+  target: Target
+): Feedback {
+  const missingYear = diff.askYear && (year === undefined || !Number.isFinite(year));
+  const missingEngine = diff.askEngine && !engine;
+  if (!g || missingYear || missingEngine) {
+    return {
+      guess: g ? `${g.brand} ${g.model}` : "",
+      resolved: false,
+      correct: false,
+      cells: [],
+    };
+  }
+
   const cells: Cell[] = [brandCell(g.brand, answer.brand), modelCell(g.model, answer.model)];
+
+  if (diff.askYear && year !== undefined) {
+    cells.push(yearCell(year, answer.year));
+  } else if (g.year !== undefined) {
+    // No se pide el año, pero si conocemos el del coche escrito lo damos de pista.
+    cells.push(yearCell(g.year, answer.year));
+  }
+
+  if (diff.askEngine && engine) {
+    cells.push(sameCell("engine", "Motor", engine, answer.engine ?? ""));
+  }
+
+  // Pistas extra: solo si el coche escrito está en nuestra BBDD.
   if (g.bodyType) cells.push(sameCell("body", "Carrocería", g.bodyType, answer.bodyType));
   if (g.region) cells.push(sameCell("region", "Región", g.region, answer.region));
-  if (g.year !== undefined) cells.push(yearCell(g.year, answer.year));
 
-  const correct =
+  const carOk =
     target === "brand"
       ? eq(g.brand, answer.brand)
       : target === "model"
         ? eq(g.model, answer.model)
         : eq(g.brand, answer.brand) && eq(g.model, answer.model);
 
-  return { guess: `${g.brand} ${g.model}`, resolved: true, correct, cells };
+  const yearOk = !diff.askYear || year === answer.year;
+  const engineOk = !diff.askEngine || eq(engine ?? "", answer.engine ?? "");
+
+  const parts = [`${g.brand} ${g.model}`];
+  if (diff.askYear && year !== undefined) parts.push(String(year));
+  if (diff.askEngine && engine) parts.push(engine);
+
+  return {
+    guess: parts.join(" · "),
+    resolved: true,
+    correct: carOk && yearOk && engineOk,
+    cells,
+  };
 }
 
-/** Options for the small static datalist (only used by non-typeahead modes now). */
+/** Opciones del datalist pequeño (modos sin catálogo grande). */
 export function optionsFor(cars: Car[], target: Target): string[] {
   const uniq = (xs: string[]) => [...new Set(xs)];
   switch (target) {
@@ -132,6 +158,33 @@ export function optionsFor(cars: Car[], target: Target): string[] {
   }
 }
 
+/**
+ * Motorizaciones para elegir: la correcta + señuelos de otros coches.
+ * Adivinar "1.6 TDCi" a pelo sería brutal, así que se ofrece de lista.
+ */
+export function engineChoices(answer: Car, cars: Car[], n = 6): string[] {
+  const correct = answer.engine;
+  if (!correct) return [];
+  const pool = [
+    ...new Set(
+      cars
+        .map((c) => c.engine)
+        .filter((e): e is string => Boolean(e) && normalize(e!) !== normalize(correct))
+    ),
+  ];
+  // Barajado estable-ish; el orden real da igual porque se baraja al servir.
+  for (let i = pool.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [pool[i], pool[j]] = [pool[j], pool[i]];
+  }
+  const out = [correct, ...pool.slice(0, Math.max(0, n - 1))];
+  for (let i = out.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [out[i], out[j]] = [out[j], out[i]];
+  }
+  return out;
+}
+
 export function revealAnswer(car: Car) {
   return {
     brand: car.brand,
@@ -140,5 +193,6 @@ export function revealAnswer(car: Car) {
     year: car.year,
     region: car.region,
     bodyType: car.bodyType,
+    engine: car.engine,
   };
 }

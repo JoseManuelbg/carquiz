@@ -36,14 +36,15 @@ export default function RevealImage({
   region?: Region;
   gameOver?: boolean;
 }) {
-  // Harder with streak: finer grid (4→8) and stronger blur.
+  // Harder with streak: finer grid (4→8) and a bit more blur.
+  // Blur is deliberately mild — it was unreadably strong before.
   const grid = Math.min(4 + Math.floor(intensity / 2), 8);
-  const maxBlur = Math.min(22 + intensity * 5, 64);
+  const maxBlur = Math.min(10 + intensity * 1.5, 22);
   const total = grid * grid;
   const order = useMemo(() => pseudoOrder(total), [total]);
 
   const r = gameOver ? 1 : Math.max(0, Math.min(1, level));
-  const frame = "w-full rounded-md border-2 border-tile-border overflow-hidden bg-background";
+  const frame = "panel w-full rounded-sm overflow-hidden";
 
   if (strategy === "region" && region && !gameOver) {
     const w = Math.min(0.999, region.w);
@@ -87,7 +88,7 @@ export default function RevealImage({
             return (
               <div
                 key={i}
-                className="bg-background border border-tile-border"
+                className="bg-surface border border-line"
                 style={{
                   transition: "transform 0.5s ease, opacity 0.4s ease",
                   transitionDelay: `${pos * 16}ms`,

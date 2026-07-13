@@ -1,53 +1,96 @@
-// In-memory round store (provisional).
+// Server-authoritative game rounds, stored in Postgres.
 //
-// A "round" is one server-authoritative game: it remembers which car is the
-// answer and how many attempts have been used, so the answer never travels to
-// the client until the game is legitimately over. This lives in process memory
-// on purpose for the JSON phase — swap for Redis/DB when the backend is real.
+// Replaces the old in-memory Map, which broke on serverless (a round created on
+// one instance was invisible to the instance handling the guess).
 
-import { randomUUID } from "node:crypto";
+import { supabaseAdmin } from "./supabase";
 
 export interface Round {
+  id: string;
   carId: string;
   modeId: string;
+  difficulty: string;
   attempts: number;
   maxAttempts: number;
   solved: boolean;
-  expires: number;
+  expiresAt: string;
+}
+
+interface RoundRow {
+  id: string;
+  car_id: string;
+  mode_id: string;
+  difficulty: string;
+  attempts: number;
+  max_attempts: number;
+  solved: boolean;
+  expires_at: string;
 }
 
 const TTL_MS = 1000 * 60 * 60; // 1h
-const store = new Map<string, Round>();
 
-function sweep() {
-  const now = Date.now();
-  for (const [id, r] of store) if (r.expires < now) store.delete(id);
+function toRound(r: RoundRow): Round {
+  return {
+    id: r.id,
+    carId: r.car_id,
+    modeId: r.mode_id,
+    difficulty: r.difficulty,
+    attempts: r.attempts,
+    maxAttempts: r.max_attempts,
+    solved: r.solved,
+    expiresAt: r.expires_at,
+  };
 }
 
-export function createRound(
+export async function createRound(
   carId: string,
   modeId: string,
-  maxAttempts: number
-): string {
-  sweep();
-  const id = randomUUID();
-  store.set(id, {
-    carId,
-    modeId,
-    attempts: 0,
-    maxAttempts,
-    solved: false,
-    expires: Date.now() + TTL_MS,
-  });
-  return id;
+  maxAttempts: number,
+  difficulty: string
+): Promise<string> {
+  const { data, error } = await supabaseAdmin()
+    .from("rounds")
+    .insert({
+      car_id: carId,
+      mode_id: modeId,
+      difficulty,
+      max_attempts: maxAttempts,
+      expires_at: new Date(Date.now() + TTL_MS).toISOString(),
+    })
+    .select("id")
+    .single();
+  if (error) throw new Error(`createRound: ${error.message}`);
+  return data.id as string;
 }
 
-export function getRound(id: string): Round | undefined {
-  const r = store.get(id);
-  if (!r) return undefined;
-  if (r.expires < Date.now()) {
-    store.delete(id);
-    return undefined;
-  }
-  return r;
+export async function getRound(id: string): Promise<Round | undefined> {
+  const { data, error } = await supabaseAdmin()
+    .from("rounds")
+    .select("*")
+    .eq("id", id)
+    .maybeSingle();
+  if (error) return undefined; // malformed uuid, etc.
+  if (!data) return undefined;
+  const round = toRound(data as RoundRow);
+  if (new Date(round.expiresAt).getTime() < Date.now()) return undefined;
+  return round;
+}
+
+/**
+ * Atomically consume one attempt. The SQL function refuses to count attempts on
+ * a round that's already solved, exhausted or expired, so a double-submit can't
+ * burn extra tries or cheat the counter.
+ */
+export async function applyAttempt(
+  id: string,
+  correct: boolean
+): Promise<Round | undefined> {
+  const { data, error } = await supabaseAdmin().rpc("apply_attempt", {
+    p_round_id: id,
+    p_correct: correct,
+  });
+  if (error) throw new Error(`applyAttempt: ${error.message}`);
+  if (!data) return undefined;
+  const row = (Array.isArray(data) ? data[0] : data) as RoundRow;
+  return row ? toRound(row) : undefined;
 }

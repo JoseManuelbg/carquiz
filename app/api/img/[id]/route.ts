@@ -1,17 +1,17 @@
-// Serves a car photo by its opaque image id, reading the real file from /cars.
-// The real filename (which would spoil the answer) never reaches the client.
+// Serves a car photo by its opaque image id, streaming it from the PRIVATE
+// Supabase Storage bucket. The client never sees the storage path or filename,
+// which would spoil the answer.
 
-import { readFile } from "node:fs/promises";
-import path from "node:path";
 import { getImage } from "@/lib/db";
+import { supabaseAdmin, PHOTO_BUCKET } from "@/lib/supabase";
 
 const MIME: Record<string, string> = {
-  ".jpg": "image/jpeg",
-  ".jpeg": "image/jpeg",
-  ".png": "image/png",
-  ".webp": "image/webp",
-  ".avif": "image/avif",
-  ".gif": "image/gif",
+  jpg: "image/jpeg",
+  jpeg: "image/jpeg",
+  png: "image/png",
+  webp: "image/webp",
+  avif: "image/avif",
+  gif: "image/gif",
 };
 
 export async function GET(
@@ -22,13 +22,18 @@ export async function GET(
   const found = await getImage(id);
   if (!found) return new Response("Not found", { status: 404 });
 
-  const bytes = await readFile(path.join(process.cwd(), "cars", found.image.file));
-  const type = MIME[path.extname(found.image.file).toLowerCase()] ?? "image/jpeg";
+  const { data, error } = await supabaseAdmin()
+    .storage.from(PHOTO_BUCKET)
+    .download(found.image.storagePath);
+  if (error || !data) return new Response("Not found", { status: 404 });
 
-  return new Response(new Uint8Array(bytes), {
+  const ext = found.image.storagePath.split(".").pop()?.toLowerCase() ?? "jpg";
+  const bytes = new Uint8Array(await data.arrayBuffer());
+
+  return new Response(bytes, {
     headers: {
-      "Content-Type": type,
-      // Opaque id is stable per image, so caching is safe and desirable.
+      "Content-Type": data.type || MIME[ext] || "image/jpeg",
+      // Opaque id is stable per image, so caching is safe.
       "Cache-Control": "public, max-age=86400, immutable",
     },
   });

@@ -1,18 +1,19 @@
-// Evaluates a guess against the round's answer. Server-authoritative: it counts
-// attempts and only reveals the answer once the game is legitimately over.
+// Evalúa un intento contra la respuesta de la ronda. Autoridad en servidor: los
+// intentos se consumen de forma atómica en la BBDD y la respuesta solo se revela
+// cuando la partida ha terminado de verdad.
 
 import { getCarById, getCars } from "@/lib/db";
 import { getMode } from "@/lib/modes";
+import { getDifficulty } from "@/lib/difficulty";
 import {
-  evaluateCar,
-  evaluateDaily,
+  evaluateGuess,
   evaluateYear,
   revealAnswer,
   type Feedback,
   type GuessCar,
 } from "@/lib/game";
 import { resolveCar } from "@/lib/reference";
-import { getRound } from "@/lib/rounds";
+import { applyAttempt, getRound } from "@/lib/rounds";
 import { normalize } from "@/lib/normalize";
 
 export async function POST(req: Request) {
@@ -20,33 +21,37 @@ export async function POST(req: Request) {
     roundId?: string;
     guess?: string;
     year?: number;
+    engine?: string;
   } | null;
 
   if (!body?.roundId || typeof body.guess !== "string") {
     return Response.json({ error: "bad-request" }, { status: 400 });
   }
 
-  const round = getRound(body.roundId);
+  let round = await getRound(body.roundId);
   if (!round) return Response.json({ error: "expired" }, { status: 410 });
 
   const mode = getMode(round.modeId);
   const answer = await getCarById(round.carId);
   if (!mode || !answer) return Response.json({ error: "gone" }, { status: 410 });
 
+  // El nivel se lee de la ronda, no del cliente: no se puede bajar la dificultad
+  // a mitad de partida para que te la den por buena.
+  const diff = getDifficulty(round.difficulty);
   const alreadyOver = round.solved || round.attempts >= round.maxAttempts;
 
   let feedback: Feedback;
-  if (mode.askYear) {
-    feedback = evaluateDaily(answer, await resolveCar(body.guess), body.year);
-  } else if (mode.target === "year") {
+  if (mode.target === "year") {
     feedback = evaluateYear(answer, body.guess);
   } else {
-    // Prefer our curated car (full attributes); fall back to the big catalog.
+    // Preferimos el coche de nuestra BBDD (trae todos los atributos);
+    // si no, tiramos del catálogo grande (solo marca + modelo).
     const n = normalize(body.guess);
     const cars = await getCars();
     const curated =
       cars.find((c) => normalize(`${c.brand} ${c.model}`) === n) ??
       cars.find((c) => normalize(c.model) === n);
+
     let g: GuessCar | undefined;
     if (curated) {
       g = {
@@ -55,19 +60,18 @@ export async function POST(req: Request) {
         bodyType: curated.bodyType,
         region: curated.region,
         year: curated.year,
+        engine: curated.engine,
       };
     } else {
       const ref = await resolveCar(body.guess);
       if (ref) g = { brand: ref.brand, model: ref.model };
     }
-    feedback = g
-      ? evaluateCar(answer, g, mode.target)
-      : { guess: body.guess, resolved: false, correct: false, cells: [] };
+
+    feedback = evaluateGuess(answer, g, body.year, body.engine, diff, mode.target);
   }
 
   if (!alreadyOver && feedback.resolved) {
-    round.attempts += 1;
-    if (feedback.correct) round.solved = true;
+    round = (await applyAttempt(round.id, feedback.correct)) ?? round;
   }
 
   const gameOver = round.solved || round.attempts >= round.maxAttempts;

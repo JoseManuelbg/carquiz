@@ -33,8 +33,8 @@ export interface Credit {
 export interface CarImage {
   /** Opaque id exposed to the client (used in /api/img/[id]). Never reveals the answer. */
   id: string;
-  /** Real filename on disk under /cars. Server-only, never sent to the client. */
-  file: string;
+  /** Path inside the private Supabase Storage bucket. Server-only — never sent to the client. */
+  storagePath: string;
   part: Part;
   /** Optional crop rectangle, e.g. the headlight, used by the "region" reveal. */
   region?: Region;

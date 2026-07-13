@@ -16,9 +16,11 @@ interface RoundData {
   roundId: string;
   day?: string;
   mode: Mode;
+  difficulty: { id: string; askYear: boolean; askEngine: boolean };
   imageId: string;
   options: string[];
   yearRange?: [number, number];
+  engineOptions?: string[];
   reveal: RevealStrategy;
   region?: Region;
   credit?: Credit;
@@ -54,13 +56,15 @@ export default function Game({ query, daily = false }: { query: string; daily?: 
   const [answer, setAnswer] = useState<RevealedAnswer | undefined>(undefined);
   const [text, setText] = useState("");
   const [year, setYear] = useState("");
+  const [engine, setEngine] = useState("");
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const [note, setNote] = useState<string | null>(null);
   const [streak, setStreak] = useState(0);
   const [best, setBest] = useState(0);
   const suggestTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const askYear = round?.mode.askYear ?? false;
+  const askYear = round?.difficulty.askYear ?? false;
+  const askEngine = round?.difficulty.askEngine ?? false;
   const typeahead = round?.mode.typeahead ?? false;
   const maxAttempts = round?.mode.maxAttempts ?? 0;
 
@@ -74,6 +78,7 @@ export default function Game({ query, daily = false }: { query: string; daily?: 
     setAnswer(undefined);
     setText("");
     setYear("");
+    setEngine("");
     setSuggestions([]);
     setNote(null);
     try {
@@ -126,6 +131,7 @@ export default function Game({ query, daily = false }: { query: string; daily?: 
     const guess = text.trim();
     if (!guess) return;
     if (askYear && !year.trim()) return setNote("Pon también un año.");
+    if (askEngine && !engine) return setNote("Elige una motorización.");
 
     const res = await fetch("/api/guess", {
       method: "POST",
@@ -134,6 +140,7 @@ export default function Game({ query, daily = false }: { query: string; daily?: 
         roundId: round.roundId,
         guess,
         year: askYear ? Number(year) : undefined,
+        engine: askEngine ? engine : undefined,
       }),
     });
     if (!res.ok) return setNote("La ronda ha caducado. Empieza otra.");
@@ -146,6 +153,7 @@ export default function Game({ query, daily = false }: { query: string; daily?: 
     setNote(null);
     setText("");
     setYear("");
+    setEngine("");
     setSuggestions([]);
 
     const next = [...guesses, data.feedback];
@@ -201,15 +209,36 @@ export default function Game({ query, daily = false }: { query: string; daily?: 
 
   return (
     <div className="flex flex-col gap-5 w-full max-w-lg">
-      <div className="flex items-center justify-between border-b border-tile-border pb-2">
-        <span className="font-mono text-sm text-muted tabular-nums">
-          {used} / {maxAttempts}
-        </span>
+      {/* Marcador tipo salpicadero */}
+      <div className="panel flex items-stretch divide-x divide-line rounded-sm">
+        <div className="flex-1 px-4 py-2.5">
+          <div className="font-display text-[10px] uppercase tracking-[0.2em] text-muted">
+            Intento
+          </div>
+          <div className="readout text-xl font-bold">
+            {String(used).padStart(2, "0")}
+            <span className="text-muted">/{String(maxAttempts).padStart(2, "0")}</span>
+          </div>
+        </div>
         {!daily && (
-          <span className="text-[13px] uppercase tracking-widest text-muted">
-            Racha <span className="text-foreground font-medium">{streak}</span>
-            <span className="mx-2 opacity-40">/</span>Récord {best}
-          </span>
+          <>
+            <div className="flex-1 px-4 py-2.5">
+              <div className="font-display text-[10px] uppercase tracking-[0.2em] text-muted">
+                Racha
+              </div>
+              <div className="readout text-xl font-bold text-accent">
+                {String(streak).padStart(2, "0")}
+              </div>
+            </div>
+            <div className="flex-1 px-4 py-2.5">
+              <div className="font-display text-[10px] uppercase tracking-[0.2em] text-muted">
+                Récord
+              </div>
+              <div className="readout text-xl font-bold">
+                {String(best).padStart(2, "0")}
+              </div>
+            </div>
+          </>
         )}
       </div>
 
@@ -236,7 +265,7 @@ export default function Game({ query, daily = false }: { query: string; daily?: 
             onChange={(e) => onTextChange(e.target.value)}
             placeholder="Marca y modelo…"
             autoComplete="off"
-            className="flex-1 min-w-48 rounded-md border-2 border-tile-border bg-transparent px-3 py-2.5 outline-none focus:border-accent transition-colors"
+            className="flex-1 min-w-48 rounded-sm border border-line bg-surface px-3 py-2.5 outline-none focus:border-accent transition-colors placeholder:text-muted"
           />
           <datalist id="guess-opts">
             {(typeahead ? suggestions : round.options).map((o) => (
@@ -252,13 +281,28 @@ export default function Game({ query, daily = false }: { query: string; daily?: 
               placeholder="Año"
               min={round.yearRange?.[0]}
               max={round.yearRange?.[1]}
-              className="w-24 rounded-md border-2 border-tile-border bg-transparent px-3 py-2.5 outline-none focus:border-accent transition-colors"
+              className="w-24 rounded-sm border border-line bg-surface px-3 py-2.5 outline-none focus:border-accent transition-colors placeholder:text-muted readout"
             />
+          )}
+
+          {askEngine && round.engineOptions && (
+            <select
+              value={engine}
+              onChange={(e) => setEngine(e.target.value)}
+              className="rounded-sm border border-line bg-surface px-3 py-2.5 outline-none focus:border-accent transition-colors"
+            >
+              <option value="">Motorización…</option>
+              {round.engineOptions.map((o) => (
+                <option key={o} value={o}>
+                  {o}
+                </option>
+              ))}
+            </select>
           )}
 
           <button
             type="submit"
-            className="rounded-md bg-foreground text-background px-6 py-2.5 text-sm font-bold uppercase tracking-wider hover:opacity-90 transition"
+            className="rounded-sm bg-accent text-white px-6 py-2.5 font-display text-sm font-bold uppercase tracking-widest hover:brightness-110 active:scale-[0.98] transition"
           >
             Probar
           </button>
@@ -278,15 +322,20 @@ export default function Game({ query, daily = false }: { query: string; daily?: 
       </ul>
 
       {(status === "won" || status === "lost") && answer && (
-        <div className="border-t border-b border-tile-border py-6 text-center flex flex-col gap-1">
+        <div className="panel rounded-sm py-6 text-center flex flex-col gap-1 relative overflow-hidden">
+          <span
+            className={`absolute inset-x-0 top-0 h-1 ${
+              status === "won" ? "checker" : "racing-stripe"
+            }`}
+          />
           <p
-            className={`text-sm font-bold uppercase tracking-widest ${
-              status === "won" ? "text-correct" : "text-muted"
+            className={`font-display text-sm font-bold uppercase tracking-[0.2em] ${
+              status === "won" ? "text-correct" : "text-accent"
             }`}
           >
-            {status === "won" ? "Correcto" : "Se acabó"}
+            {status === "won" ? "¡Correcto!" : "Se acabó"}
           </p>
-          <p className="text-2xl font-extrabold">
+          <p className="font-display text-3xl font-bold uppercase tracking-wide">
             {answer.brand} {answer.model}
             {answer.gen ? ` · ${answer.gen}` : ""}
           </p>
@@ -308,7 +357,7 @@ export default function Game({ query, daily = false }: { query: string; daily?: 
       {!daily && !playing && (
         <button
           onClick={startRound}
-          className="self-center rounded-full border-2 border-foreground px-6 py-2 text-sm font-bold uppercase tracking-wider hover:bg-foreground hover:text-background transition"
+          className="self-center rounded-sm border border-line bg-surface px-6 py-2.5 font-display text-sm font-bold uppercase tracking-widest hover:border-accent hover:text-accent transition"
         >
           Siguiente coche →
         </button>
@@ -323,12 +372,12 @@ function CellBox({ cell }: { cell: Cell }) {
   const arrow = cell.arrow === "up" ? " ↑" : cell.arrow === "down" ? " ↓" : "";
   return (
     <span
-      className={`flex flex-col items-center justify-center gap-0.5 rounded px-3 py-2 min-w-20 text-white ${bg}`}
+      className={`flex flex-col items-center justify-center gap-0.5 rounded-sm px-3 py-2 min-w-20 text-white ${bg}`}
     >
-      <span className="text-[9px] uppercase tracking-wider font-semibold opacity-80">
+      <span className="font-display text-[9px] uppercase tracking-[0.15em] opacity-75">
         {cell.label}
       </span>
-      <span className="font-bold text-sm uppercase tracking-wide">
+      <span className="font-display font-bold text-base uppercase tracking-wide">
         {cell.value}
         {arrow}
       </span>

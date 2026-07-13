@@ -1,44 +1,85 @@
 @import "tailwindcss";
 
+/* Garaje / competición: asfalto, rojo de carrera, tipografía condensada. */
 :root {
-  --background: #ffffff;
-  --foreground: #1a1a1b;
-  --muted: #787c7e;
-  --tile-border: #d3d6da;
-  --correct: #6aaa64;
-  --present: #c9b458;
-  --absent: #787c7e;
-  --accent: #6aaa64;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #121213;
-    --foreground: #d7dadc;
-    --muted: #818384;
-    --tile-border: #3a3a3c;
-    --correct: #538d4e;
-    --present: #b59f3b;
-    --absent: #3a3a3c;
-    --accent: #538d4e;
-  }
+  --background: #0d0e10; /* asfalto */
+  --surface: #15171a; /* panel */
+  --foreground: #f3f3f1;
+  --muted: #8b9098;
+  --line: #2b2f35;
+  --accent: #e10600; /* rojo competición */
+  --accent2: #ffcc00; /* amarillo aviso */
+  --correct: #4f9d4a;
+  --present: #c9a227;
+  --absent: #383c42;
 }
 
 @theme inline {
   --color-background: var(--background);
+  --color-surface: var(--surface);
   --color-foreground: var(--foreground);
   --color-muted: var(--muted);
+  --color-line: var(--line);
   --color-accent: var(--accent);
+  --color-accent2: var(--accent2);
   --color-correct: var(--correct);
   --color-present: var(--present);
   --color-absent: var(--absent);
-  --color-tile-border: var(--tile-border);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-display: var(--font-display);
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: var(--font-sans), "Helvetica Neue", Arial, sans-serif;
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  /* Textura sutil de asfalto + halo superior. */
+  background-image:
+    radial-gradient(120% 80% at 50% -20%, #1c2026 0%, transparent 60%),
+    repeating-linear-gradient(
+      45deg,
+      rgba(255, 255, 255, 0.014) 0 2px,
+      transparent 2px 7px
+    );
+  background-attachment: fixed;
+}
+
+/* Franja de carrera roja/negra. */
+.racing-stripe {
+  background: repeating-linear-gradient(
+    90deg,
+    var(--accent) 0 22px,
+    #101114 22px 30px
+  );
+}
+
+/* Bandera de cuadros. */
+.checker {
+  background-image: repeating-conic-gradient(
+    var(--foreground) 0% 25%,
+    #101114 0% 50%
+  );
+  background-size: 10px 10px;
+}
+
+/* Panel metálico del taller. */
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 10px 30px rgba(0, 0, 0, 0.45);
+}
+
+/* Lectura tipo salpicadero. */
+.readout {
+  font-family: var(--font-mono), monospace;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.08em;
+}
+
+::selection {
+  background: var(--accent);
+  color: #fff;
 }
