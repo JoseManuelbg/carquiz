@@ -35,7 +35,12 @@ export default async function AdminLayout({
             Panel
           </Link>
         </div>
-        <span className="text-xs text-muted">{user.email}</span>
+        <div className="flex items-center gap-3 text-xs">
+          <Link href="/admin/stats" className="text-muted hover:text-accent">
+            Datos
+          </Link>
+          <span className="text-muted">{user.email}</span>
+        </div>
       </div>
       {children}
     </div>

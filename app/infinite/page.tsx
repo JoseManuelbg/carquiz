@@ -47,16 +47,9 @@ export default function InfinitePage() {
 
   return (
     <div className="flex flex-col gap-8 py-2">
-      <header className="flex items-center gap-3">
-        <span className="racing-stripe h-1 w-8" />
-        <h1 className="font-display text-3xl font-bold uppercase tracking-wide">
-          Modo infinito
-        </h1>
-        <span className="racing-stripe h-1 flex-1 opacity-40" />
-      </header>
-      <p className="-mt-6 text-sm text-muted">
-        Elige modos y regiones. Con varios, cada ronda sale uno al azar.
-      </p>
+      <h1 className="font-display text-3xl font-bold uppercase tracking-wide">
+        Modo infinito
+      </h1>
 
       <Section title="Modos">
         {PLAYABLE.map((m) => (
@@ -104,9 +97,6 @@ export default function InfinitePage() {
           </Chip>
         ))}
       </Section>
-      <p className="-mt-6 text-xs text-muted">
-        {DIFFICULTIES.find((d) => d.id === difficulty)?.desc}
-      </p>
 
       <button
         disabled={!canPlay}

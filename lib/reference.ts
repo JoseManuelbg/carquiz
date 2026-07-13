@@ -20,8 +20,24 @@ export const YEAR_RANGE: [number, number] = [
   vehicles.yearRange[1],
 ];
 
-// Curated supplement (EU/JDM models vPIC under-represents) merged with vPIC.
-const base = [...(extra as RefCar[]), ...(vehicles.cars as RefCar[])];
+/**
+ * vPIC mete códigos de camión/comercial que no son modelos de verdad
+ * ("A8513", "At9513", "B6000", "'34"). Ensucian el autocompletado.
+ *   - "A4", "S3", "Q7"  -> se quedan (1 dígito)
+ *   - "911", "500", "206" -> se quedan (solo dígitos)
+ *   - "A8513", "B700", "Cft8000" -> fuera (letras + 3 o más dígitos pegados)
+ */
+function isJunkModel(model: string): boolean {
+  if (model.length < 2) return true;
+  if (/^[^a-z0-9]/i.test(model)) return true; // empieza por ' o -
+  return /^[a-z]{1,3}\d{3,}$/i.test(model);
+}
+
+// Suplemento curado (EU/JDM que vPIC cubre mal) + vPIC ya limpio.
+const base = [
+  ...(extra as RefCar[]),
+  ...(vehicles.cars as RefCar[]).filter((c) => !isJunkModel(c.model)),
+];
 
 let merged: RefCar[] | null = null;
 
@@ -36,6 +52,14 @@ async function allCars(): Promise<RefCar[]> {
     seen.add(key);
     out.push(c);
   }
+
+  // CRÍTICO: ordenar alfabéticamente. Si dejamos los coches del pool de
+  // respuestas al principio (como venían), el autocompletado los muestra
+  // siempre arriba y le canta al jugador cuál es la respuesta.
+  out.sort((a, b) =>
+    `${a.brand} ${a.model}`.localeCompare(`${b.brand} ${b.model}`, "es")
+  );
+
   merged = out;
   return out;
 }

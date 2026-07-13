@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { Geist, Geist_Mono, Oswald } from "next/font/google";
 import Link from "next/link";
+import UserNav from "./ui/UserNav";
 import "./globals.css";
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
@@ -35,13 +37,19 @@ export default function RootLayout({
                 Car<span className="text-accent">Quiz</span>
               </span>
             </Link>
-            <nav className="flex gap-4 font-display text-sm uppercase tracking-widest text-muted">
-              <Link href="/daily" className="hover:text-foreground transition-colors">
+            <nav className="flex items-center gap-4 text-sm">
+              <Link href="/daily" className="text-muted hover:text-foreground transition-colors">
                 Diario
               </Link>
-              <Link href="/infinite" className="hover:text-foreground transition-colors">
+              <Link href="/infinite" className="text-muted hover:text-foreground transition-colors">
                 Infinito
               </Link>
+              <Link href="/ranking" className="text-muted hover:text-foreground transition-colors">
+                Ranking
+              </Link>
+              <Suspense fallback={null}>
+                <UserNav />
+              </Suspense>
             </nav>
           </div>
           <div className="racing-stripe h-1" />

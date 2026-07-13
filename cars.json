@@ -1213,7 +1213,18 @@
     "engine": "1.8 8v",
     "region": "EUR",
     "bodyType": "Hatchback",
-    "images": []
+    "images": [
+      {
+        "id": "img_c0bf48d2d0",
+        "file": "vw-golf-mk2-gti.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Charlie from United Kingdom",
+          "license": "CC BY 2.0",
+          "source": "https://commons.wikimedia.org/wiki/File:Various_(15136117751).jpg"
+        }
+      }
+    ]
   },
   {
     "id": "vw-golf-mk1-gti",
@@ -1224,7 +1235,18 @@
     "engine": "1.6 8v",
     "region": "EUR",
     "bodyType": "Hatchback",
-    "images": []
+    "images": [
+      {
+        "id": "img_0c69027a0c",
+        "file": "vw-golf-mk1-gti.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Matti Blume",
+          "license": "CC BY-SA",
+          "source": "https://commons.wikimedia.org/wiki/File:VW_Golf_GTI,_Rallye_Monte_Carlo_Historique_2025,_Bad_Homburg_(P1032837).jpg"
+        }
+      }
+    ]
   },
   {
     "id": "vw-golf-gti-mk7",
@@ -1235,7 +1257,18 @@
     "engine": "2.0 TSI",
     "region": "EUR",
     "bodyType": "Hatchback",
-    "images": []
+    "images": [
+      {
+        "id": "img_3b00324954",
+        "file": "vw-golf-gti-mk7.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Bob Linsdell",
+          "license": "CC BY 3.0",
+          "source": "https://commons.wikimedia.org/wiki/File:Winnipeg_Sports_Car_Club,_George_Porayko_Way,_St._Andrews_-_panoramio.jpg"
+        }
+      }
+    ]
   },
   {
     "id": "vw-polo-6n",
@@ -1246,7 +1279,18 @@
     "engine": "1.4",
     "region": "EUR",
     "bodyType": "Hatchback",
-    "images": []
+    "images": [
+      {
+        "id": "img_38f466eba5",
+        "file": "vw-polo-6n.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Charlie from United Kingdom",
+          "license": "CC BY 2.0",
+          "source": "https://commons.wikimedia.org/wiki/File:Harlequin_VW_Polo_(11737975086).jpg"
+        }
+      }
+    ]
   },
   {
     "id": "seat-ibiza-6k",
@@ -1257,7 +1301,18 @@
     "engine": "1.8 20v",
     "region": "EUR",
     "bodyType": "Hatchback",
-    "images": []
+    "images": [
+      {
+        "id": "img_763c27ff4a",
+        "file": "seat-ibiza-6k.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Xavigivax",
+          "license": "CC BY-SA 3.0",
+          "source": "https://commons.wikimedia.org/wiki/File:Seat_Ibiza_Kit_Car.jpg"
+        }
+      }
+    ]
   },
   {
     "id": "renault-clio-2",
@@ -1268,7 +1323,18 @@
     "engine": "1.5 dCi",
     "region": "EUR",
     "bodyType": "Hatchback",
-    "images": []
+    "images": [
+      {
+        "id": "img_af8bbc2dcd",
+        "file": "renault-clio-2.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Adam Court",
+          "license": "CC BY 2.0",
+          "source": "https://commons.wikimedia.org/wiki/File:RenaultSport_Clio_182_(31769012112).jpg"
+        }
+      }
+    ]
   },
   {
     "id": "renault-clio-williams",
@@ -1279,7 +1345,18 @@
     "engine": "2.0 16v",
     "region": "EUR",
     "bodyType": "Hatchback",
-    "images": []
+    "images": [
+      {
+        "id": "img_c3ffcfeac8",
+        "file": "renault-clio-williams.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Alexander-93",
+          "license": "CC BY-SA 4.0",
+          "source": "https://commons.wikimedia.org/wiki/File:Renault_Clio_V_(2023)_Esprit_Alpine_Automesse_Ludwigsburg_2023_1X7A0088.jpg"
+        }
+      }
+    ]
   },
   {
     "id": "renault-clio-v6",
@@ -1290,7 +1367,18 @@
     "engine": "3.0 V6",
     "region": "EUR",
     "bodyType": "Hatchback",
-    "images": []
+    "images": [
+      {
+        "id": "img_9b60e46c62",
+        "file": "renault-clio-v6.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Spanish Coches",
+          "license": "CC BY 2.0",
+          "source": "https://commons.wikimedia.org/wiki/File:2003_Renault_Clio_V6_(7157885442).jpg"
+        }
+      }
+    ]
   },
   {
     "id": "renault-megane-rs-2",
@@ -1301,7 +1389,18 @@
     "engine": "2.0 Turbo",
     "region": "EUR",
     "bodyType": "Hatchback",
-    "images": []
+    "images": [
+      {
+        "id": "img_48a109b0e0",
+        "file": "renault-megane-rs-2.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Grand Parc - Bordeaux, France from France",
+          "license": "CC BY 2.0",
+          "source": "https://commons.wikimedia.org/wiki/File:Porsche_GT3_RS_-_Circuit_Val_de_Vienne_-_15-11-2014_-_Image_Picture_Photography_-_Organisateur_-_Club_AGC86_Vienne_-_www.agc86.fr_(15182582653).jpg"
+        }
+      }
+    ]
   },
   {
     "id": "renault-twingo-1",
@@ -1312,7 +1411,18 @@
     "engine": "1.2",
     "region": "EUR",
     "bodyType": "Hatchback",
-    "images": []
+    "images": [
+      {
+        "id": "img_cfb1d0694a",
+        "file": "renault-twingo-1.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Kilyann Le Hen",
+          "license": "CC BY 4.0",
+          "source": "https://commons.wikimedia.org/wiki/File:Tony_Bardeau_(Renault_Twingo_II)_-_Lessay_2024.jpg"
+        }
+      }
+    ]
   },
   {
     "id": "renault-espace-1",
@@ -1323,7 +1433,18 @@
     "engine": "2.0",
     "region": "EUR",
     "bodyType": "MPV",
-    "images": []
+    "images": [
+      {
+        "id": "img_a36795ac1a",
+        "file": "renault-espace-1.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Riley from Christchurch, New Zealand",
+          "license": "CC BY 2.0",
+          "source": "https://commons.wikimedia.org/wiki/File:1990_Renault_Espace_TXE_Quadra_(30526644174).jpg"
+        }
+      }
+    ]
   },
   {
     "id": "citroen-saxo-vts",
@@ -1334,7 +1455,18 @@
     "engine": "1.6 16v",
     "region": "EUR",
     "bodyType": "Hatchback",
-    "images": []
+    "images": [
+      {
+        "id": "img_cff128212e",
+        "file": "citroen-saxo-vts.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Calreyn88",
+          "license": "CC BY-SA 4.0",
+          "source": "https://commons.wikimedia.org/wiki/File:2000_Citro%C3%ABn_Saxo_VTS_Rally_Car.jpg"
+        }
+      }
+    ]
   },
   {
     "id": "citroen-ds",
@@ -1345,7 +1477,18 @@
     "engine": "2.1",
     "region": "EUR",
     "bodyType": "Sedan",
-    "images": []
+    "images": [
+      {
+        "id": "img_04bf38cb67",
+        "file": "citroen-ds.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Calreyn88",
+          "license": "CC BY-SA 4.0",
+          "source": "https://commons.wikimedia.org/wiki/File:1970_Citroen_DS_21_1.jpg"
+        }
+      }
+    ]
   },
   {
     "id": "peugeot-106-rallye",
@@ -1356,7 +1499,18 @@
     "engine": "1.6 8v",
     "region": "EUR",
     "bodyType": "Hatchback",
-    "images": []
+    "images": [
+      {
+        "id": "img_aefcdc9acf",
+        "file": "peugeot-106-rallye.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "SunflowerYuri",
+          "license": "CC BY 4.0",
+          "source": "https://commons.wikimedia.org/wiki/File:Rallye_Nancy_2023_106.jpg"
+        }
+      }
+    ]
   },
   {
     "id": "peugeot-206-gti",
@@ -1367,7 +1521,18 @@
     "engine": "2.0 16v",
     "region": "EUR",
     "bodyType": "Hatchback",
-    "images": []
+    "images": [
+      {
+        "id": "img_0df7cb7def",
+        "file": "peugeot-206-gti.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Kev22",
+          "license": "CC BY-SA 4.0",
+          "source": "https://commons.wikimedia.org/wiki/File:Peugeot_206_Commercial_01.jpg"
+        }
+      }
+    ]
   },
   {
     "id": "opel-corsa-b",
@@ -1378,7 +1543,18 @@
     "engine": "1.4",
     "region": "EUR",
     "bodyType": "Hatchback",
-    "images": []
+    "images": [
+      {
+        "id": "img_59c833936f",
+        "file": "opel-corsa-b.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Calreyn88",
+          "license": "CC BY-SA 4.0",
+          "source": "https://commons.wikimedia.org/wiki/File:1991_Opel_Corsa_GSi_2.jpg"
+        }
+      }
+    ]
   },
   {
     "id": "ford-escort-rs-cosworth",
@@ -1389,7 +1565,18 @@
     "engine": "2.0 Turbo",
     "region": "EUR",
     "bodyType": "Hatchback",
-    "images": []
+    "images": [
+      {
+        "id": "img_b970463e24",
+        "file": "ford-escort-rs-cosworth.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Calreyn88",
+          "license": "CC BY-SA 4.0",
+          "source": "https://commons.wikimedia.org/wiki/File:1994_Ford_Escort_RS_Cosworth_Group_A_Rally_Car.jpg"
+        }
+      }
+    ]
   },
   {
     "id": "ford-focus-rs-mk1",
@@ -1400,7 +1587,18 @@
     "engine": "2.0 Turbo",
     "region": "EUR",
     "bodyType": "Hatchback",
-    "images": []
+    "images": [
+      {
+        "id": "img_65ab08f7bc",
+        "file": "ford-focus-rs-mk1.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Calreyn88",
+          "license": "CC BY-SA 4.0",
+          "source": "https://commons.wikimedia.org/wiki/File:2010_Ford_Focus_RS_500_2.jpg"
+        }
+      }
+    ]
   },
   {
     "id": "fiat-punto-gt",
@@ -1422,7 +1620,18 @@
     "engine": "0.9",
     "region": "EUR",
     "bodyType": "Hatchback",
-    "images": []
+    "images": [
+      {
+        "id": "img_1b030d2479",
+        "file": "fiat-panda-mk1.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Riley from Christchurch, New Zealand",
+          "license": "CC BY 2.0",
+          "source": "https://commons.wikimedia.org/wiki/File:1988_Fiat_Panda_1000S_(7682880654).jpg"
+        }
+      }
+    ]
   },
   {
     "id": "alfa-147-gta",
@@ -1433,7 +1642,18 @@
     "engine": "3.2 V6",
     "region": "EUR",
     "bodyType": "Hatchback",
-    "images": []
+    "images": [
+      {
+        "id": "img_ebf3b30400",
+        "file": "alfa-147-gta.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Tony Harrison",
+          "license": "CC BY-SA 2.0",
+          "source": "https://commons.wikimedia.org/wiki/File:Alfa_147_GTA_Brooklands_May_2010_IMG_9018.jpg"
+        }
+      }
+    ]
   },
   {
     "id": "alfa-155",
@@ -1444,7 +1664,18 @@
     "engine": "2.0 Turbo",
     "region": "EUR",
     "bodyType": "Sedan",
-    "images": []
+    "images": [
+      {
+        "id": "img_a204a05e97",
+        "file": "alfa-155.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Tony Harrison",
+          "license": "CC BY-SA 2.0",
+          "source": "https://commons.wikimedia.org/wiki/File:Gabriele_Tarquini_BTCC_Truxton_4th_April_1994.jpg"
+        }
+      }
+    ]
   },
   {
     "id": "skoda-octavia-vrs-1",
@@ -1455,7 +1686,18 @@
     "engine": "1.8 Turbo",
     "region": "EUR",
     "bodyType": "Hatchback",
-    "images": []
+    "images": [
+      {
+        "id": "img_b9307c0eea",
+        "file": "skoda-octavia-vrs-1.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Vauxford",
+          "license": "CC BY-SA 4.0",
+          "source": "https://commons.wikimedia.org/wiki/File:2004_Skoda_Octavia_VRS_1.8.jpg"
+        }
+      }
+    ]
   },
   {
     "id": "dacia-sandero-2",
@@ -1466,7 +1708,18 @@
     "engine": "0.9 TCe",
     "region": "EUR",
     "bodyType": "Hatchback",
-    "images": []
+    "images": [
+      {
+        "id": "img_6501c0d667",
+        "file": "dacia-sandero-2.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Marcelo Braga from São Paulo, Brasil",
+          "license": "CC BY 2.0",
+          "source": "https://commons.wikimedia.org/wiki/File:Analfabeto._(43691914622).jpg"
+        }
+      }
+    ]
   },
   {
     "id": "mini-cooper-classic",
@@ -1477,7 +1730,18 @@
     "engine": "1.3",
     "region": "EUR",
     "bodyType": "Hatchback",
-    "images": []
+    "images": [
+      {
+        "id": "img_a2988dd2bb",
+        "file": "mini-cooper-classic.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Dietmar Rabich",
+          "license": "CC BY-SA 4.0",
+          "source": "https://commons.wikimedia.org/wiki/File:M%C3%BCnster,_Hafen,_BMW_Mini_--_2019_--_7358.jpg"
+        }
+      }
+    ]
   },
   {
     "id": "bmw-5-e39",
@@ -1488,7 +1752,18 @@
     "engine": "530d",
     "region": "EUR",
     "bodyType": "Sedan",
-    "images": []
+    "images": [
+      {
+        "id": "img_864b5d075b",
+        "file": "bmw-5-e39.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "nakhon100",
+          "license": "CC BY 2.0",
+          "source": "https://commons.wikimedia.org/wiki/File:BMW_M5_E39_(14912356598)_(cropped).jpg"
+        }
+      }
+    ]
   },
   {
     "id": "bmw-m5-e39",
@@ -1499,7 +1774,18 @@
     "engine": "4.9 V8",
     "region": "EUR",
     "bodyType": "Sedan",
-    "images": []
+    "images": [
+      {
+        "id": "img_43bce18e4f",
+        "file": "bmw-m5-e39.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "The Car Spy",
+          "license": "CC BY 2.0",
+          "source": "https://commons.wikimedia.org/wiki/File:BMW_M5_(2002)_-_Flickr_-_The_Car_Spy_(3).jpg"
+        }
+      }
+    ]
   },
   {
     "id": "bmw-m4-f82",
@@ -1510,7 +1796,18 @@
     "engine": "3.0 Turbo",
     "region": "EUR",
     "bodyType": "Coupe",
-    "images": []
+    "images": [
+      {
+        "id": "img_9dffd66aa2",
+        "file": "bmw-m4-f82.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Ank kumar",
+          "license": "CC BY-SA 4.0",
+          "source": "https://commons.wikimedia.org/wiki/File:Hockenheimring,_DTM_2015_(Ank_Kumar)_11.jpg"
+        }
+      }
+    ]
   },
   {
     "id": "bmw-z3",
@@ -1521,7 +1818,18 @@
     "engine": "1.9",
     "region": "EUR",
     "bodyType": "Roadster",
-    "images": []
+    "images": [
+      {
+        "id": "img_74f3867ed7",
+        "file": "bmw-z3.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Jeremy from Sydney, Australia",
+          "license": "CC BY 2.0",
+          "source": "https://commons.wikimedia.org/wiki/File:1997_BMW_Z3_(E36-7)_convertible_(26483814194).jpg"
+        }
+      }
+    ]
   },
   {
     "id": "bmw-z4-e85",
@@ -1532,7 +1840,18 @@
     "engine": "3.0i",
     "region": "EUR",
     "bodyType": "Roadster",
-    "images": []
+    "images": [
+      {
+        "id": "img_a996bec8f1",
+        "file": "bmw-z4-e85.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Calreyn88",
+          "license": "CC BY-SA 4.0",
+          "source": "https://commons.wikimedia.org/wiki/File:2003_BMW_Z4_3.0i.jpg"
+        }
+      }
+    ]
   },
   {
     "id": "mercedes-e-w124",
@@ -1543,7 +1862,18 @@
     "engine": "2.3",
     "region": "EUR",
     "bodyType": "Sedan",
-    "images": []
+    "images": [
+      {
+        "id": "img_2b70c3f419",
+        "file": "mercedes-e-w124.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Calreyn88",
+          "license": "CC BY-SA 4.0",
+          "source": "https://commons.wikimedia.org/wiki/File:2006_Mercedes_CLS_55_AMG_Auto.jpg"
+        }
+      }
+    ]
   },
   {
     "id": "mercedes-slk-r170",
@@ -1554,7 +1884,18 @@
     "engine": "2.3 Kompressor",
     "region": "EUR",
     "bodyType": "Roadster",
-    "images": []
+    "images": [
+      {
+        "id": "img_fbed98d409",
+        "file": "mercedes-slk-r170.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "MercurySable99",
+          "license": "CC BY-SA 4.0",
+          "source": "https://commons.wikimedia.org/wiki/File:1998_Mercedes-Benz_SLK_230_Kompressor,_front_left_(Cruisin%27_the_River_Lowellville_Car_Cruise,_July_17,_2023).jpg"
+        }
+      }
+    ]
   },
   {
     "id": "mercedes-sls-amg",
@@ -1565,7 +1906,18 @@
     "engine": "6.2 V8",
     "region": "EUR",
     "bodyType": "Coupe",
-    "images": []
+    "images": [
+      {
+        "id": "img_258bc48c36",
+        "file": "mercedes-sls-amg.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Christian Flores from Carlsbad / Encinitas, United States of America",
+          "license": "CC BY-SA 2.0",
+          "source": "https://commons.wikimedia.org/wiki/File:Mercedes_Benz_SLS_AMG_C197_(5215878597).jpg"
+        }
+      }
+    ]
   },
   {
     "id": "mercedes-a45-amg",
@@ -1576,7 +1928,18 @@
     "engine": "2.0 Turbo",
     "region": "EUR",
     "bodyType": "Hatchback",
-    "images": []
+    "images": [
+      {
+        "id": "img_ce383c2690",
+        "file": "mercedes-a45-amg.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Kytabu",
+          "license": "CC BY-SA 4.0",
+          "source": "https://commons.wikimedia.org/wiki/File:Hobson_Shannon_Sheargold_A45_2012_B6HR.jpg"
+        }
+      }
+    ]
   },
   {
     "id": "audi-s4-b5",
@@ -1587,7 +1950,18 @@
     "engine": "2.7 Biturbo",
     "region": "EUR",
     "bodyType": "Sedan",
-    "images": []
+    "images": [
+      {
+        "id": "img_f96f51ef0d",
+        "file": "audi-s4-b5.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Dinkun Chen",
+          "license": "CC BY-SA 4.0",
+          "source": "https://commons.wikimedia.org/wiki/File:AUDI_S4_(B9)_China_(4).jpg"
+        }
+      }
+    ]
   },
   {
     "id": "audi-rs4-b5",
@@ -1598,7 +1972,18 @@
     "engine": "2.7 Biturbo",
     "region": "EUR",
     "bodyType": "Estate",
-    "images": []
+    "images": [
+      {
+        "id": "img_ffba64d447",
+        "file": "audi-rs4-b5.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Calreyn88",
+          "license": "CC BY-SA 4.0",
+          "source": "https://commons.wikimedia.org/wiki/File:2021_Audi_RS4_Nogaro_Edition_TFSi_Quattro_Auto_ABT_RS4-S_2.jpg"
+        }
+      }
+    ]
   },
   {
     "id": "audi-rs6-c7",
@@ -1609,7 +1994,18 @@
     "engine": "4.0 V8",
     "region": "EUR",
     "bodyType": "Estate",
-    "images": []
+    "images": [
+      {
+        "id": "img_3d9e062c11",
+        "file": "audi-rs6-c7.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Spanish Coches",
+          "license": "CC BY 2.0",
+          "source": "https://commons.wikimedia.org/wiki/File:Audi_RS6_Avant_C5_(Typ_4F)_(4249041219).jpg"
+        }
+      }
+    ]
   },
   {
     "id": "audi-r8-42",
@@ -1620,7 +2016,18 @@
     "engine": "4.2 V8",
     "region": "EUR",
     "bodyType": "Coupe",
-    "images": []
+    "images": [
+      {
+        "id": "img_1de598e4d5",
+        "file": "audi-r8-42.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Jose Mª Izquierdo Galiot",
+          "license": "CC BY 2.0",
+          "source": "https://commons.wikimedia.org/wiki/File:DTM_Audi_R8_Safety_Car_2008_(2904482049).jpg"
+        }
+      }
+    ]
   },
   {
     "id": "volvo-240",
@@ -1631,7 +2038,18 @@
     "engine": "2.3",
     "region": "EUR",
     "bodyType": "Estate",
-    "images": []
+    "images": [
+      {
+        "id": "img_ec16752b44",
+        "file": "volvo-240.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Spanish Coches",
+          "license": "CC BY 2.0",
+          "source": "https://commons.wikimedia.org/wiki/File:1985_Volvo_240_GL_(244)_(3936887772).jpg"
+        }
+      }
+    ]
   },
   {
     "id": "saab-9000",
@@ -1642,7 +2060,18 @@
     "engine": "2.3 Turbo",
     "region": "EUR",
     "bodyType": "Hatchback",
-    "images": []
+    "images": [
+      {
+        "id": "img_1a5a934b51",
+        "file": "saab-9000.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "NZ Car Freak",
+          "license": "CC BY 2.0",
+          "source": "https://commons.wikimedia.org/wiki/File:1993_SAAB_9000_CD.jpg"
+        }
+      }
+    ]
   },
   {
     "id": "lancia-thema-832",
@@ -1653,7 +2082,18 @@
     "engine": "3.0 V8",
     "region": "EUR",
     "bodyType": "Sedan",
-    "images": []
+    "images": [
+      {
+        "id": "img_4683442a75",
+        "file": "lancia-thema-832.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Tony Harrison from Farnborough, UK",
+          "license": "CC BY-SA 2.0",
+          "source": "https://commons.wikimedia.org/wiki/File:Lancia_Thema_8.32_Auto_Italia_Italian_Car_Day_Brooklands_May_2010_IMG_8686_(4569090252).jpg"
+        }
+      }
+    ]
   },
   {
     "id": "jaguar-e-type",
@@ -1664,7 +2104,18 @@
     "engine": "4.2",
     "region": "EUR",
     "bodyType": "Coupe",
-    "images": []
+    "images": [
+      {
+        "id": "img_2cab3d0052",
+        "file": "jaguar-e-type.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Calreyn88",
+          "license": "CC BY-SA 4.0",
+          "source": "https://commons.wikimedia.org/wiki/File:1965_Jaguar_E-Type_5.jpg"
+        }
+      }
+    ]
   },
   {
     "id": "jaguar-xj6",
@@ -1675,7 +2126,18 @@
     "engine": "3.6",
     "region": "EUR",
     "bodyType": "Sedan",
-    "images": []
+    "images": [
+      {
+        "id": "img_4d0d0b4c31",
+        "file": "jaguar-xj6.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Kieran White from Manchester, England",
+          "license": "CC BY 2.0",
+          "source": "https://commons.wikimedia.org/wiki/File:1988_Jaguar_XJ6%27s_(18707049142).jpg"
+        }
+      }
+    ]
   },
   {
     "id": "aston-martin-db5",
@@ -1686,7 +2148,18 @@
     "engine": "4.0",
     "region": "EUR",
     "bodyType": "Coupe",
-    "images": []
+    "images": [
+      {
+        "id": "img_865d73e009",
+        "file": "aston-martin-db5.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Michel Curi",
+          "license": "CC BY 2.0",
+          "source": "https://commons.wikimedia.org/wiki/File:1964_Aston_Martin_DB5_at_the_Louwen_Museum.jpg"
+        }
+      }
+    ]
   },
   {
     "id": "bentley-continental-gt",
@@ -1697,7 +2170,18 @@
     "engine": "6.0 W12",
     "region": "EUR",
     "bodyType": "Coupe",
-    "images": []
+    "images": [
+      {
+        "id": "img_8403186ce4",
+        "file": "bentley-continental-gt.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "The Car Spy",
+          "license": "CC BY 2.0",
+          "source": "https://commons.wikimedia.org/wiki/File:2005_Bentley_Continental_GT_-_Flickr_-_The_Car_Spy.jpg"
+        }
+      }
+    ]
   },
   {
     "id": "porsche-911-930",
@@ -1708,7 +2192,18 @@
     "engine": "3.3 Turbo",
     "region": "EUR",
     "bodyType": "Coupe",
-    "images": []
+    "images": [
+      {
+        "id": "img_b199eeae2f",
+        "file": "porsche-911-930.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Mr.choppers",
+          "license": "CC BY-SA 3.0",
+          "source": "https://commons.wikimedia.org/wiki/File:1979_DP_Motorsport_DP935_I_in_Guards_Red,_front_left.jpg"
+        }
+      }
+    ]
   },
   {
     "id": "porsche-911-964",
@@ -1719,7 +2214,18 @@
     "engine": "3.6",
     "region": "EUR",
     "bodyType": "Coupe",
-    "images": []
+    "images": [
+      {
+        "id": "img_a7db0e37c6",
+        "file": "porsche-911-964.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Mr.choppers",
+          "license": "CC BY-SA 3.0",
+          "source": "https://commons.wikimedia.org/wiki/File:1992_Porsche_911_America_Roadster_in_Mint,_rear_right.jpg"
+        }
+      }
+    ]
   },
   {
     "id": "porsche-911-991",
@@ -1730,7 +2236,18 @@
     "engine": "3.4",
     "region": "EUR",
     "bodyType": "Coupe",
-    "images": []
+    "images": [
+      {
+        "id": "img_fd894bea71",
+        "file": "porsche-911-991.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Ermell",
+          "license": "CC BY-SA 4.0",
+          "source": "https://commons.wikimedia.org/wiki/File:Porsche_911_RSR_-20180520-RM-145303.jpg"
+        }
+      }
+    ]
   },
   {
     "id": "porsche-959",
@@ -1741,7 +2258,18 @@
     "engine": "2.8 Biturbo",
     "region": "EUR",
     "bodyType": "Coupe",
-    "images": []
+    "images": [
+      {
+        "id": "img_8bd67c67ef",
+        "file": "porsche-959.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Clemson from San Francisco, USA",
+          "license": "CC BY 2.0",
+          "source": "https://commons.wikimedia.org/wiki/File:1987_Porsche_959_2.8L_Twin_Turbo_(model)_(1481357239).jpg"
+        }
+      }
+    ]
   },
   {
     "id": "porsche-boxster-986",
@@ -1752,7 +2280,18 @@
     "engine": "2.5",
     "region": "EUR",
     "bodyType": "Roadster",
-    "images": []
+    "images": [
+      {
+        "id": "img_fbee0e78ab",
+        "file": "porsche-boxster-986.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Greg Gjerdingen from Willmar, USA",
+          "license": "CC BY 2.0",
+          "source": "https://commons.wikimedia.org/wiki/File:1999_Porsche_Boxster_(34815136166).jpg"
+        }
+      }
+    ]
   },
   {
     "id": "ferrari-f40",
@@ -1763,7 +2302,18 @@
     "engine": "2.9 Biturbo",
     "region": "EUR",
     "bodyType": "Coupe",
-    "images": []
+    "images": [
+      {
+        "id": "img_7ca1e6147f",
+        "file": "ferrari-f40.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Gordon Calder - 7 Million Views - Thanks!",
+          "license": "CC BY 2.0",
+          "source": "https://commons.wikimedia.org/wiki/File:Ferari_F40_%22GT%22_-_Road_registered.jpg"
+        }
+      }
+    ]
   },
   {
     "id": "ferrari-testarossa",
@@ -1774,7 +2324,18 @@
     "engine": "4.9 F12",
     "region": "EUR",
     "bodyType": "Coupe",
-    "images": []
+    "images": [
+      {
+        "id": "img_baf09ea4d4",
+        "file": "ferrari-testarossa.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Charles from Port Chester, New York",
+          "license": "CC BY 2.0",
+          "source": "https://commons.wikimedia.org/wiki/File:De_Tomaso_Pantera_GT5_(1986)_(52780724100).jpg"
+        }
+      }
+    ]
   },
   {
     "id": "ferrari-f355",
@@ -1785,7 +2346,18 @@
     "engine": "3.5 V8",
     "region": "EUR",
     "bodyType": "Coupe",
-    "images": []
+    "images": [
+      {
+        "id": "img_cf1a3746a7",
+        "file": "ferrari-f355.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Alexander-93",
+          "license": "CC BY-SA 4.0",
+          "source": "https://commons.wikimedia.org/wiki/File:Ferrari_F355_Berlinetta_1X7A7333.jpg"
+        }
+      }
+    ]
   },
   {
     "id": "ferrari-458-italia",
@@ -1796,7 +2368,18 @@
     "engine": "4.5 V8",
     "region": "EUR",
     "bodyType": "Coupe",
-    "images": []
+    "images": [
+      {
+        "id": "img_76b174028a",
+        "file": "ferrari-458-italia.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Michael Barera",
+          "license": "CC BY-SA 4.0",
+          "source": "https://commons.wikimedia.org/wiki/File:2011_Rolling_Sculpture_Car_Show_44.jpg"
+        }
+      }
+    ]
   },
   {
     "id": "lamborghini-countach",
@@ -1807,7 +2390,18 @@
     "engine": "5.2 V12",
     "region": "EUR",
     "bodyType": "Coupe",
-    "images": []
+    "images": [
+      {
+        "id": "img_abec7b5c68",
+        "file": "lamborghini-countach.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Mr.choppers",
+          "license": "CC BY-SA 4.0",
+          "source": "https://commons.wikimedia.org/wiki/File:1986_Lamborghini_Countach_5000_Quattrovalvole_in_Canepa_Green,_front_right.jpg"
+        }
+      }
+    ]
   },
   {
     "id": "lamborghini-diablo",
@@ -1818,7 +2412,18 @@
     "engine": "5.7 V12",
     "region": "EUR",
     "bodyType": "Coupe",
-    "images": []
+    "images": [
+      {
+        "id": "img_3af0eb61c6",
+        "file": "lamborghini-diablo.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Gordon Calder - 7 Million Views - Thanks!",
+          "license": "CC BY 2.0",
+          "source": "https://commons.wikimedia.org/wiki/File:Lamborghini_5-95_Zagato.jpg"
+        }
+      }
+    ]
   },
   {
     "id": "lamborghini-murcielago",
@@ -1829,7 +2434,18 @@
     "engine": "6.2 V12",
     "region": "EUR",
     "bodyType": "Coupe",
-    "images": []
+    "images": [
+      {
+        "id": "img_b31d252cba",
+        "file": "lamborghini-murcielago.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Charles from Port Chester, New York",
+          "license": "CC BY 2.0",
+          "source": "https://commons.wikimedia.org/wiki/File:Lamborghini_Murci%C3%A9lago_(2003)_(53773779614).jpg"
+        }
+      }
+    ]
   },
   {
     "id": "lamborghini-gallardo",
@@ -1840,7 +2456,18 @@
     "engine": "5.0 V10",
     "region": "EUR",
     "bodyType": "Coupe",
-    "images": []
+    "images": [
+      {
+        "id": "img_d2a80bd0a4",
+        "file": "lamborghini-gallardo.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Shane K from Mississauga, Canada",
+          "license": "CC BY-SA 2.0",
+          "source": "https://commons.wikimedia.org/wiki/File:Customized_Gallardo_(5482880089).jpg"
+        }
+      }
+    ]
   },
   {
     "id": "maserati-3200gt",
@@ -1851,7 +2478,18 @@
     "engine": "3.2 Biturbo",
     "region": "EUR",
     "bodyType": "Coupe",
-    "images": []
+    "images": [
+      {
+        "id": "img_13a11726be",
+        "file": "maserati-3200gt.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Grand Parc - Bordeaux, France from France",
+          "license": "CC BY 2.0",
+          "source": "https://commons.wikimedia.org/wiki/File:Maserati_Spyder_V8_4.2_-_Image_Photo_Picture_(13890976742).jpg"
+        }
+      }
+    ]
   },
   {
     "id": "bugatti-veyron",
@@ -1862,7 +2500,18 @@
     "engine": "8.0 W16",
     "region": "EUR",
     "bodyType": "Coupe",
-    "images": []
+    "images": [
+      {
+        "id": "img_e2cf3f30e1",
+        "file": "bugatti-veyron.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "This picture has been taken by Oleg Yunakov. Contact e-mail: yunakovgmail.com. Image can be used in accordance with the terms of the СС-BY-SA license. Other photos can be seen here.",
+          "license": "CC BY-SA 4.0",
+          "source": "https://commons.wikimedia.org/wiki/File:2006_Bugatti_Veyron_-_02.jpg"
+        }
+      }
+    ]
   },
   {
     "id": "mclaren-f1",
@@ -1873,7 +2522,18 @@
     "engine": "6.1 V12",
     "region": "EUR",
     "bodyType": "Coupe",
-    "images": []
+    "images": [
+      {
+        "id": "img_4c69574810",
+        "file": "mclaren-f1.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Ank Kumar",
+          "license": "CC BY-SA 4.0",
+          "source": "https://commons.wikimedia.org/wiki/File:British_Racing_Green_McLaren_F1_GTR_Longtail_at_Geneva_International_Motor_Show_2015_(Ank_Kumar,_Infosys)_10.jpg"
+        }
+      }
+    ]
   },
   {
     "id": "tvr-sagaris",
@@ -1884,7 +2544,18 @@
     "engine": "4.0",
     "region": "EUR",
     "bodyType": "Coupe",
-    "images": []
+    "images": [
+      {
+        "id": "img_07f961e532",
+        "file": "tvr-sagaris.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Steve Glover",
+          "license": "CC BY 2.0",
+          "source": "https://commons.wikimedia.org/wiki/File:TVR_Sagaris_(2005)_-_15227507288.jpg"
+        }
+      }
+    ]
   },
   {
     "id": "lotus-esprit",
@@ -1895,7 +2566,18 @@
     "engine": "2.2 Turbo",
     "region": "EUR",
     "bodyType": "Coupe",
-    "images": []
+    "images": [
+      {
+        "id": "img_ad5ba6c295",
+        "file": "lotus-esprit.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Jeremy from Sydney, Australia",
+          "license": "CC BY 2.0",
+          "source": "https://commons.wikimedia.org/wiki/File:1990_Lotus_Esprit_Turbo_(28987359131).jpg"
+        }
+      }
+    ]
   },
   {
     "id": "nissan-skyline-r32",
@@ -1906,7 +2588,18 @@
     "engine": "2.6 RB26",
     "region": "JDM",
     "bodyType": "Coupe",
-    "images": []
+    "images": [
+      {
+        "id": "img_95fd89968a",
+        "file": "nissan-skyline-r32.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Sicnag",
+          "license": "CC BY 2.0",
+          "source": "https://commons.wikimedia.org/wiki/File:1991_Nissan_Skyline_R32_GTR_(15817370285).jpg"
+        }
+      }
+    ]
   },
   {
     "id": "nissan-skyline-r33",
@@ -1917,7 +2610,18 @@
     "engine": "2.6 RB26",
     "region": "JDM",
     "bodyType": "Coupe",
-    "images": []
+    "images": [
+      {
+        "id": "img_a2d8808094",
+        "file": "nissan-skyline-r33.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "crash71100",
+          "license": "CC0",
+          "source": "https://commons.wikimedia.org/wiki/File:Nissan_Skyline_GT-R_R33_-_48274369936.jpg"
+        }
+      }
+    ]
   },
   {
     "id": "nissan-silvia-s15",
@@ -1928,7 +2632,18 @@
     "engine": "2.0 SR20DET",
     "region": "JDM",
     "bodyType": "Coupe",
-    "images": []
+    "images": [
+      {
+        "id": "img_0170c2b119",
+        "file": "nissan-silvia-s15.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Calreyn88",
+          "license": "CC BY-SA 4.0",
+          "source": "https://commons.wikimedia.org/wiki/File:2000_Nissan_Silvia_200SX_Touring.jpg"
+        }
+      }
+    ]
   },
   {
     "id": "nissan-silvia-s13",
@@ -1939,7 +2654,18 @@
     "engine": "1.8 CA18DET",
     "region": "JDM",
     "bodyType": "Coupe",
-    "images": []
+    "images": [
+      {
+        "id": "img_5006748276",
+        "file": "nissan-silvia-s13.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "SsmIntrigue",
+          "license": "CC BY-SA 4.0",
+          "source": "https://commons.wikimedia.org/wiki/File:Modified240SX.jpg"
+        }
+      }
+    ]
   },
   {
     "id": "nissan-figaro",
@@ -1950,7 +2676,18 @@
     "engine": "1.0 Turbo",
     "region": "JDM",
     "bodyType": "Convertible",
-    "images": []
+    "images": [
+      {
+        "id": "img_8e846a9a7b",
+        "file": "nissan-figaro.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Coolalabright",
+          "license": "CC BY 4.0",
+          "source": "https://commons.wikimedia.org/wiki/File:1991_Nissan_Figaro_Convertible.jpg"
+        }
+      }
+    ]
   },
   {
     "id": "toyota-mr2-sw20",
@@ -1961,7 +2698,18 @@
     "engine": "2.0 Turbo",
     "region": "JDM",
     "bodyType": "Coupe",
-    "images": []
+    "images": [
+      {
+        "id": "img_759612d207",
+        "file": "toyota-mr2-sw20.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Sicnag",
+          "license": "CC BY 2.0",
+          "source": "https://commons.wikimedia.org/wiki/File:1987_Toyota_MR2_W10_Sports_(31982950727).jpg"
+        }
+      }
+    ]
   },
   {
     "id": "toyota-celica-st205",
@@ -1972,7 +2720,18 @@
     "engine": "2.0 Turbo",
     "region": "JDM",
     "bodyType": "Coupe",
-    "images": []
+    "images": [
+      {
+        "id": "img_c3f67220f1",
+        "file": "toyota-celica-st205.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Kieran White from Manchester, England",
+          "license": "CC BY 2.0",
+          "source": "https://commons.wikimedia.org/wiki/File:1995_Toyota_Celica_2.0_Rally_Car_(50967030146).jpg"
+        }
+      }
+    ]
   },
   {
     "id": "toyota-chaser-jzx100",
@@ -1983,7 +2742,18 @@
     "engine": "2.5 1JZ",
     "region": "JDM",
     "bodyType": "Sedan",
-    "images": []
+    "images": [
+      {
+        "id": "img_45dcc57afe",
+        "file": "toyota-chaser-jzx100.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Shark21",
+          "license": "CC BY-SA 3.0",
+          "source": "https://commons.wikimedia.org/wiki/File:RC_Drift_body_Toyota_Chaser_JZX100_by_Yakuzzza.JPG"
+        }
+      }
+    ]
   },
   {
     "id": "toyota-land-cruiser-80",
@@ -1994,7 +2764,18 @@
     "engine": "4.2 Diesel",
     "region": "JDM",
     "bodyType": "SUV",
-    "images": []
+    "images": [
+      {
+        "id": "img_a7814bc59a",
+        "file": "toyota-land-cruiser-80.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Sergey Korovkin 84",
+          "license": "CC BY-SA 4.0",
+          "source": "https://commons.wikimedia.org/wiki/File:%D0%97%D1%88%D1%89%D1%85%D1%8598789.jpg"
+        }
+      }
+    ]
   },
   {
     "id": "mazda-rx7-fc",
@@ -2005,7 +2786,18 @@
     "engine": "1.3 Rotary",
     "region": "JDM",
     "bodyType": "Coupe",
-    "images": []
+    "images": [
+      {
+        "id": "img_cdce92c393",
+        "file": "mazda-rx7-fc.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Riley from Christchurch, New Zealand",
+          "license": "CC BY 2.0",
+          "source": "https://commons.wikimedia.org/wiki/File:1988_Mazda_RX7_(29652922641).jpg"
+        }
+      }
+    ]
   },
   {
     "id": "mazda-rx8",
@@ -2016,7 +2808,18 @@
     "engine": "1.3 Rotary",
     "region": "JDM",
     "bodyType": "Coupe",
-    "images": []
+    "images": [
+      {
+        "id": "img_f1ff8522b8",
+        "file": "mazda-rx8.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Robert Yorde from Ohio, USA",
+          "license": "CC BY 2.0",
+          "source": "https://commons.wikimedia.org/wiki/File:-52._2004_Mazda_RX8,_TT-T4,_Advanced_(53919615576).jpg"
+        }
+      }
+    ]
   },
   {
     "id": "mitsubishi-3000gt",
@@ -2027,7 +2830,18 @@
     "engine": "3.0 Biturbo",
     "region": "JDM",
     "bodyType": "Coupe",
-    "images": []
+    "images": [
+      {
+        "id": "img_c36e5e61d3",
+        "file": "mitsubishi-3000gt.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Elise240SX",
+          "license": "CC BY-SA 4.0",
+          "source": "https://commons.wikimedia.org/wiki/File:1993_Mitsubishi_3000GT_VR4_in_Albany_Black_Pearl,_Rear_Right_(St._Ignace_2023).jpg"
+        }
+      }
+    ]
   },
   {
     "id": "mitsubishi-evo-ix",
@@ -2038,7 +2852,18 @@
     "engine": "2.0 Turbo",
     "region": "JDM",
     "bodyType": "Sedan",
-    "images": []
+    "images": [
+      {
+        "id": "img_d96a5c5f94",
+        "file": "mitsubishi-evo-ix.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Sgt. Leejay Lockhart",
+          "license": "Public domain",
+          "source": "https://commons.wikimedia.org/wiki/File:Fort_Campbell_holds_car_show_for_Week_of_the_Eagles_140517-A-LS265-252.jpg"
+        }
+      }
+    ]
   },
   {
     "id": "subaru-impreza-22b",
@@ -2049,7 +2874,18 @@
     "engine": "2.2 Turbo",
     "region": "JDM",
     "bodyType": "Coupe",
-    "images": []
+    "images": [
+      {
+        "id": "img_06e41686ac",
+        "file": "subaru-impreza-22b.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Retired electrician",
+          "license": "CC0",
+          "source": "https://commons.wikimedia.org/wiki/File:Moscow_car_show_2025-08-03_Subaru_WRX_01.jpg"
+        }
+      }
+    ]
   },
   {
     "id": "subaru-legacy-bh",
@@ -2060,7 +2896,18 @@
     "engine": "2.0 Turbo",
     "region": "JDM",
     "bodyType": "Estate",
-    "images": []
+    "images": [
+      {
+        "id": "img_4d6e0db9f3",
+        "file": "subaru-legacy-bh.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Charlie from United Kingdom",
+          "license": "CC BY 2.0",
+          "source": "https://commons.wikimedia.org/wiki/File:2000_Subaru_Legacy_Saloon_GL_AWD_2_litre_(9741749412).jpg"
+        }
+      }
+    ]
   },
   {
     "id": "honda-s2000-ap1",
@@ -2071,7 +2918,18 @@
     "engine": "2.0 F20C",
     "region": "JDM",
     "bodyType": "Roadster",
-    "images": []
+    "images": [
+      {
+        "id": "img_b7c1d8fd2d",
+        "file": "honda-s2000-ap1.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "crash71100",
+          "license": "CC0",
+          "source": "https://commons.wikimedia.org/wiki/File:Honda_S2000_b.jpg"
+        }
+      }
+    ]
   },
   {
     "id": "honda-civic-eg6",
@@ -2082,7 +2940,18 @@
     "engine": "1.6 VTEC",
     "region": "JDM",
     "bodyType": "Hatchback",
-    "images": []
+    "images": [
+      {
+        "id": "img_81b19497ea",
+        "file": "honda-civic-eg6.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "crash71100",
+          "license": "CC0",
+          "source": "https://commons.wikimedia.org/wiki/File:Honda_Civic_b.jpg"
+        }
+      }
+    ]
   },
   {
     "id": "honda-civic-type-r-ep3",
@@ -2093,7 +2962,18 @@
     "engine": "2.0 i-VTEC",
     "region": "JDM",
     "bodyType": "Hatchback",
-    "images": []
+    "images": [
+      {
+        "id": "img_4c14656e17",
+        "file": "honda-civic-type-r-ep3.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "crash71100",
+          "license": "CC0",
+          "source": "https://commons.wikimedia.org/wiki/File:Honda_Civic_Type_R_b.jpg"
+        }
+      }
+    ]
   },
   {
     "id": "honda-prelude-bb",
@@ -2104,7 +2984,18 @@
     "engine": "2.2 VTEC",
     "region": "JDM",
     "bodyType": "Coupe",
-    "images": []
+    "images": [
+      {
+        "id": "img_64aa5af270",
+        "file": "honda-prelude-bb.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Calreyn88",
+          "license": "CC BY-SA 4.0",
+          "source": "https://commons.wikimedia.org/wiki/File:1990_Honda_Prelude_4WS_Auto.jpg"
+        }
+      }
+    ]
   },
   {
     "id": "lexus-is300",
@@ -2115,7 +3006,18 @@
     "engine": "3.0 2JZ",
     "region": "JDM",
     "bodyType": "Sedan",
-    "images": []
+    "images": [
+      {
+        "id": "img_51d216ec99",
+        "file": "lexus-is300.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Dinkun Chen",
+          "license": "CC BY-SA 4.0",
+          "source": "https://commons.wikimedia.org/wiki/File:LEXUS_IS_300_(XE30)_China.jpg"
+        }
+      }
+    ]
   },
   {
     "id": "lexus-lfa",
@@ -2126,7 +3028,18 @@
     "engine": "4.8 V10",
     "region": "JDM",
     "bodyType": "Coupe",
-    "images": []
+    "images": [
+      {
+        "id": "img_bfd248693c",
+        "file": "lexus-lfa.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Motohide Miwa",
+          "license": "CC BY 2.0",
+          "source": "https://commons.wikimedia.org/wiki/File:Lexus_LFA_Long_Beach_Grand_Prix_Official_Pace_Car.jpg"
+        }
+      }
+    ]
   },
   {
     "id": "suzuki-jimny-jb",
@@ -2137,7 +3050,18 @@
     "engine": "1.3",
     "region": "JDM",
     "bodyType": "SUV",
-    "images": []
+    "images": [
+      {
+        "id": "img_7ded64af8d",
+        "file": "suzuki-jimny-jb.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Rocking Cars",
+          "license": "CC BY 2.0",
+          "source": "https://commons.wikimedia.org/wiki/File:Suzuki_Jimny_(10001199305).jpg"
+        }
+      }
+    ]
   },
   {
     "id": "daihatsu-copen",
@@ -2148,7 +3072,18 @@
     "engine": "0.66 Turbo",
     "region": "JDM",
     "bodyType": "Roadster",
-    "images": []
+    "images": [
+      {
+        "id": "img_1479682ae6",
+        "file": "daihatsu-copen.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "crash71100",
+          "license": "CC0",
+          "source": "https://commons.wikimedia.org/wiki/File:Daihatsu_Copen_b.jpg"
+        }
+      }
+    ]
   },
   {
     "id": "chevrolet-corvette-c2",
@@ -2159,7 +3094,18 @@
     "engine": "5.4 V8",
     "region": "USDM",
     "bodyType": "Coupe",
-    "images": []
+    "images": [
+      {
+        "id": "img_64395e50fc",
+        "file": "chevrolet-corvette-c2.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Michael Barera",
+          "license": "CC BY-SA 4.0",
+          "source": "https://commons.wikimedia.org/wiki/File:2022_Downtown_West_Allis_Classic_Car_Show_101_(1965_Chevrolet_Corvette).jpg"
+        }
+      }
+    ]
   },
   {
     "id": "chevrolet-corvette-c5",
@@ -2170,7 +3116,18 @@
     "engine": "5.7 V8",
     "region": "USDM",
     "bodyType": "Coupe",
-    "images": []
+    "images": [
+      {
+        "id": "img_5bf9398996",
+        "file": "chevrolet-corvette-c5.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "ERIC SALARD from Paris, FRANCE",
+          "license": "CC BY-SA 2.0",
+          "source": "https://commons.wikimedia.org/wiki/File:CHEVROLET_CORVETTE_C5-R_RETROMOBILE_2023_(52671639585).jpg"
+        }
+      }
+    ]
   },
   {
     "id": "chevrolet-camaro-z28",
@@ -2181,7 +3138,18 @@
     "engine": "5.7 V8",
     "region": "USDM",
     "bodyType": "Coupe",
-    "images": []
+    "images": [
+      {
+        "id": "img_65f12556b1",
+        "file": "chevrolet-camaro-z28.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Michael Barera",
+          "license": "CC BY-SA 4.0",
+          "source": "https://commons.wikimedia.org/wiki/File:2022_Downtown_West_Allis_Classic_Car_Show_050_(1969_Chevrolet_Camaro).jpg"
+        }
+      }
+    ]
   },
   {
     "id": "ford-mustang-1967",
@@ -2192,7 +3160,18 @@
     "engine": "4.7 V8",
     "region": "USDM",
     "bodyType": "Coupe",
-    "images": []
+    "images": [
+      {
+        "id": "img_c980f10e47",
+        "file": "ford-mustang-1967.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "John Robert McPherson",
+          "license": "CC0",
+          "source": "https://commons.wikimedia.org/wiki/File:Ford_Mustang_Coupe_1967_Ballina_Golf_Cub_NSW_L1030005.jpg"
+        }
+      }
+    ]
   },
   {
     "id": "ford-gt-2005",
@@ -2203,7 +3182,18 @@
     "engine": "5.4 V8",
     "region": "USDM",
     "bodyType": "Coupe",
-    "images": []
+    "images": [
+      {
+        "id": "img_0f84bbf220",
+        "file": "ford-gt-2005.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Calreyn88",
+          "license": "CC BY-SA 4.0",
+          "source": "https://commons.wikimedia.org/wiki/File:2005_Ford_Mustang_GT_1.jpg"
+        }
+      }
+    ]
   },
   {
     "id": "ford-f150",
@@ -2214,7 +3204,18 @@
     "engine": "5.4 V8",
     "region": "USDM",
     "bodyType": "Pickup",
-    "images": []
+    "images": [
+      {
+        "id": "img_e3201717b1",
+        "file": "ford-f150.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Dietmar Rabich",
+          "license": "CC BY-SA 4.0",
+          "source": "https://commons.wikimedia.org/wiki/File:Prag,_Wenzelsplatz,_Ford_Mustang_--_2019_--_101913.jpg"
+        }
+      }
+    ]
   },
   {
     "id": "dodge-charger-1969",
@@ -2225,7 +3226,18 @@
     "engine": "7.2 V8",
     "region": "USDM",
     "bodyType": "Coupe",
-    "images": []
+    "images": [
+      {
+        "id": "img_f64f459109",
+        "file": "dodge-charger-1969.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "DogsRNice",
+          "license": "CC BY-SA 4.0",
+          "source": "https://commons.wikimedia.org/wiki/File:1969_Dodge_Charger_at_the_Wheels_of_Yesteryear_Vintage_Auto_Museum_May_2022.jpg"
+        }
+      }
+    ]
   },
   {
     "id": "dodge-viper-gts",
@@ -2236,7 +3248,18 @@
     "engine": "8.0 V10",
     "region": "USDM",
     "bodyType": "Coupe",
-    "images": []
+    "images": [
+      {
+        "id": "img_c43cca8884",
+        "file": "dodge-viper-gts.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Kieran White from Manchester, England",
+          "license": "CC BY 2.0",
+          "source": "https://commons.wikimedia.org/wiki/File:1998_Chrysler_Viper_GTS_RT10_(16512561149).jpg"
+        }
+      }
+    ]
   },
   {
     "id": "pontiac-firebird-trans-am",
@@ -2247,7 +3270,18 @@
     "engine": "6.6 V8",
     "region": "USDM",
     "bodyType": "Coupe",
-    "images": []
+    "images": [
+      {
+        "id": "img_936d0d5c3f",
+        "file": "pontiac-firebird-trans-am.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Calreyn88",
+          "license": "CC BY-SA 4.0",
+          "source": "https://commons.wikimedia.org/wiki/File:1979_Pontiac_Firebird_Trans-Am_7.5L.jpg"
+        }
+      }
+    ]
   },
   {
     "id": "plymouth-barracuda",
@@ -2258,7 +3292,18 @@
     "engine": "7.2 V8",
     "region": "USDM",
     "bodyType": "Coupe",
-    "images": []
+    "images": [
+      {
+        "id": "img_f666932542",
+        "file": "plymouth-barracuda.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Michael Barera",
+          "license": "CC BY-SA 4.0",
+          "source": "https://commons.wikimedia.org/wiki/File:2022_Downtown_West_Allis_Classic_Car_Show_013_(1970_Plymouth_Barracuda).jpg"
+        }
+      }
+    ]
   },
   {
     "id": "jeep-cherokee-xj",
@@ -2269,7 +3314,18 @@
     "engine": "4.0",
     "region": "USDM",
     "bodyType": "SUV",
-    "images": []
+    "images": [
+      {
+        "id": "img_1422a35a8d",
+        "file": "jeep-cherokee-xj.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Paul Sableman",
+          "license": "CC BY 2.0",
+          "source": "https://commons.wikimedia.org/wiki/File:Car_Parts_(16258509441).jpg"
+        }
+      }
+    ]
   },
   {
     "id": "hummer-h1",
@@ -2280,7 +3336,18 @@
     "engine": "6.5 Diesel",
     "region": "USDM",
     "bodyType": "SUV",
-    "images": []
+    "images": [
+      {
+        "id": "img_23ad8c5b06",
+        "file": "hummer-h1.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Greg Gjerdingen from Willmar, USA",
+          "license": "CC BY 2.0",
+          "source": "https://commons.wikimedia.org/wiki/File:1997_Hummer_H1_(30077064115).jpg"
+        }
+      }
+    ]
   },
   {
     "id": "cadillac-eldorado",
@@ -2291,7 +3358,18 @@
     "engine": "8.2 V8",
     "region": "USDM",
     "bodyType": "Coupe",
-    "images": []
+    "images": [
+      {
+        "id": "img_e46fa7d0a2",
+        "file": "cadillac-eldorado.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Greg Gjerdingen from Willmar, USA",
+          "license": "CC BY 2.0",
+          "source": "https://commons.wikimedia.org/wiki/File:1975_%26_1976_Cadillac_Eldorado_Convertibles_(21572632442).jpg"
+        }
+      }
+    ]
   },
   {
     "id": "shelby-cobra-427",
@@ -2302,7 +3380,18 @@
     "engine": "7.0 V8",
     "region": "USDM",
     "bodyType": "Roadster",
-    "images": []
+    "images": [
+      {
+        "id": "img_bcdaa69aee",
+        "file": "shelby-cobra-427.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Sicnag",
+          "license": "CC BY 2.0",
+          "source": "https://commons.wikimedia.org/wiki/File:1966_AC_Cobra_427_MkIII.jpg"
+        }
+      }
+    ]
   },
   {
     "id": "tesla-model-s",
@@ -2313,6 +3402,17 @@
     "engine": "Eléctrico",
     "region": "USDM",
     "bodyType": "Sedan",
-    "images": []
+    "images": [
+      {
+        "id": "img_053bddd5e9",
+        "file": "tesla-model-s.jpg",
+        "part": "full",
+        "credit": {
+          "artist": "Jeremy from Sydney, Australia",
+          "license": "CC BY 2.0",
+          "source": "https://commons.wikimedia.org/wiki/File:2015_Tesla_Model_S_85_hatchback_(20536923125).jpg"
+        }
+      }
+    ]
   }
 ]

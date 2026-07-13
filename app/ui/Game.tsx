@@ -42,6 +42,8 @@ interface GuessResponse {
   solved: boolean;
   gameOver: boolean;
   answer?: RevealedAnswer;
+  /** Solo si hay sesión: racha/récord calculados en servidor. */
+  stats?: { streak: number; best: number; dailyStreak: number };
 }
 
 type Status = "loading" | "playing" | "won" | "lost" | "nodata" | "error";
@@ -68,24 +70,17 @@ export default function Game({ query, daily = false }: { query: string; daily?: 
   const typeahead = round?.mode.typeahead ?? false;
   const maxAttempts = round?.mode.maxAttempts ?? 0;
 
-  useEffect(() => {
-    if (!daily) setBest(Number(localStorage.getItem(bestKey(query)) ?? 0));
-  }, [daily, query]);
-
-  const startRound = useCallback(async () => {
-    setStatus("loading");
-    setGuesses([]);
-    setAnswer(undefined);
-    setText("");
-    setYear("");
-    setEngine("");
-    setSuggestions([]);
-    setNote(null);
+  // Empieza por un await a propósito: así no hay setState síncrono dentro del
+  // efecto (provocaría renders en cascada).
+  const loadRound = useCallback(async () => {
     try {
       const res = await fetch(`/api/round?${query}`, { cache: "no-store" });
       if (res.status === 503) return setStatus("nodata");
       if (!res.ok) return setStatus("error");
       const data: RoundData = await res.json();
+
+      // El récord vive en localStorage (solo existe en el navegador).
+      if (!daily) setBest(Number(localStorage.getItem(bestKey(query)) ?? 0));
 
       if (daily && data.day) {
         const saved = localStorage.getItem(dailyKey(data.day));
@@ -105,9 +100,26 @@ export default function Game({ query, daily = false }: { query: string; daily?: 
     }
   }, [query, daily]);
 
+  /** "Siguiente coche": limpia la mesa y pide otra ronda. */
+  const nextRound = useCallback(() => {
+    setStatus("loading");
+    setGuesses([]);
+    setAnswer(undefined);
+    setText("");
+    setYear("");
+    setEngine("");
+    setSuggestions([]);
+    setNote(null);
+    loadRound();
+  }, [loadRound]);
+
   useEffect(() => {
-    startRound();
-  }, [startRound]);
+    // La regla no puede ver que loadRound empieza por un `await`: sus setState
+    // ocurren tras la petición, no de forma síncrona. Es la carga inicial de la
+    // ronda, que es justo para lo que sirve un efecto.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    loadRound();
+  }, [loadRound]);
 
   function onTextChange(v: string) {
     setText(v);
@@ -170,7 +182,11 @@ export default function Game({ query, daily = false }: { query: string; daily?: 
           JSON.stringify({ status: finalStatus, guesses: next, answer: data.answer })
         );
       } else if (!daily) {
-        if (data.solved) {
+        if (data.stats) {
+          // Con sesión manda el servidor.
+          setStreak(data.stats.streak);
+          setBest(data.stats.best);
+        } else if (data.solved) {
           const s = streak + 1;
           setStreak(s);
           if (s > best) {
@@ -197,7 +213,6 @@ export default function Game({ query, daily = false }: { query: string; daily?: 
   if (!round) return null;
 
   const used = guesses.filter((g) => g.resolved).length;
-  const left = maxAttempts - used;
   const playing = status === "playing";
   const level = !playing
     ? 1
@@ -342,21 +357,12 @@ export default function Game({ query, daily = false }: { query: string; daily?: 
           <p className="text-sm text-muted">
             {answer.year} · {answer.bodyType} · {answer.region}
           </p>
-          {!daily && status === "lost" && (
-            <p className="text-xs text-muted mt-1">Racha reiniciada.</p>
-          )}
         </div>
-      )}
-
-      {playing && (
-        <p className="text-xs text-muted text-center">
-          {left} {left === 1 ? "intento" : "intentos"} restantes
-        </p>
       )}
 
       {!daily && !playing && (
         <button
-          onClick={startRound}
+          onClick={nextRound}
           className="self-center rounded-sm border border-line bg-surface px-6 py-2.5 font-display text-sm font-bold uppercase tracking-widest hover:border-accent hover:text-accent transition"
         >
           Siguiente coche →

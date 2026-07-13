@@ -15,6 +15,9 @@ import {
 import { resolveCar } from "@/lib/reference";
 import { applyAttempt, getRound } from "@/lib/rounds";
 import { normalize } from "@/lib/normalize";
+import { getCurrentUser } from "@/lib/auth";
+import { recordDaily, recordInfinite } from "@/lib/stats";
+import { todayKey } from "@/lib/daily";
 
 export async function POST(req: Request) {
   const body = (await req.json().catch(() => null)) as {
@@ -76,6 +79,25 @@ export async function POST(req: Request) {
 
   const gameOver = round.solved || round.attempts >= round.maxAttempts;
 
+  // Si hay sesión, la partida cuenta para stats y rankings. La racha la calcula
+  // el servidor (si la mandara el cliente, cualquiera pondría racha de 999).
+  let stats = null;
+  if (gameOver) {
+    const user = await getCurrentUser();
+    if (user) {
+      stats =
+        round.modeId === "daily"
+          ? await recordDaily(user.id, todayKey(), round.solved, round.attempts)
+          : await recordInfinite(
+              user.id,
+              round.solved,
+              round.attempts,
+              round.modeId,
+              round.difficulty
+            );
+    }
+  }
+
   return Response.json({
     feedback,
     attempts: round.attempts,
@@ -83,5 +105,12 @@ export async function POST(req: Request) {
     solved: round.solved,
     gameOver,
     answer: gameOver ? revealAnswer(answer) : undefined,
+    stats: stats
+      ? {
+          streak: stats.current_infinite_streak,
+          best: stats.best_infinite_streak,
+          dailyStreak: stats.daily_current_streak,
+        }
+      : undefined,
   });
 }
