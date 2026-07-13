@@ -53,5 +53,7 @@ export interface Car {
   region: string;
   /** Hatchback | Sedan | SUV | Coupe ... */
   bodyType: string;
+  /** Datos+foto verificados a mano en /admin. Los automáticos pueden fallar. */
+  reviewed?: boolean;
   images: CarImage[];
 }

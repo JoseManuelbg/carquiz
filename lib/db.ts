@@ -24,10 +24,12 @@ interface CarRow {
   engine: string | null;
   region: string;
   body_type: string;
+  reviewed: boolean | null;
   car_images: ImageRow[] | null;
 }
 
-const SELECT = "id,brand,model,gen,year,engine,region,body_type,car_images(*)";
+const SELECT =
+  "id,brand,model,gen,year,engine,region,body_type,reviewed,car_images(*)";
 
 function toCar(row: CarRow): Car {
   return {
@@ -39,6 +41,7 @@ function toCar(row: CarRow): Car {
     engine: row.engine ?? undefined,
     region: row.region,
     bodyType: row.body_type,
+    reviewed: row.reviewed ?? false,
     images: (row.car_images ?? []).map(
       (i): CarImage => ({
         id: i.id,

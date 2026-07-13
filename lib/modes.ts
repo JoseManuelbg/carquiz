@@ -71,14 +71,16 @@ export const INFINITE_MODES: Mode[] = [
     reveal: "tiles",
     typeahead: true,
   },
+  // Estos dos usan el recorte anotado en /admin (part + region_box).
   {
     id: "inf-faro-model",
-    title: "Faro → Modelo",
-    description: "Solo el faro. Adivina el modelo.",
+    title: "Faro",
+    description: "Solo el faro. Adivina el coche.",
     part: "headlight",
-    target: "model",
+    target: "car",
     maxAttempts: 5,
     typeahead: true,
+    reveal: "region",
   },
   {
     id: "inf-morro-year",
@@ -87,6 +89,7 @@ export const INFINITE_MODES: Mode[] = [
     part: "front",
     target: "year",
     maxAttempts: 5,
+    reveal: "region",
   },
 ];
 

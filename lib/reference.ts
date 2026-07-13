@@ -57,8 +57,55 @@ export async function searchCars(q: string, limit = 20): Promise<string[]> {
   return [...starts, ...contains].slice(0, limit);
 }
 
-/** Resolve a typed "Brand Model" to its brand/model, or undefined if unknown. */
+/** Distancia de edición acotada: si supera `max`, corta y devuelve max+1. */
+function editDistance(a: string, b: string, max: number): number {
+  if (Math.abs(a.length - b.length) > max) return max + 1;
+  let prev = Array.from({ length: b.length + 1 }, (_, i) => i);
+  for (let i = 1; i <= a.length; i++) {
+    const cur = [i];
+    let best = i;
+    for (let j = 1; j <= b.length; j++) {
+      const cost = a[i - 1] === b[j - 1] ? 0 : 1;
+      cur[j] = Math.min(prev[j] + 1, cur[j - 1] + 1, prev[j - 1] + cost);
+      best = Math.min(best, cur[j]);
+    }
+    if (best > max) return max + 1; // ninguna opción puede ya bajar de max
+    prev = cur;
+  }
+  return prev[b.length];
+}
+
+/**
+ * Resuelve lo que ha escrito el jugador a un coche del catálogo.
+ * Acepta texto libre y tolera erratas: primero exacto, luego "modelo" a secas,
+ * y por último la coincidencia más cercana (p.ej. "ford focuss" → Ford Focus).
+ */
 export async function resolveCar(text: string): Promise<RefCar | undefined> {
   const n = normalize(text);
-  return (await allCars()).find((c) => normalize(`${c.brand} ${c.model}`) === n);
+  if (!n) return undefined;
+  const cars = await allCars();
+
+  // 1) Exacto "marca modelo".
+  const exact = cars.find((c) => normalize(`${c.brand} ${c.model}`) === n);
+  if (exact) return exact;
+
+  // 2) Solo el modelo ("focus" → Ford Focus), si no es ambiguo.
+  const byModel = cars.filter((c) => normalize(c.model) === n);
+  if (byModel.length === 1) return byModel[0];
+
+  // 3) Tolerancia a erratas: 1 fallo si es corto, 2 si es largo.
+  const max = n.length <= 6 ? 1 : 2;
+  let best: RefCar | undefined;
+  let bestD = max + 1;
+  for (const c of cars) {
+    for (const cand of [normalize(`${c.brand} ${c.model}`), normalize(c.model)]) {
+      const d = editDistance(n, cand, max);
+      if (d < bestD) {
+        bestD = d;
+        best = c;
+        if (d === 0) return c;
+      }
+    }
+  }
+  return bestD <= max ? best : undefined;
 }

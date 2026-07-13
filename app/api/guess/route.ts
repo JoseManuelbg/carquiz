@@ -44,27 +44,27 @@ export async function POST(req: Request) {
   if (mode.target === "year") {
     feedback = evaluateYear(answer, body.guess);
   } else {
-    // Preferimos el coche de nuestra BBDD (trae todos los atributos);
-    // si no, tiramos del catálogo grande (solo marca + modelo).
-    const n = normalize(body.guess);
-    const cars = await getCars();
-    const curated =
-      cars.find((c) => normalize(`${c.brand} ${c.model}`) === n) ??
-      cars.find((c) => normalize(c.model) === n);
+    // Texto libre: resolvemos tolerando erratas ("ford focuss" → Ford Focus).
+    const ref = await resolveCar(body.guess);
 
     let g: GuessCar | undefined;
-    if (curated) {
-      g = {
-        brand: curated.brand,
-        model: curated.model,
-        bodyType: curated.bodyType,
-        region: curated.region,
-        year: curated.year,
-        engine: curated.engine,
-      };
-    } else {
-      const ref = await resolveCar(body.guess);
-      if (ref) g = { brand: ref.brand, model: ref.model };
+    if (ref) {
+      // Si el coche resuelto es uno de los nuestros, usamos todos sus atributos
+      // (así se siguen dando las pistas de carrocería/región/año).
+      const cars = await getCars();
+      const key = normalize(`${ref.brand} ${ref.model}`);
+      const curated = cars.find((c) => normalize(`${c.brand} ${c.model}`) === key);
+
+      g = curated
+        ? {
+            brand: curated.brand,
+            model: curated.model,
+            bodyType: curated.bodyType,
+            region: curated.region,
+            year: curated.year,
+            engine: curated.engine,
+          }
+        : { brand: ref.brand, model: ref.model };
     }
 
     feedback = evaluateGuess(answer, g, body.year, body.engine, diff, mode.target);
