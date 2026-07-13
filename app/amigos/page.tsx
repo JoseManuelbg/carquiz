@@ -7,6 +7,8 @@ import AddFriendForm from "./AddFriendForm";
 
 export const dynamic = "force-dynamic";
 
+export const metadata = { robots: { index: false, follow: false } };
+
 export default async function Amigos() {
   const user = await getCurrentUser();
   if (!user) redirect("/login?next=/amigos");
@@ -50,12 +52,12 @@ export default async function Amigos() {
           </h2>
           {pending.map((p) => (
             <form
-              key={p.user_id}
+              key={p.userId}
               action={acceptFriend}
               className="panel rounded-sm flex items-center gap-3 px-3 py-2"
             >
-              <input type="hidden" name="requesterId" value={p.user_id} />
-              <span className="flex-1">{p.profiles?.username ?? "alguien"}</span>
+              <input type="hidden" name="requesterId" value={p.userId} />
+              <span className="flex-1">{p.username}</span>
               <button className="rounded-sm bg-accent text-white px-3 py-1.5 text-sm font-display uppercase hover:brightness-110">
                 Aceptar
               </button>

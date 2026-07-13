@@ -3,6 +3,7 @@ import { Suspense } from "react";
 import { Geist, Geist_Mono, Oswald } from "next/font/google";
 import Link from "next/link";
 import UserNav from "./ui/UserNav";
+import { SITE_DESC, SITE_NAME, SITE_URL } from "@/lib/site";
 import "./globals.css";
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
@@ -15,9 +16,42 @@ const oswald = Oswald({
 });
 
 export const metadata: Metadata = {
-  title: "Car Quiz — Adivina el coche",
-  description:
-    "Adivina el coche por la foto. Un reto diario y un modo infinito que aprieta con cada acierto.",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: "Car Quiz — Adivina el coche por la foto",
+    // Las demás páginas quedan como "Coche del día · Car Quiz".
+    template: "%s · Car Quiz",
+  },
+  description: SITE_DESC,
+  applicationName: SITE_NAME,
+  keywords: [
+    "adivinar coches",
+    "juego de coches",
+    "wordle de coches",
+    "quiz de coches",
+    "adivina el coche",
+    "coche del día",
+    "car quiz",
+  ],
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    locale: "es_ES",
+    url: SITE_URL,
+    siteName: SITE_NAME,
+    title: "Car Quiz — Adivina el coche por la foto",
+    description: SITE_DESC,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Car Quiz — Adivina el coche por la foto",
+    description: SITE_DESC,
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, "max-image-preview": "large" },
+  },
 };
 
 export default function RootLayout({

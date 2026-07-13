@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { countCars } from "@/lib/db";
+import { SITE_DESC, SITE_NAME, SITE_URL } from "@/lib/site";
 
 // El contador de coches crece: refrescar cada 5 min en vez de congelarlo en el build.
 export const revalidate = 300;
@@ -7,8 +8,25 @@ export const revalidate = 300;
 export default async function Home() {
   const total = await countCars();
 
+  // Datos estructurados: le dicen a Google que esto es un juego, no un blog.
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Game",
+    name: SITE_NAME,
+    url: SITE_URL,
+    description: SITE_DESC,
+    inLanguage: "es",
+    genre: ["Puzzle", "Trivia"],
+    applicationCategory: "GameApplication",
+    offers: { "@type": "Offer", price: "0", priceCurrency: "EUR" },
+  };
+
   return (
     <div className="flex flex-col gap-10 py-8">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <header className="flex flex-col gap-4">
         <h1 className="font-display text-6xl sm:text-7xl font-bold uppercase leading-[0.88]">
           ¿Sabes qué

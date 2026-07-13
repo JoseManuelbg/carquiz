@@ -72,7 +72,27 @@ export async function getProfile(userId: string) {
   return data as { id: string; username: string | null; daily_reminder: boolean } | null;
 }
 
-/** Los rankings solo muestran a quien tiene nombre puesto. */
+/** Nombres de usuario por id. */
+async function usernames(ids: string[]): Promise<Map<string, string>> {
+  if (ids.length === 0) return new Map();
+  const { data } = await supabaseAdmin()
+    .from("profiles")
+    .select("id,username")
+    .in("id", ids);
+  const m = new Map<string, string>();
+  for (const p of data ?? []) {
+    if (p.username) m.set(p.id as string, p.username as string);
+  }
+  return m;
+}
+
+/**
+ * Los rankings solo muestran a quien tiene nombre puesto.
+ *
+ * Ojo: `user_stats` y `profiles` cuelgan las dos de auth.users, pero NO hay
+ * relación directa entre ellas, así que PostgREST no puede hacer el embed
+ * (`profiles!inner(...)` falla). Se unen aquí, en dos consultas.
+ */
 async function ranking(
   column: "best_infinite_streak" | "daily_best_streak",
   limit: number,
@@ -80,7 +100,7 @@ async function ranking(
 ): Promise<RankRow[]> {
   let q = supabaseAdmin()
     .from("user_stats")
-    .select(`user_id, ${column}, daily_won, daily_played, profiles!inner(username)`)
+    .select("user_id, best_infinite_streak, daily_best_streak, daily_won, daily_played")
     .gt(column, 0)
     .order(column, { ascending: false })
     .limit(limit);
@@ -90,18 +110,16 @@ async function ranking(
   const { data, error } = await q;
   if (error) throw new Error(`ranking: ${error.message}`);
 
-  type Row = Record<string, unknown> & {
+  const rows = (data ?? []) as unknown as (Record<string, number> & {
     user_id: string;
-    daily_won: number;
-    daily_played: number;
-    profiles: { username: string | null };
-  };
+  })[];
+  const names = await usernames(rows.map((r) => r.user_id));
 
-  return (data as unknown as Row[])
-    .filter((r) => r.profiles?.username)
+  return rows
+    .filter((r) => names.has(r.user_id))
     .map((r) => ({
       userId: r.user_id,
-      username: r.profiles.username as string,
+      username: names.get(r.user_id)!,
       value: Number(r[column]),
       extra:
         column === "daily_best_streak"
@@ -127,16 +145,21 @@ export async function friendIds(userId: string): Promise<string[]> {
   return (data ?? []).map((r) => r.friend_id as string);
 }
 
-export async function pendingRequests(userId: string) {
+/** Peticiones de amistad recibidas. (Mismo motivo que en ranking: sin embed.) */
+export async function pendingRequests(
+  userId: string
+): Promise<{ userId: string; username: string }[]> {
   const { data } = await supabaseAdmin()
     .from("friendships")
-    .select("user_id, profiles!friendships_user_id_fkey(username)")
+    .select("user_id")
     .eq("friend_id", userId)
     .eq("status", "pending");
-  return (data ?? []) as unknown as {
-    user_id: string;
-    profiles: { username: string | null };
-  }[];
+
+  const ids = (data ?? []).map((r) => r.user_id as string);
+  const names = await usernames(ids);
+  return ids
+    .filter((id) => names.has(id))
+    .map((id) => ({ userId: id, username: names.get(id)! }));
 }
 
 export async function listFriends(userId: string) {

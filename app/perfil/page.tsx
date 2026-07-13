@@ -6,6 +6,9 @@ import UsernameForm from "./UsernameForm";
 
 export const dynamic = "force-dynamic";
 
+// Páginas de usuario: nada que indexar.
+export const metadata = { robots: { index: false, follow: false } };
+
 export default async function Perfil() {
   const user = await getCurrentUser();
   if (!user) redirect("/login?next=/perfil");

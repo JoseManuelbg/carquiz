@@ -1,8 +1,16 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { getCurrentUser } from "@/lib/auth";
 import { friendIds, topDaily, topInfinite, type RankRow } from "@/lib/stats";
 
 export const dynamic = "force-dynamic";
+
+export const metadata: Metadata = {
+  title: "Ranking",
+  description:
+    "Las mejores rachas de Car Quiz: modo infinito y coche del día. Compite en global o solo contra tus amigos.",
+  alternates: { canonical: "/ranking" },
+};
 
 export default async function Ranking({
   searchParams,
