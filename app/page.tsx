@@ -1,14 +1,14 @@
 import Link from "next/link";
 import { countCars } from "@/lib/db";
+import { getT } from "@/lib/i18n/server";
 import { SITE_DESC, SITE_NAME, SITE_URL } from "@/lib/site";
 
 // El contador de coches crece: refrescar cada 5 min en vez de congelarlo en el build.
 export const revalidate = 300;
 
 export default async function Home() {
-  const total = await countCars();
+  const [total, { t }] = await Promise.all([countCars(), getT()]);
 
-  // Datos estructurados: le dicen a Google que esto es un juego, no un blog.
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Game",
@@ -29,26 +29,17 @@ export default async function Home() {
       />
       <header className="flex flex-col gap-4">
         <h1 className="font-display text-6xl sm:text-7xl font-bold uppercase leading-[0.88]">
-          ¿Sabes qué
-          <br />
-          coche es
-          <span className="text-accent">?</span>
+          {t("home.title")}
         </h1>
-        <p className="text-muted max-w-sm">
-          Solo tienes la foto. {total} coches, de un Focus a un Countach.
-        </p>
+        <p className="text-muted max-w-sm">{t("home.subtitle", { n: total })}</p>
       </header>
 
       <div className="flex flex-col gap-3">
-        <ModeLink
-          href="/daily"
-          title="Coche del día"
-          desc="Uno solo, el mismo para todos."
-        />
+        <ModeLink href="/daily" title={t("home.daily")} desc={t("home.dailyDesc")} />
         <ModeLink
           href="/infinite"
-          title="Modo infinito"
-          desc="Encadena aciertos. Cuanta más racha, más difícil."
+          title={t("home.infinite")}
+          desc={t("home.infiniteDesc")}
         />
       </div>
     </div>

@@ -15,8 +15,10 @@ import {
 import { resolveCar } from "@/lib/reference";
 import { applyAttempt, getRound } from "@/lib/rounds";
 import { normalize } from "@/lib/normalize";
+import { cookies } from "next/headers";
+import { NextResponse } from "next/server";
 import { getCurrentUser } from "@/lib/auth";
-import { recordDaily, recordInfinite } from "@/lib/stats";
+import { bumpDailyAnon, recordDaily, recordInfinite } from "@/lib/stats";
 import { todayKey } from "@/lib/daily";
 
 export async function POST(req: Request) {
@@ -78,28 +80,38 @@ export async function POST(req: Request) {
   }
 
   const gameOver = round.solved || round.attempts >= round.maxAttempts;
+  const isDaily = round.modeId === "daily";
+  const today = todayKey();
 
   // Si hay sesión, la partida cuenta para stats y rankings. La racha la calcula
   // el servidor (si la mandara el cliente, cualquiera pondría racha de 999).
   let stats = null;
+  let bumpedAnonDaily = false;
   if (gameOver) {
     const user = await getCurrentUser();
     if (user) {
-      stats =
-        round.modeId === "daily"
-          ? await recordDaily(user.id, todayKey(), round.solved, round.attempts, round.carId)
-          : await recordInfinite(
-              user.id,
-              round.solved,
-              round.attempts,
-              round.modeId,
-              round.difficulty,
-              round.carId
-            );
+      // Registrados: recordDaily ya incrementa el contador del día (en SQL).
+      stats = isDaily
+        ? await recordDaily(user.id, today, round.solved, round.attempts, round.carId)
+        : await recordInfinite(
+            user.id,
+            round.solved,
+            round.attempts,
+            round.modeId,
+            round.difficulty,
+            round.carId
+          );
+    } else if (isDaily && round.solved) {
+      // Anónimos: cuentan una vez por navegador (dedup por cookie).
+      const jar = await cookies();
+      if (jar.get("cq_dsolved")?.value !== today) {
+        await bumpDailyAnon(today);
+        bumpedAnonDaily = true;
+      }
     }
   }
 
-  return Response.json({
+  const res = NextResponse.json({
     feedback,
     attempts: round.attempts,
     maxAttempts: round.maxAttempts,
@@ -114,4 +126,14 @@ export async function POST(req: Request) {
         }
       : undefined,
   });
+
+  if (bumpedAnonDaily) {
+    res.cookies.set("cq_dsolved", today, {
+      httpOnly: true,
+      sameSite: "lax",
+      path: "/",
+      maxAge: 60 * 60 * 36,
+    });
+  }
+  return res;
 }

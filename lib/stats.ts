@@ -58,6 +58,28 @@ export async function recordInfinite(
   return (Array.isArray(data) ? data[0] : data) ?? null;
 }
 
+/** Cuántas personas han adivinado el coche de un día. */
+export async function getDailySolved(day: string): Promise<number> {
+  const { data } = await supabaseAdmin()
+    .from("daily_stats")
+    .select("solved")
+    .eq("day", day)
+    .maybeSingle();
+  return (data?.solved as number) ?? 0;
+}
+
+/** Suma un acierto anónimo (dedup por cookie en la ruta).
+ *  No debe romper la partida si la migración aún no está: se ignora el error. */
+export async function bumpDailyAnon(day: string): Promise<number> {
+  try {
+    const { data, error } = await supabaseAdmin().rpc("bump_daily_anon", { p_day: day });
+    if (error) return 0;
+    return (typeof data === "number" ? data : 0) ?? 0;
+  } catch {
+    return 0;
+  }
+}
+
 export async function getStats(userId: string): Promise<UserStats | null> {
   const { data } = await supabaseAdmin()
     .from("user_stats")

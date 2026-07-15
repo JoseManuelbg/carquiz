@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Game from "@/app/ui/Game";
+import { getT } from "@/lib/i18n/server";
 
 export const metadata: Metadata = {
   title: "Coche del día",
@@ -8,11 +9,12 @@ export const metadata: Metadata = {
   alternates: { canonical: "/daily" },
 };
 
-export default function DailyPage() {
+export default async function DailyPage() {
+  const { t } = await getT();
   return (
     <div className="flex flex-col items-center gap-6">
       <h1 className="self-start font-display text-3xl font-bold uppercase tracking-wide">
-        Coche del día
+        {t("home.daily")}
       </h1>
       <Game query="mode=daily" daily />
     </div>

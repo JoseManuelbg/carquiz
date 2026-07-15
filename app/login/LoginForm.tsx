@@ -3,9 +3,11 @@
 import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { createSupabaseBrowser } from "@/lib/supabase/client";
+import { useT } from "@/app/ui/I18nProvider";
 import { isUsernameFree } from "./actions";
 
 export default function LoginForm() {
+  const { t } = useT();
   const router = useRouter();
   const params = useSearchParams();
   const next = params.get("next") ?? "/";
@@ -48,7 +50,7 @@ export default function LoginForm() {
     setBusy(false);
     if (error) return setMsg(error.message);
     if (mode === "signup") {
-      return setMsg("Cuenta creada. Revisa tu email para confirmarla.");
+      return setMsg(t("auth.created"));
     }
     // Pasa por bienvenida: reenvía a `next` si ya hay nombre, o lo pide si no.
     router.push(`/bienvenida?next=${encodeURIComponent(next)}`);
@@ -77,11 +79,13 @@ export default function LoginForm() {
         disabled={busy}
         className="panel rounded-sm py-3 font-display uppercase tracking-widest hover:border-accent transition disabled:opacity-50"
       >
-        Continuar con Google
+        {t("auth.google")}
       </button>
 
       <div className="flex items-center gap-3 text-xs text-muted">
-        <span className="h-px flex-1 bg-line" />o<span className="h-px flex-1 bg-line" />
+        <span className="h-px flex-1 bg-line" />
+        {t("auth.or")}
+        <span className="h-px flex-1 bg-line" />
       </div>
 
       <form onSubmit={withEmail} className="flex flex-col gap-3">
@@ -91,15 +95,12 @@ export default function LoginForm() {
               required
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              placeholder="Nombre de piloto"
+              placeholder={t("auth.pilotName")}
               minLength={3}
               maxLength={20}
               className="rounded-sm border border-line bg-surface px-3 py-2.5 outline-none focus:border-accent"
             />
-            <span className="text-xs text-muted">
-              Es el nombre con el que sales en el ranking. Tu email no se muestra
-              nunca.
-            </span>
+            <span className="text-xs text-muted">{t("auth.nameHint")}</span>
           </div>
         )}
 
@@ -108,7 +109,7 @@ export default function LoginForm() {
           required
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          placeholder="Email"
+          placeholder={t("auth.email")}
           className="rounded-sm border border-line bg-surface px-3 py-2.5 outline-none focus:border-accent"
         />
         <input
@@ -117,7 +118,7 @@ export default function LoginForm() {
           minLength={6}
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          placeholder="Contraseña"
+          placeholder={t("auth.password")}
           className="rounded-sm border border-line bg-surface px-3 py-2.5 outline-none focus:border-accent"
         />
         <button
@@ -125,7 +126,7 @@ export default function LoginForm() {
           disabled={busy}
           className="rounded-sm bg-accent text-white py-3 font-display font-bold uppercase tracking-widest hover:brightness-110 transition disabled:opacity-50"
         >
-          {mode === "signin" ? "Entrar" : "Crear cuenta"}
+          {mode === "signin" ? t("auth.signin") : t("auth.signup")}
         </button>
       </form>
 
@@ -138,7 +139,7 @@ export default function LoginForm() {
         }}
         className="text-sm text-muted hover:text-foreground underline self-start"
       >
-        {mode === "signin" ? "¿No tienes cuenta? Crear una" : "¿Ya tienes cuenta? Entrar"}
+        {mode === "signin" ? t("auth.toSignup") : t("auth.toSignin")}
       </button>
     </div>
   );

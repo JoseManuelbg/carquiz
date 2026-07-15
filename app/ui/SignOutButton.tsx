@@ -2,9 +2,11 @@
 
 import { useRouter } from "next/navigation";
 import { createSupabaseBrowser } from "@/lib/supabase/client";
+import { useT } from "./I18nProvider";
 
 export default function SignOutButton() {
   const router = useRouter();
+  const { t } = useT();
 
   return (
     <button
@@ -14,9 +16,8 @@ export default function SignOutButton() {
         router.refresh();
       }}
       className="text-muted hover:text-foreground transition-colors"
-      title="Cerrar sesión"
     >
-      Salir
+      {t("nav.logout")}
     </button>
   );
 }

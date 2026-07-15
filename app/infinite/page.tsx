@@ -4,13 +4,9 @@ import { useEffect, useState } from "react";
 import Game from "@/app/ui/Game";
 import { INFINITE_MODES } from "@/lib/modes";
 import { DIFFICULTIES } from "@/lib/difficulty";
+import { useT } from "@/app/ui/I18nProvider";
 
-const REGIONS = [
-  { id: "EUR", label: "Europa" },
-  { id: "JDM", label: "Japón" },
-  { id: "USDM", label: "EE.UU." },
-];
-
+const REGION_IDS = ["EUR", "JDM", "USDM"];
 const PLAYABLE = INFINITE_MODES.filter((m) => m.part === "full");
 const COMING_SOON = INFINITE_MODES.filter((m) => m.part !== "full");
 
@@ -21,8 +17,9 @@ interface Facets {
 }
 
 export default function InfinitePage() {
+  const { t } = useT();
   const [modes, setModes] = useState<Set<string>>(new Set(PLAYABLE.map((m) => m.id)));
-  const [regions, setRegions] = useState<Set<string>>(new Set(REGIONS.map((r) => r.id)));
+  const [regions, setRegions] = useState<Set<string>>(new Set(REGION_IDS));
   const [difficulty, setDifficulty] = useState("normal");
   const [brands, setBrands] = useState<Set<string>>(new Set());
   const [bodies, setBodies] = useState<Set<string>>(new Set());
@@ -61,7 +58,7 @@ export default function InfinitePage() {
           onClick={() => setStarted(false)}
           className="self-start font-display text-xs uppercase tracking-widest text-muted hover:text-accent transition-colors"
         >
-          ← Ajustes
+          ← {t("inf.settings")}
         </button>
         <Game key={query} query={query} />
       </div>
@@ -76,44 +73,48 @@ export default function InfinitePage() {
   return (
     <div className="flex flex-col gap-7 py-2">
       <h1 className="font-display text-3xl font-bold uppercase tracking-wide">
-        Modo infinito
+        {t("home.infinite")}
       </h1>
 
-      <Section title="Modos">
+      <Section title={t("inf.modes")}>
         {PLAYABLE.map((m) => (
-          <Chip key={m.id} active={modes.has(m.id)} onClick={() => setModes((s) => toggle(s, m.id))} title={m.description}>
-            {m.title}
+          <Chip key={m.id} active={modes.has(m.id)} onClick={() => setModes((s) => toggle(s, m.id))}>
+            {t(`mode.${m.id}`)}
           </Chip>
         ))}
         {COMING_SOON.map((m) => (
           <span
             key={m.id}
-            title="Necesita anotar la zona en /admin"
             className="rounded-sm border border-dashed border-line px-3 py-1.5 font-display text-sm uppercase tracking-wide text-muted/50"
           >
-            {m.title} · pronto
+            {t(`mode.${m.id}`)} · {t("inf.soon")}
           </span>
         ))}
       </Section>
 
-      <Section title="Dificultad">
+      <Section title={t("inf.difficulty")}>
         {DIFFICULTIES.map((d) => (
-          <Chip key={d.id} active={difficulty === d.id} onClick={() => setDifficulty(d.id)} title={d.desc}>
-            {d.label}
+          <Chip
+            key={d.id}
+            active={difficulty === d.id}
+            onClick={() => setDifficulty(d.id)}
+            title={t(`diff.${d.id}.desc`)}
+          >
+            {t(`diff.${d.id}`)}
           </Chip>
         ))}
       </Section>
 
-      <Section title="Región">
-        {REGIONS.map((r) => (
-          <Chip key={r.id} active={regions.has(r.id)} onClick={() => setRegions((s) => toggle(s, r.id))}>
-            {r.label}
+      <Section title={t("inf.region")}>
+        {REGION_IDS.map((r) => (
+          <Chip key={r} active={regions.has(r)} onClick={() => setRegions((s) => toggle(s, r))}>
+            {t(`region.${r}`)}
           </Chip>
         ))}
       </Section>
 
       {facets && facets.bodies.length > 1 && (
-        <Section title="Carrocería" hint="vacío = todas">
+        <Section title={t("inf.body")} hint={t("inf.emptyAll")}>
           {facets.bodies.map((b) => (
             <Chip key={b.value} active={bodies.has(b.value)} onClick={() => setBodies((s) => toggle(s, b.value))}>
               {b.value}
@@ -123,7 +124,7 @@ export default function InfinitePage() {
       )}
 
       {facets && facets.decades.length > 1 && (
-        <Section title="Década" hint="vacío = todas">
+        <Section title={t("inf.decade")} hint={t("inf.emptyAll")}>
           {facets.decades.map((d) => (
             <Chip
               key={d.value}
@@ -140,21 +141,22 @@ export default function InfinitePage() {
         <section className="flex flex-col gap-3">
           <div className="flex items-baseline justify-between">
             <h2 className="font-display text-xs uppercase tracking-[0.2em] text-muted">
-              Marca <span className="normal-case tracking-normal">· vacío = todas</span>
+              {t("inf.brand")}{" "}
+              <span className="normal-case tracking-normal">· {t("inf.emptyAll")}</span>
             </h2>
             {brands.size > 0 && (
               <button
                 onClick={() => setBrands(new Set())}
                 className="text-xs text-accent hover:underline"
               >
-                Quitar ({brands.size})
+                {t("inf.remove")} ({brands.size})
               </button>
             )}
           </div>
           <input
             value={brandSearch}
             onChange={(e) => setBrandSearch(e.target.value)}
-            placeholder="Buscar marca…"
+            placeholder={t("inf.searchBrand")}
             className="rounded-sm border border-line bg-surface px-3 py-2 text-sm outline-none focus:border-accent"
           />
           <div className="flex flex-wrap gap-2 max-h-52 overflow-y-auto p-1">
@@ -172,7 +174,7 @@ export default function InfinitePage() {
         onClick={() => setStarted(true)}
         className="rounded-sm bg-accent text-white py-4 font-display text-lg font-bold uppercase tracking-[0.2em] transition hover:brightness-110 active:scale-[0.99] disabled:opacity-30"
       >
-        Arrancar
+        {t("inf.start")}
       </button>
     </div>
   );
