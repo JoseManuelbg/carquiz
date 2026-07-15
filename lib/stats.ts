@@ -38,6 +38,7 @@ export async function recordDaily(
   return (Array.isArray(data) ? data[0] : data) ?? null;
 }
 
+/** Devuelve la racha (actual y mejor) DE ESA DIFICULTAD. */
 export async function recordInfinite(
   userId: string,
   solved: boolean,
@@ -45,7 +46,7 @@ export async function recordInfinite(
   modeId: string,
   difficulty: string,
   carId: string
-): Promise<UserStats | null> {
+): Promise<{ streak: number; best: number } | null> {
   const { data, error } = await supabaseAdmin().rpc("record_infinite", {
     p_user: userId,
     p_solved: solved,
@@ -55,7 +56,37 @@ export async function recordInfinite(
     p_car: carId,
   });
   if (error) throw new Error(`recordInfinite: ${error.message}`);
-  return (Array.isArray(data) ? data[0] : data) ?? null;
+  const row = (Array.isArray(data) ? data[0] : data) as
+    | { current_streak: number; best_streak: number }
+    | undefined;
+  return row ? { streak: row.current_streak, best: row.best_streak } : null;
+}
+
+/** Racha actual del usuario en una dificultad (para tapar la foto acorde). */
+export async function getInfiniteStreak(
+  userId: string,
+  difficulty: string
+): Promise<number> {
+  const { data } = await supabaseAdmin()
+    .from("infinite_streaks")
+    .select("current_streak")
+    .eq("user_id", userId)
+    .eq("difficulty", difficulty)
+    .maybeSingle();
+  return (data?.current_streak as number) ?? 0;
+}
+
+/** Mejor racha por dificultad (para el perfil). */
+export async function getInfiniteBests(
+  userId: string
+): Promise<Record<string, number>> {
+  const { data } = await supabaseAdmin()
+    .from("infinite_streaks")
+    .select("difficulty, best_streak")
+    .eq("user_id", userId);
+  const out: Record<string, number> = {};
+  for (const r of data ?? []) out[r.difficulty as string] = r.best_streak as number;
+  return out;
 }
 
 /** Cuántas personas han adivinado el coche de un día. */
@@ -199,8 +230,34 @@ async function ranking(
     }));
 }
 
-export const topInfinite = (limit = 20, ids?: string[]) =>
-  ranking("best_infinite_streak", limit, ids);
+/** Ranking de infinito de UNA dificultad (tabla infinite_streaks). */
+export async function topInfinite(
+  difficulty: string,
+  limit = 20,
+  ids?: string[]
+): Promise<RankRow[]> {
+  let q = supabaseAdmin()
+    .from("infinite_streaks")
+    .select("user_id, best_streak")
+    .eq("difficulty", difficulty)
+    .gt("best_streak", 0)
+    .order("best_streak", { ascending: false })
+    .limit(limit);
+  if (ids) q = q.in("user_id", ids);
+
+  const { data, error } = await q;
+  if (error) return []; // p.ej. si la migración de infinite_streaks aún no está
+
+  const rows = (data ?? []) as { user_id: string; best_streak: number }[];
+  const names = await usernames(rows.map((r) => r.user_id));
+  return rows
+    .filter((r) => names.has(r.user_id))
+    .map((r) => ({
+      userId: r.user_id,
+      username: names.get(r.user_id)!,
+      value: r.best_streak,
+    }));
+}
 
 export const topDaily = (limit = 20, ids?: string[]) =>
   ranking("daily_best_streak", limit, ids);

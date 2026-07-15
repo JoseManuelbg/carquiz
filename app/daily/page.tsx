@@ -5,7 +5,7 @@ import { getT } from "@/lib/i18n/server";
 export const metadata: Metadata = {
   title: "Coche del día",
   description:
-    "El reto diario de Car Quiz: adivina marca, modelo y año de un coche por su foto. Un coche nuevo cada día, el mismo para todo el mundo.",
+    "El reto diario de Autodle: adivina marca, modelo y año de un coche por su foto. Un coche nuevo cada día, el mismo para todo el mundo.",
   alternates: { canonical: "/daily" },
 };
 

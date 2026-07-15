@@ -21,20 +21,20 @@ const oswald = Oswald({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Car Quiz — Adivina el coche por la foto",
-    // Las demás páginas quedan como "Coche del día · Car Quiz".
-    template: "%s · Car Quiz",
+    default: "Autodle — Adivina el coche por la foto",
+    // Las demás páginas quedan como "Coche del día · Autodle".
+    template: "%s · Autodle",
   },
   description: SITE_DESC,
   applicationName: SITE_NAME,
   keywords: [
+    "autodle",
     "adivinar coches",
     "juego de coches",
     "wordle de coches",
     "quiz de coches",
     "adivina el coche",
     "coche del día",
-    "car quiz",
   ],
   alternates: { canonical: "/" },
   openGraph: {
@@ -42,12 +42,12 @@ export const metadata: Metadata = {
     locale: "es_ES",
     url: SITE_URL,
     siteName: SITE_NAME,
-    title: "Car Quiz — Adivina el coche por la foto",
+    title: "Autodle — Adivina el coche por la foto",
     description: SITE_DESC,
   },
   twitter: {
     card: "summary_large_image",
-    title: "Car Quiz — Adivina el coche por la foto",
+    title: "Autodle — Adivina el coche por la foto",
     description: SITE_DESC,
   },
   robots: {
@@ -73,7 +73,7 @@ export default async function RootLayout({
               <Link href="/" className="flex items-center gap-2.5 group">
                 <span className="checker h-7 w-7 rounded-sm shrink-0" />
                 <span className="font-display text-2xl font-bold uppercase tracking-wide leading-none">
-                  Car<span className="text-accent">Quiz</span>
+                  Auto<span className="text-accent">dle</span>
                 </span>
               </Link>
               <nav className="flex items-center gap-4 text-sm">

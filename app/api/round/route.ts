@@ -11,7 +11,7 @@ import { YEAR_RANGE } from "@/lib/reference";
 import { createRound } from "@/lib/rounds";
 import { todayKey } from "@/lib/daily";
 import { getCurrentUser } from "@/lib/auth";
-import { getStats } from "@/lib/stats";
+import { getInfiniteStreak } from "@/lib/stats";
 import type { Car } from "@/lib/types";
 
 const RECENT_COOKIE = "cq_recent";
@@ -51,8 +51,8 @@ export async function GET(req: Request) {
   if (!isDaily) {
     const user = await getCurrentUser();
     if (user) {
-      const st = await getStats(user.id);
-      intensity = st?.current_infinite_streak ?? 0;
+      // Racha de ESA dificultad (no manipulable).
+      intensity = await getInfiniteStreak(user.id, diff.id);
     } else {
       intensity = Math.max(0, Math.min(40, Number(sp.get("streak")) || 0));
     }

@@ -38,7 +38,7 @@ interface GuessResponse {
   solved: boolean;
   gameOver: boolean;
   answer?: RevealedAnswer;
-  stats?: { streak: number; best: number; dailyStreak: number };
+  stats?: { streak: number; best: number };
 }
 
 type Status = "loading" | "playing" | "won" | "lost" | "nodata" | "error";

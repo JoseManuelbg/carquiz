@@ -99,6 +99,9 @@ export const dictionaries: Record<Locale, Dict> = {
     "welcome.title": "Elige tu nombre",
     "welcome.text": "Es con el que sales en el ranking y con el que te añaden tus amigos. Tu email no se muestra nunca. Podrás cambiarlo más adelante.",
     "welcome.cta": "Empezar a jugar",
+    "rank.global": "Global",
+    "rank.friends": "Amigos",
+    "rank.loginPrompt": "para que tus partidas cuenten y competir con amigos.",
   },
 
   en: {
@@ -192,6 +195,9 @@ export const dictionaries: Record<Locale, Dict> = {
     "welcome.title": "Choose your name",
     "welcome.text": "It's your name on the ranking and how friends add you. Your email is never shown. You can change it later.",
     "welcome.cta": "Start playing",
+    "rank.global": "Global",
+    "rank.friends": "Friends",
+    "rank.loginPrompt": "so your games count and you can compete with friends.",
   },
 
   fr: {
@@ -285,6 +291,9 @@ export const dictionaries: Record<Locale, Dict> = {
     "welcome.title": "Choisis ton nom",
     "welcome.text": "C'est ton nom au classement et pour que tes amis t'ajoutent. Ton e-mail n'est jamais affiché. Tu pourras le changer plus tard.",
     "welcome.cta": "Commencer à jouer",
+    "rank.global": "Global",
+    "rank.friends": "Amis",
+    "rank.loginPrompt": "pour que tes parties comptent et défier tes amis.",
   },
 
   it: {
@@ -378,6 +387,9 @@ export const dictionaries: Record<Locale, Dict> = {
     "welcome.title": "Scegli il tuo nome",
     "welcome.text": "È il tuo nome in classifica e con cui ti aggiungono gli amici. La tua email non si mostra mai. Potrai cambiarlo dopo.",
     "welcome.cta": "Inizia a giocare",
+    "rank.global": "Globale",
+    "rank.friends": "Amici",
+    "rank.loginPrompt": "così le tue partite contano e sfidi gli amici.",
   },
 
   de: {
@@ -471,6 +483,9 @@ export const dictionaries: Record<Locale, Dict> = {
     "welcome.title": "Wähle deinen Namen",
     "welcome.text": "Dein Name in der Rangliste und für Freunde. Deine E-Mail wird nie gezeigt. Du kannst ihn später ändern.",
     "welcome.cta": "Losspielen",
+    "rank.global": "Global",
+    "rank.friends": "Freunde",
+    "rank.loginPrompt": "damit deine Spiele zählen und du gegen Freunde antrittst.",
   },
 
   pt: {
@@ -564,6 +579,9 @@ export const dictionaries: Record<Locale, Dict> = {
     "welcome.title": "Escolhe o teu nome",
     "welcome.text": "É o teu nome no ranking e como os amigos te adicionam. O teu email nunca é mostrado. Podes mudá-lo depois.",
     "welcome.cta": "Começar a jogar",
+    "rank.global": "Global",
+    "rank.friends": "Amigos",
+    "rank.loginPrompt": "para que os teus jogos contem e competires com amigos.",
   },
 };
 

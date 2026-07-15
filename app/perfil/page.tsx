@@ -1,7 +1,13 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { getCurrentUser } from "@/lib/auth";
-import { getDetailedStats, getProfile, getStats } from "@/lib/stats";
+import {
+  getDetailedStats,
+  getInfiniteBests,
+  getProfile,
+  getStats,
+} from "@/lib/stats";
+import { DIFFICULTIES } from "@/lib/difficulty";
 import { cooldownDaysLeft } from "@/lib/username";
 import UsernameForm from "./UsernameForm";
 
@@ -14,10 +20,11 @@ export default async function Perfil() {
   const user = await getCurrentUser();
   if (!user) redirect("/login?next=/perfil");
 
-  const [profile, stats, detail] = await Promise.all([
+  const [profile, stats, detail, infBests] = await Promise.all([
     getProfile(user.id),
     getStats(user.id),
     getDetailedStats(user.id),
+    getInfiniteBests(user.id),
   ]);
 
   const played = stats?.daily_played ?? 0;
@@ -55,11 +62,12 @@ export default async function Perfil() {
 
       <section className="flex flex-col gap-3">
         <h2 className="font-display text-sm uppercase tracking-[0.2em] text-muted">
-          Infinito
+          Infinito · mejor racha por dificultad
         </h2>
-        <div className="grid grid-cols-2 gap-2">
-          <Stat label="Racha actual" value={stats?.current_infinite_streak ?? 0} accent />
-          <Stat label="Mejor racha" value={stats?.best_infinite_streak ?? 0} />
+        <div className="grid grid-cols-3 gap-2">
+          {DIFFICULTIES.map((d) => (
+            <Stat key={d.id} label={d.label} value={infBests[d.id] ?? 0} />
+          ))}
         </div>
       </section>
 

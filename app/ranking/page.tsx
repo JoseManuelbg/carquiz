@@ -2,13 +2,15 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { getCurrentUser } from "@/lib/auth";
 import { friendIds, topDaily, topInfinite, type RankRow } from "@/lib/stats";
+import { DIFFICULTIES } from "@/lib/difficulty";
+import { getT } from "@/lib/i18n/server";
 
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Ranking",
   description:
-    "Las mejores rachas de Car Quiz: modo infinito y coche del día. Compite en global o solo contra tus amigos.",
+    "Las mejores rachas de Autodle: modo infinito por dificultad y coche del día. Compite en global o solo contra tus amigos.",
   alternates: { canonical: "/ranking" },
 };
 
@@ -18,56 +20,66 @@ export default async function Ranking({
   searchParams: Promise<{ scope?: string }>;
 }) {
   const { scope } = await searchParams;
+  const { t } = await getT();
   const user = await getCurrentUser();
   const friendsScope = scope === "amigos" && Boolean(user);
 
   // El ranking privado incluye a tus amigos y a ti.
   const ids = friendsScope && user ? [...(await friendIds(user.id)), user.id] : undefined;
 
-  const [infinite, daily] = await Promise.all([
-    topInfinite(20, ids),
+  // Una tabla de infinito por dificultad + la del coche del día.
+  const [infiniteByDiff, daily] = await Promise.all([
+    Promise.all(DIFFICULTIES.map((d) => topInfinite(d.id, 20, ids))),
     topDaily(20, ids),
   ]);
 
   return (
     <div className="flex flex-col gap-8">
-      <h1 className="font-display text-3xl font-bold uppercase tracking-wide">Ranking</h1>
+      <h1 className="font-display text-3xl font-bold uppercase tracking-wide">
+        {t("nav.ranking")}
+      </h1>
 
       {user && (
         <div className="flex gap-2">
           <Tab href="/ranking" active={!friendsScope}>
-            Global
+            {t("rank.global")}
           </Tab>
           <Tab href="/ranking?scope=amigos" active={friendsScope}>
-            Amigos
+            {t("rank.friends")}
           </Tab>
         </div>
       )}
 
-      <Board
-        title="Mejor racha · Infinito"
-        rows={infinite}
-        me={user?.id}
-        empty={
-          friendsScope
-            ? "Ni tú ni tus amigos habéis encadenado aciertos todavía."
-            : "Nadie ha encadenado aciertos todavía."
-        }
-      />
+      <div className="flex flex-col gap-3">
+        <h2 className="font-display text-sm uppercase tracking-[0.2em] text-muted">
+          {t("home.infinite")}
+        </h2>
+        <div className="grid gap-4 sm:grid-cols-3">
+          {DIFFICULTIES.map((d, i) => (
+            <Board
+              key={d.id}
+              title={t(`diff.${d.id}`)}
+              rows={infiniteByDiff[i]}
+              me={user?.id}
+              empty="—"
+            />
+          ))}
+        </div>
+      </div>
 
       <Board
-        title="Mejor racha · Coche del día"
+        title={t("home.daily")}
         rows={daily}
         me={user?.id}
-        empty="Aún no hay rachas diarias."
+        empty="—"
       />
 
       {!user && (
         <p className="text-sm text-muted">
           <Link href="/login?next=/ranking" className="text-accent hover:underline">
-            Entra
+            {t("nav.login")}
           </Link>{" "}
-          para que tus partidas cuenten y competir con amigos.
+          {t("rank.loginPrompt")}
         </p>
       )}
     </div>

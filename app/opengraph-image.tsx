@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "Car Quiz — Adivina el coche por la foto";
+export const alt = "Autodle — Adivina el coche por la foto";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 // Se genera bajo demanda, no en el build: al tener sharp instalado, generarla
@@ -58,7 +58,7 @@ export default async function OgImage() {
               color: "#8b9098",
             }}
           >
-            CAR QUIZ
+            AUTODLE
           </div>
 
           {/* Dos líneas explícitas: si lo dejo envolver solo, parte mal el "?" */}

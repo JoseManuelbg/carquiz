@@ -83,24 +83,27 @@ export async function POST(req: Request) {
   const isDaily = round.modeId === "daily";
   const today = todayKey();
 
-  // Si hay sesión, la partida cuenta para stats y rankings. La racha la calcula
-  // el servidor (si la mandara el cliente, cualquiera pondría racha de 999).
-  let stats = null;
+  // Si hay sesión, la partida cuenta para stats y rankings. La racha (por
+  // dificultad) la calcula el servidor: si la mandara el cliente, cualquiera
+  // pondría racha de 999.
+  let infStats: { streak: number; best: number } | null = null;
   let bumpedAnonDaily = false;
   if (gameOver) {
     const user = await getCurrentUser();
     if (user) {
-      // Registrados: recordDaily ya incrementa el contador del día (en SQL).
-      stats = isDaily
-        ? await recordDaily(user.id, today, round.solved, round.attempts, round.carId)
-        : await recordInfinite(
-            user.id,
-            round.solved,
-            round.attempts,
-            round.modeId,
-            round.difficulty,
-            round.carId
-          );
+      if (isDaily) {
+        // recordDaily incrementa también el contador del día (en SQL).
+        await recordDaily(user.id, today, round.solved, round.attempts, round.carId);
+      } else {
+        infStats = await recordInfinite(
+          user.id,
+          round.solved,
+          round.attempts,
+          round.modeId,
+          round.difficulty,
+          round.carId
+        );
+      }
     } else if (isDaily && round.solved) {
       // Anónimos: cuentan una vez por navegador (dedup por cookie).
       const jar = await cookies();
@@ -118,13 +121,7 @@ export async function POST(req: Request) {
     solved: round.solved,
     gameOver,
     answer: gameOver ? revealAnswer(answer) : undefined,
-    stats: stats
-      ? {
-          streak: stats.current_infinite_streak,
-          best: stats.best_infinite_streak,
-          dailyStreak: stats.daily_current_streak,
-        }
-      : undefined,
+    stats: infStats ?? undefined,
   });
 
   if (bumpedAnonDaily) {

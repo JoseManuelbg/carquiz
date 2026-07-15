@@ -10,7 +10,7 @@ export default async function Footer() {
     <footer className="border-t border-line mt-8">
       <div className="mx-auto max-w-xl w-full flex flex-wrap items-center justify-between gap-3 px-4 py-6 text-xs text-muted">
         <div className="flex items-center gap-3">
-          <span>Car Quiz</span>
+          <span>Autodle</span>
           <span className="opacity-40">·</span>
           <Link href="/ranking" className="hover:text-foreground transition-colors">
             {t("nav.ranking")}
