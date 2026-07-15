@@ -110,10 +110,15 @@ export async function getDetailedStats(userId: string): Promise<DetailedStats> {
 export async function getProfile(userId: string) {
   const { data } = await supabaseAdmin()
     .from("profiles")
-    .select("id,username,daily_reminder")
+    .select("id,username,daily_reminder,username_changed_at")
     .eq("id", userId)
     .maybeSingle();
-  return data as { id: string; username: string | null; daily_reminder: boolean } | null;
+  return data as {
+    id: string;
+    username: string | null;
+    daily_reminder: boolean;
+    username_changed_at: string | null;
+  } | null;
 }
 
 /** Nombres de usuario por id. */

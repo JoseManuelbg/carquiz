@@ -42,8 +42,9 @@ export async function GET(
   return new Response(bytes, {
     headers: {
       "Content-Type": data.type || MIME[ext] || "image/jpeg",
-      // Opaque id is stable per image, so caching is safe.
-      "Cache-Control": "public, max-age=86400, immutable",
+      // Solo-admin: NO cachear en el CDN (antes era público+immutable, y eso dejó
+      // copias completas cacheadas en el edge). Privado y sin store.
+      "Cache-Control": "private, no-store",
     },
   });
 }

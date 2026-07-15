@@ -8,7 +8,7 @@ import { isUsernameFree } from "./actions";
 export default function LoginForm() {
   const router = useRouter();
   const params = useSearchParams();
-  const next = params.get("next") ?? "/perfil";
+  const next = params.get("next") ?? "/";
 
   const [mode, setMode] = useState<"signin" | "signup">("signin");
   const [email, setEmail] = useState("");
@@ -50,7 +50,8 @@ export default function LoginForm() {
     if (mode === "signup") {
       return setMsg("Cuenta creada. Revisa tu email para confirmarla.");
     }
-    router.push(next);
+    // Pasa por bienvenida: reenvía a `next` si ya hay nombre, o lo pide si no.
+    router.push(`/bienvenida?next=${encodeURIComponent(next)}`);
     router.refresh();
   }
 

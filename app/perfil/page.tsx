@@ -2,6 +2,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { getCurrentUser } from "@/lib/auth";
 import { getDetailedStats, getProfile, getStats } from "@/lib/stats";
+import { cooldownDaysLeft } from "@/lib/username";
 import UsernameForm from "./UsernameForm";
 
 export const dynamic = "force-dynamic";
@@ -96,14 +97,23 @@ export default async function Perfil() {
         )}
       </section>
 
-      {profile?.username && (
-        <div className="panel rounded-sm p-4 flex flex-col gap-2">
-          <h2 className="font-display text-sm uppercase tracking-[0.2em] text-muted">
-            Cambiar nombre
-          </h2>
-          <UsernameForm current={profile.username} />
-        </div>
-      )}
+      {profile?.username &&
+        (() => {
+          const left = cooldownDaysLeft(profile.username_changed_at);
+          return (
+            <div className="panel rounded-sm p-4 flex flex-col gap-2">
+              <h2 className="font-display text-sm uppercase tracking-[0.2em] text-muted">
+                Cambiar nombre
+              </h2>
+              <UsernameForm current={profile.username} disabled={left > 0} />
+              {left > 0 && (
+                <p className="text-xs text-muted">
+                  Podrás cambiarlo de nuevo en {left} {left === 1 ? "día" : "días"}.
+                </p>
+              )}
+            </div>
+          );
+        })()}
 
       <div className="flex gap-4 text-sm">
         <Link href="/amigos" className="text-accent hover:underline">

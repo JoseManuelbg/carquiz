@@ -3,6 +3,9 @@ import { ImageResponse } from "next/og";
 export const alt = "Car Quiz — Adivina el coche por la foto";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
+// Se genera bajo demanda, no en el build: al tener sharp instalado, generarla
+// en build metía a sharp en su pipeline y petaba ("colourspace not set").
+export const dynamic = "force-dynamic";
 
 /** Oswald (condensada, negrita) desde Google Fonts. Sin esto, satori solo tiene
  *  una fuente regular y el titular se ve soso. Se descarga en el build. */

@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { getCurrentUser } from "@/lib/auth";
 import { supabaseAdmin } from "@/lib/supabase";
+import { USERNAME_RE, USERNAME_COOLDOWN_DAYS, cooldownDaysLeft } from "@/lib/username";
 
 /** El nombre es lo que se ve en los rankings. Sin nombre, no sales. */
 export async function setUsername(formData: FormData) {
@@ -10,13 +11,41 @@ export async function setUsername(formData: FormData) {
   if (!user) return { error: "No has iniciado sesión." };
 
   const username = String(formData.get("username") ?? "").trim();
-  if (!/^[a-zA-Z0-9_-]{3,20}$/.test(username)) {
+  if (!USERNAME_RE.test(username)) {
     return { error: "3-20 caracteres: letras, números, guion o guion bajo." };
   }
 
-  const { error } = await supabaseAdmin()
+  const sb = supabaseAdmin();
+  const current = await sb
     .from("profiles")
-    .upsert({ id: user.id, username }, { onConflict: "id" });
+    .select("username, username_changed_at")
+    .eq("id", user.id)
+    .maybeSingle();
+
+  const hadName = Boolean(current.data?.username);
+  const sameName = current.data?.username === username;
+
+  // Cooldown: solo al CAMBIAR un nombre ya existente por otro distinto.
+  if (hadName && !sameName) {
+    const left = cooldownDaysLeft(current.data?.username_changed_at);
+    if (left > 0) {
+      return {
+        error: `Solo puedes cambiar el nombre cada ${USERNAME_COOLDOWN_DAYS} días. Te quedan ${left}.`,
+      };
+    }
+  }
+
+  if (sameName) return { ok: true };
+
+  const { error } = await sb.from("profiles").upsert(
+    {
+      id: user.id,
+      username,
+      // El primer nombre no arranca el cooldown; los cambios sí.
+      username_changed_at: hadName ? new Date().toISOString() : null,
+    },
+    { onConflict: "id" }
+  );
 
   if (error) {
     return {
