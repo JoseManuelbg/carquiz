@@ -87,13 +87,14 @@ export async function POST(req: Request) {
     if (user) {
       stats =
         round.modeId === "daily"
-          ? await recordDaily(user.id, todayKey(), round.solved, round.attempts)
+          ? await recordDaily(user.id, todayKey(), round.solved, round.attempts, round.carId)
           : await recordInfinite(
               user.id,
               round.solved,
               round.attempts,
               round.modeId,
-              round.difficulty
+              round.difficulty,
+              round.carId
             );
     }
   }

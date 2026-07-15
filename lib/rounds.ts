@@ -10,6 +10,7 @@ export interface Round {
   carId: string;
   modeId: string;
   difficulty: string;
+  intensity: number;
   attempts: number;
   maxAttempts: number;
   solved: boolean;
@@ -21,6 +22,7 @@ interface RoundRow {
   car_id: string;
   mode_id: string;
   difficulty: string;
+  intensity: number;
   attempts: number;
   max_attempts: number;
   solved: boolean;
@@ -35,6 +37,7 @@ function toRound(r: RoundRow): Round {
     carId: r.car_id,
     modeId: r.mode_id,
     difficulty: r.difficulty,
+    intensity: r.intensity ?? 0,
     attempts: r.attempts,
     maxAttempts: r.max_attempts,
     solved: r.solved,
@@ -46,7 +49,8 @@ export async function createRound(
   carId: string,
   modeId: string,
   maxAttempts: number,
-  difficulty: string
+  difficulty: string,
+  intensity: number
 ): Promise<string> {
   const { data, error } = await supabaseAdmin()
     .from("rounds")
@@ -54,6 +58,7 @@ export async function createRound(
       car_id: carId,
       mode_id: modeId,
       difficulty,
+      intensity,
       max_attempts: maxAttempts,
       expires_at: new Date(Date.now() + TTL_MS).toISOString(),
     })

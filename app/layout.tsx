@@ -3,6 +3,7 @@ import { Suspense } from "react";
 import { Geist, Geist_Mono, Oswald } from "next/font/google";
 import Link from "next/link";
 import UserNav from "./ui/UserNav";
+import Footer from "./ui/Footer";
 import { SITE_DESC, SITE_NAME, SITE_URL } from "@/lib/site";
 import "./globals.css";
 
@@ -89,6 +90,7 @@ export default function RootLayout({
           <div className="racing-stripe h-1" />
         </header>
         <main className="mx-auto max-w-xl w-full flex-1 px-4 py-8">{children}</main>
+        <Footer />
       </body>
     </html>
   );

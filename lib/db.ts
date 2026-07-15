@@ -102,22 +102,55 @@ export async function getImage(
   return car && image ? { car, image } : undefined;
 }
 
-/** Cars usable as an answer: must own a matching image and (optionally) a region. */
+export interface CandidateFilters {
+  regions?: string[];
+  brands?: string[];
+  bodies?: string[];
+  /** Décadas como número: 1990, 2000… (Math.floor(year/10)*10). */
+  decades?: number[];
+}
+
+/** Cars usable as an answer: deben tener imagen de la parte y pasar los filtros.
+ *  Filtro vacío/ausente = no restringe. */
 export async function answerCandidates(
   part?: Part,
-  regions?: string[]
+  filters: CandidateFilters = {}
 ): Promise<Car[]> {
   let q = supabaseAdmin().from("cars").select(SELECT);
-  if (regions && regions.length) q = q.in("region", regions);
+  if (filters.regions?.length) q = q.in("region", filters.regions);
+  if (filters.brands?.length) q = q.in("brand", filters.brands);
+  if (filters.bodies?.length) q = q.in("body_type", filters.bodies);
 
   const { data, error } = await q;
   if (error) throw new Error(`answerCandidates: ${error.message}`);
 
+  const decadeSet = filters.decades?.length ? new Set(filters.decades) : null;
+
   return (data as unknown as CarRow[])
     .map(toCar)
-    .filter((c) =>
-      part ? c.images.some((i) => i.part === part) : c.images.length > 0
-    );
+    .filter((c) => (part ? c.images.some((i) => i.part === part) : c.images.length > 0))
+    .filter((c) => !decadeSet || decadeSet.has(Math.floor(c.year / 10) * 10));
+}
+
+/** Facetas para el menú de personalización del infinito. */
+export async function getFacets() {
+  const cars = (await getCars()).filter((c) => c.images.length > 0);
+  const count = <T,>(pick: (c: Car) => T) => {
+    const m = new Map<T, number>();
+    for (const c of cars) m.set(pick(c), (m.get(pick(c)) ?? 0) + 1);
+    return [...m.entries()];
+  };
+  return {
+    brands: count((c) => c.brand)
+      .sort((a, b) => a[0].localeCompare(b[0]))
+      .map(([value, n]) => ({ value, n })),
+    bodies: count((c) => c.bodyType)
+      .sort((a, b) => a[0].localeCompare(b[0]))
+      .map(([value, n]) => ({ value, n })),
+    decades: count((c) => Math.floor(c.year / 10) * 10)
+      .sort((a, b) => a[0] - b[0])
+      .map(([value, n]) => ({ value, n })),
+  };
 }
 
 /**

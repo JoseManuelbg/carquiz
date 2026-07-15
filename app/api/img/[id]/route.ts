@@ -4,6 +4,7 @@
 
 import { getImage } from "@/lib/db";
 import { supabaseAdmin, PHOTO_BUCKET } from "@/lib/supabase";
+import { getCurrentUser, isAdminEmail } from "@/lib/auth";
 
 const MIME: Record<string, string> = {
   jpg: "image/jpeg",
@@ -18,6 +19,14 @@ export async function GET(
   _req: Request,
   { params }: { params: Promise<{ id: string }> }
 ) {
+  // El juego sirve las fotos por ronda (/api/round-img) ya tapadas. Este
+  // endpoint devuelve la foto LIMPIA por id real, así que es solo para el panel:
+  // se restringe a administradores para no abrir una vía de trampa.
+  const user = await getCurrentUser();
+  if (!user || !(await isAdminEmail(user.email))) {
+    return new Response("Not found", { status: 404 });
+  }
+
   const { id } = await params;
   const found = await getImage(id);
   if (!found) return new Response("Not found", { status: 404 });

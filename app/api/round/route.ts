@@ -1,7 +1,5 @@
-// Arranca una ronda y devuelve todo lo que el cliente necesita EXCEPTO la respuesta.
-//
-//   GET /api/round?mode=daily
-//   GET /api/round?modes=inf-car,inf-tiles&regions=EUR,JDM&difficulty=dificil
+// Arranca una ronda y devuelve todo lo que el cliente necesita EXCEPTO la
+// respuesta y la foto limpia (la imagen se pide aparte, ya tapada, por roundId).
 
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
@@ -12,6 +10,8 @@ import { DAILY_DIFFICULTY, getDifficulty } from "@/lib/difficulty";
 import { YEAR_RANGE } from "@/lib/reference";
 import { createRound } from "@/lib/rounds";
 import { todayKey } from "@/lib/daily";
+import { getCurrentUser } from "@/lib/auth";
+import { getStats } from "@/lib/stats";
 import type { Car } from "@/lib/types";
 
 const RECENT_COOKIE = "cq_recent";
@@ -21,13 +21,6 @@ function parseList(v: string | null): string[] {
   return (v ?? "").split(",").map((s) => s.trim()).filter(Boolean);
 }
 
-/**
- * Evita que se repitan los coches: descarta los vistos hace poco.
- * Los ids van en una cookie httpOnly (el cliente nunca los ve: si los viera,
- * podría mapear id → coche y saber la respuesta).
- * Además, si excluir dejase el pool demasiado pequeño, se ignora la exclusión.
- * Así, aunque alguien manipule la cookie, no puede forzar cuál va a tocar.
- */
 function withoutRecent(candidates: Car[], recent: string[]): Car[] {
   const recentSet = new Set(recent);
   const fresh = candidates.filter((c) => !recentSet.has(c.id));
@@ -37,7 +30,12 @@ function withoutRecent(candidates: Car[], recent: string[]): Car[] {
 
 export async function GET(req: Request) {
   const sp = new URL(req.url).searchParams;
-  const regions = parseList(sp.get("regions"));
+  const filters = {
+    regions: parseList(sp.get("regions")),
+    brands: parseList(sp.get("brands")),
+    bodies: parseList(sp.get("bodies")),
+    decades: parseList(sp.get("decades")).map(Number).filter(Number.isFinite),
+  };
 
   const single = sp.get("mode");
   const modeIds = single ? [single] : parseList(sp.get("modes"));
@@ -46,6 +44,19 @@ export async function GET(req: Request) {
 
   const isDaily = modes.length === 1 && modes[0].id === "daily";
   const diff = getDifficulty(isDaily ? DAILY_DIFFICULTY : sp.get("difficulty"));
+
+  // Intensidad (cuánto se tapa la foto) = racha. Para usuarios con sesión sale
+  // de la BBDD (no manipulable); anónimos la mandan y da igual (no puntúan).
+  let intensity = 0;
+  if (!isDaily) {
+    const user = await getCurrentUser();
+    if (user) {
+      const st = await getStats(user.id);
+      intensity = st?.current_infinite_streak ?? 0;
+    } else {
+      intensity = Math.max(0, Math.min(40, Number(sp.get("streak")) || 0));
+    }
+  }
 
   const jar = await cookies();
   const recent = parseList(jar.get(RECENT_COOKIE)?.value ?? "");
@@ -61,11 +72,11 @@ export async function GET(req: Request) {
   } else {
     const viable: { mode: Mode; cands: Car[] }[] = [];
     for (const m of modes) {
-      const cands = await answerCandidates(m.part, regions);
+      const cands = await answerCandidates(m.part, filters);
       if (cands.length) viable.push({ mode: m, cands });
     }
     if (viable.length === 0) {
-      return NextResponse.json({ error: "no-data", regions }, { status: 503 });
+      return NextResponse.json({ error: "no-data" }, { status: 503 });
     }
     const chosen = viable[Math.floor(Math.random() * viable.length)];
     mode = chosen.mode;
@@ -79,7 +90,7 @@ export async function GET(req: Request) {
     answer.images.find((i) => !mode.part || i.part === mode.part) ?? answer.images[0];
   if (!image) return NextResponse.json({ error: "no-data" }, { status: 503 });
 
-  const roundId = await createRound(answer.id, mode.id, mode.maxAttempts, diff.id);
+  const roundId = await createRound(answer.id, mode.id, mode.maxAttempts, diff.id, intensity);
   const cars = await getCars();
 
   const res = NextResponse.json({
@@ -87,12 +98,12 @@ export async function GET(req: Request) {
     day,
     mode,
     difficulty: { id: diff.id, askYear: diff.askYear, askEngine: diff.askEngine },
-    imageId: image.id,
+    // Imagen SIEMPRE por ronda: el id real de la foto no se expone nunca.
+    imageUrl: `/api/round-img/${roundId}`,
+    reveal: mode.reveal ?? "none",
     options: mode.typeahead ? [] : optionsFor(cars, mode.target),
     yearRange: diff.askYear ? YEAR_RANGE : undefined,
     engineOptions: diff.askEngine ? engineChoices(answer, cars) : undefined,
-    reveal: mode.reveal ?? "none",
-    region: image.region,
     credit: image.credit
       ? { artist: image.credit.artist, license: image.credit.license }
       : undefined,

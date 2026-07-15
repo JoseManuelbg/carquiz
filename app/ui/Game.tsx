@@ -9,7 +9,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { Cell, Feedback } from "@/lib/game";
 import type { Mode } from "@/lib/modes";
-import type { Credit, Region, RevealStrategy } from "@/lib/types";
+import type { Credit, RevealStrategy } from "@/lib/types";
 import RevealImage from "./RevealImage";
 
 interface RoundData {
@@ -17,12 +17,11 @@ interface RoundData {
   day?: string;
   mode: Mode;
   difficulty: { id: string; askYear: boolean; askEngine: boolean };
-  imageId: string;
+  imageUrl: string;
   options: string[];
   yearRange?: [number, number];
   engineOptions?: string[];
   reveal: RevealStrategy;
-  region?: Region;
   credit?: Credit;
 }
 
@@ -64,6 +63,13 @@ export default function Game({ query, daily = false }: { query: string; daily?: 
   const [streak, setStreak] = useState(0);
   const [best, setBest] = useState(0);
   const suggestTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  // La racha se lee por ref dentro de loadRound: si estuviera en sus
+  // dependencias, cambiarla (al ganar) recargaría la ronda y se saltaría el
+  // resultado.
+  const streakRef = useRef(0);
+  useEffect(() => {
+    streakRef.current = streak;
+  }, [streak]);
 
   const askYear = round?.difficulty.askYear ?? false;
   const askEngine = round?.difficulty.askEngine ?? false;
@@ -74,7 +80,12 @@ export default function Game({ query, daily = false }: { query: string; daily?: 
   // efecto (provocaría renders en cascada).
   const loadRound = useCallback(async () => {
     try {
-      const res = await fetch(`/api/round?${query}`, { cache: "no-store" });
+      // Anónimos: mandan su racha para que la foto se tape acorde (los que
+      // tienen sesión la calcula el servidor y este parámetro se ignora).
+      const url = daily
+        ? `/api/round?${query}`
+        : `/api/round?${query}&streak=${streakRef.current}`;
+      const res = await fetch(url, { cache: "no-store" });
       if (res.status === 503) return setStatus("nodata");
       if (!res.ok) return setStatus("error");
       const data: RoundData = await res.json();
@@ -214,13 +225,12 @@ export default function Game({ query, daily = false }: { query: string; daily?: 
 
   const used = guesses.filter((g) => g.resolved).length;
   const playing = status === "playing";
-  const level = !playing
-    ? 1
-    : daily
-      ? maxAttempts
-        ? used / maxAttempts
-        : 1
-      : used / (maxAttempts + streak);
+  // La foto se re-pide al servidor con cada intento (y al acabar) para que la
+  // destape más. En modo "none" no hace falta: la foto ya es entera.
+  const imgSrc =
+    round.reveal === "none"
+      ? round.imageUrl
+      : `${round.imageUrl}?n=${playing ? used : "end"}`;
 
   return (
     <div className="flex flex-col gap-5 w-full max-w-lg">
@@ -257,14 +267,7 @@ export default function Game({ query, daily = false }: { query: string; daily?: 
         )}
       </div>
 
-      <RevealImage
-        src={`/api/img/${round.imageId}`}
-        strategy={round.reveal}
-        region={round.region}
-        level={level}
-        intensity={daily ? 0 : streak}
-        gameOver={!playing}
-      />
+      <RevealImage src={imgSrc} />
 
       {round.credit && (
         <p className="-mt-3 text-[11px] text-muted/70">

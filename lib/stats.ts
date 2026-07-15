@@ -24,13 +24,15 @@ export async function recordDaily(
   userId: string,
   day: string,
   solved: boolean,
-  attempts: number
+  attempts: number,
+  carId: string
 ): Promise<UserStats | null> {
   const { data, error } = await supabaseAdmin().rpc("record_daily", {
     p_user: userId,
     p_day: day,
     p_solved: solved,
     p_attempts: attempts,
+    p_car: carId,
   });
   if (error) throw new Error(`recordDaily: ${error.message}`);
   return (Array.isArray(data) ? data[0] : data) ?? null;
@@ -41,7 +43,8 @@ export async function recordInfinite(
   solved: boolean,
   attempts: number,
   modeId: string,
-  difficulty: string
+  difficulty: string,
+  carId: string
 ): Promise<UserStats | null> {
   const { data, error } = await supabaseAdmin().rpc("record_infinite", {
     p_user: userId,
@@ -49,6 +52,7 @@ export async function recordInfinite(
     p_attempts: attempts,
     p_mode: modeId,
     p_diff: difficulty,
+    p_car: carId,
   });
   if (error) throw new Error(`recordInfinite: ${error.message}`);
   return (Array.isArray(data) ? data[0] : data) ?? null;
@@ -61,6 +65,46 @@ export async function getStats(userId: string): Promise<UserStats | null> {
     .eq("user_id", userId)
     .maybeSingle();
   return (data as UserStats) ?? null;
+}
+
+export interface DetailedStats {
+  played: number;
+  solved: number;
+  fails: number;
+  solvedCars: number;
+  topBrands: { brand: string; n: number }[];
+}
+
+/** Colección del usuario: cuántos coches ha adivinado, marcas top y fallos. */
+export async function getDetailedStats(userId: string): Promise<DetailedStats> {
+  const { data } = await supabaseAdmin()
+    .from("game_results")
+    .select("solved, car_id, cars(brand)")
+    .eq("user_id", userId)
+    .limit(10000);
+
+  const rows = (data ?? []) as unknown as {
+    solved: boolean;
+    car_id: string | null;
+    cars: { brand: string } | null;
+  }[];
+
+  const played = rows.length;
+  const solved = rows.filter((r) => r.solved).length;
+  const solvedCars = new Set(
+    rows.filter((r) => r.solved && r.car_id).map((r) => r.car_id)
+  ).size;
+
+  const tally = new Map<string, number>();
+  for (const r of rows) {
+    if (r.solved && r.cars?.brand) tally.set(r.cars.brand, (tally.get(r.cars.brand) ?? 0) + 1);
+  }
+  const topBrands = [...tally.entries()]
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 6)
+    .map(([brand, n]) => ({ brand, n }));
+
+  return { played, solved, fails: played - solved, solvedCars, topBrands };
 }
 
 export async function getProfile(userId: string) {
