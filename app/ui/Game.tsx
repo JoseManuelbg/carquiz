@@ -268,7 +268,9 @@ export default function Game({ query, daily = false }: { query: string; daily?: 
             list="guess-opts"
             value={text}
             onChange={(e) => onTextChange(e.target.value)}
-            placeholder={t("game.guessPh")}
+            placeholder={
+              round.mode.target === "year" ? t("game.yearPh") : t("game.guessPh")
+            }
             autoComplete="off"
             className="flex-1 min-w-48 rounded-sm border border-line bg-surface px-3 py-2.5 outline-none focus:border-accent transition-colors placeholder:text-muted"
           />

@@ -93,17 +93,23 @@ export async function GET(req: Request) {
   const roundId = await createRound(answer.id, mode.id, mode.maxAttempts, diff.id, intensity);
   const cars = await getCars();
 
+  // Si el modo YA pide el año como respuesta (morro → año), la dificultad no
+  // debe añadir otro campo de año/motor encima: sería redundante y confuso.
+  const targetIsYear = mode.target === "year";
+  const askYear = diff.askYear && !targetIsYear;
+  const askEngine = diff.askEngine && !targetIsYear;
+
   const res = NextResponse.json({
     roundId,
     day,
     mode,
-    difficulty: { id: diff.id, askYear: diff.askYear, askEngine: diff.askEngine },
+    difficulty: { id: diff.id, askYear, askEngine },
     // Imagen SIEMPRE por ronda: el id real de la foto no se expone nunca.
     imageUrl: `/api/round-img/${roundId}`,
     reveal: mode.reveal ?? "none",
     options: mode.typeahead ? [] : optionsFor(cars, mode.target),
-    yearRange: diff.askYear ? YEAR_RANGE : undefined,
-    engineOptions: diff.askEngine ? engineChoices(answer, cars) : undefined,
+    yearRange: askYear ? YEAR_RANGE : undefined,
+    engineOptions: askEngine ? engineChoices(answer, cars) : undefined,
     credit: image.credit
       ? { artist: image.credit.artist, license: image.credit.license }
       : undefined,

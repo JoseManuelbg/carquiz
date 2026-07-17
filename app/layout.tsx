@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
+import Script from "next/script";
 import { Geist, Geist_Mono, Oswald } from "next/font/google";
 import Link from "next/link";
 import UserNav from "./ui/UserNav";
 import Footer from "./ui/Footer";
+import AdSlot from "./ui/AdSlot";
 import { I18nProvider } from "./ui/I18nProvider";
 import { getT } from "@/lib/i18n/server";
 import { SITE_DESC, SITE_NAME, SITE_URL } from "@/lib/site";
@@ -17,6 +19,9 @@ const oswald = Oswald({
   subsets: ["latin"],
   weight: ["500", "600", "700"],
 });
+
+// Sin esta variable no se carga el script de AdSense ni se pinta ningún banner.
+const ADSENSE_CLIENT = process.env.NEXT_PUBLIC_ADSENSE_CLIENT;
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -94,8 +99,20 @@ export default async function RootLayout({
             <div className="racing-stripe h-1" />
           </header>
           <main className="mx-auto max-w-xl w-full flex-1 px-4 py-8">{children}</main>
+          {/* Un solo banner, al final del contenido y antes del pie: nunca
+              encima de la foto ni interrumpiendo la partida. */}
+          <AdSlot slot={process.env.NEXT_PUBLIC_ADSENSE_SLOT_FOOTER} />
           <Footer />
         </I18nProvider>
+
+        {ADSENSE_CLIENT && (
+          <Script
+            async
+            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT}`}
+            crossOrigin="anonymous"
+            strategy="afterInteractive"
+          />
+        )}
       </body>
     </html>
   );

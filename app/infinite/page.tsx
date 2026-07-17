@@ -7,10 +7,12 @@ import { DIFFICULTIES } from "@/lib/difficulty";
 import { useT } from "@/app/ui/I18nProvider";
 
 const REGION_IDS = ["EUR", "JDM", "USDM"];
-const PLAYABLE = INFINITE_MODES.filter((m) => m.part === "full");
-const COMING_SOON = INFINITE_MODES.filter((m) => m.part !== "full");
+// Los modos de foto completa siempre están; los de parte (faro/morro) se activan
+// solos cuando hay fotos anotadas de esa zona.
+const FULL_MODES = INFINITE_MODES.filter((m) => m.part === "full");
 
 interface Facets {
+  parts: Record<string, number>;
   brands: { value: string; n: number }[];
   bodies: { value: string; n: number }[];
   decades: { value: number; n: number }[];
@@ -18,7 +20,7 @@ interface Facets {
 
 export default function InfinitePage() {
   const { t } = useT();
-  const [modes, setModes] = useState<Set<string>>(new Set(PLAYABLE.map((m) => m.id)));
+  const [modes, setModes] = useState<Set<string>>(new Set(FULL_MODES.map((m) => m.id)));
   const [regions, setRegions] = useState<Set<string>>(new Set(REGION_IDS));
   const [difficulty, setDifficulty] = useState("normal");
   const [brands, setBrands] = useState<Set<string>>(new Set());
@@ -77,19 +79,30 @@ export default function InfinitePage() {
       </h1>
 
       <Section title={t("inf.modes")}>
-        {PLAYABLE.map((m) => (
-          <Chip key={m.id} active={modes.has(m.id)} onClick={() => setModes((s) => toggle(s, m.id))}>
-            {t(`mode.${m.id}`)}
-          </Chip>
-        ))}
-        {COMING_SOON.map((m) => (
-          <span
-            key={m.id}
-            className="rounded-sm border border-dashed border-line px-3 py-1.5 font-display text-sm uppercase tracking-wide text-muted/50"
-          >
-            {t(`mode.${m.id}`)} · {t("inf.soon")}
-          </span>
-        ))}
+        {INFINITE_MODES.map((m) => {
+          // Un modo está jugable si hay coches con foto de esa parte.
+          // Mientras cargan las facetas, damos por buenos los de foto completa.
+          const available = facets
+            ? (facets.parts[m.part ?? "full"] ?? 0) > 0
+            : m.part === "full";
+
+          return available ? (
+            <Chip
+              key={m.id}
+              active={modes.has(m.id)}
+              onClick={() => setModes((s) => toggle(s, m.id))}
+            >
+              {t(`mode.${m.id}`)}
+            </Chip>
+          ) : (
+            <span
+              key={m.id}
+              className="rounded-sm border border-dashed border-line px-3 py-1.5 font-display text-sm uppercase tracking-wide text-muted/50"
+            >
+              {t(`mode.${m.id}`)} · {t("inf.soon")}
+            </span>
+          );
+        })}
       </Section>
 
       <Section title={t("inf.difficulty")}>

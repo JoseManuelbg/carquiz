@@ -140,7 +140,18 @@ export async function getFacets() {
     for (const c of cars) m.set(pick(c), (m.get(pick(c)) ?? 0) + 1);
     return [...m.entries()];
   };
+
+  // Cuántos coches tienen foto de cada parte. Es lo que decide si los modos
+  // faro/morro están jugables: se activan solos según vas anotando en /admin.
+  const parts: Record<string, number> = {};
+  for (const c of cars) {
+    for (const p of new Set(c.images.map((i) => i.part))) {
+      parts[p] = (parts[p] ?? 0) + 1;
+    }
+  }
+
   return {
+    parts,
     brands: count((c) => c.brand)
       .sort((a, b) => a[0].localeCompare(b[0]))
       .map(([value, n]) => ({ value, n })),
